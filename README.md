@@ -56,7 +56,7 @@ Franco Jarc: [GitHub](https://github.com/FrancoJarc)
 
 - Diagrama de casos de uso: https://lucid.app/lucidchart/8aa65386-3e3f-4810-bda8-8163121da66f/edit?beaconFlowId=047F6D6387CB2B2B&invitationId=inv_34b38510-567e-40d5-8c37-820b0f9e5e61&page=0_0 
 
-- Diagrama de clases: https://lucid.app/lucidchart/88fbf84e-70e2-4d21-92e3-b291ae1ba863/edit?viewport_loc=-210%2C-110%2C1947%2C829%2C0_0&invitationId=inv_463ca552-1a1a-4af0-b097-05f3ca451359 .
+- Diagrama de clases: https://lucid.app/lucidchart/88fbf84e-70e2-4d21-92e3-b291ae1ba863/edit?viewport_loc=-210%2C-110%2C1947%2C829%2C0_0&invitationId=inv_463ca552-1a1a-4af0-b097-05f3ca451359 
 - Link al Kanvan hecho en Trello https://trello.com/b/flwA16Lw/fitpal 
 
 
