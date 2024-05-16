@@ -7,11 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Interfaces.UserRepository;
+import Interfaces.ClienteRepository;
 import Modelo.Cliente;
-import Modelo.Usuario;
 
-public class ClienteControlador implements UserRepository {
+public class ClienteControlador implements ClienteRepository {
     private final Connection connection;
 
     public ClienteControlador() {
@@ -19,7 +18,7 @@ public class ClienteControlador implements UserRepository {
     }
 
     @Override
-    public List<Cliente> getAllUsers() {
+    public List<Cliente> getAllCliente() {
         List<Cliente> users = new ArrayList<>();/*
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users ");
@@ -36,7 +35,7 @@ public class ClienteControlador implements UserRepository {
     }
 
     @Override
-    public Cliente getUserById(int id) {
+    public Cliente getClienteById(int id) {
     	Cliente user = null;/*
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
@@ -54,7 +53,7 @@ public class ClienteControlador implements UserRepository {
     }
 
 	@Override
-    public void addUser(Cliente cliente) {/*
+    public void addCliente(Cliente cliente) {/*
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)");
             statement.setString(1, cliente.getNombre());
@@ -70,7 +69,7 @@ public class ClienteControlador implements UserRepository {
     }
 
 	@Override
-    public void updateUser(Cliente cliente) {/*
+    public void updateCliente(Cliente cliente) {/*
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
             statement.setString(1, cliente.getNombre());
@@ -87,7 +86,7 @@ public class ClienteControlador implements UserRepository {
     }
 
     @Override
-    public void deleteUser(int id) {/*
+    public void deleteCliente(int id) {/*
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
             statement.setInt(1, id);
@@ -100,6 +99,8 @@ public class ClienteControlador implements UserRepository {
             e.printStackTrace();
         }*/
     }
+
+
 
 
 
