@@ -6,8 +6,6 @@ public class Main implements MenuIniciarSesion{
 
 	public static void main(String[] args) {
 		
-		JOptionPane.showMessageDialog(null, "Hola");
-		
 		Recepcion recepcion1= new Recepcion("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
 		Profesor profesor1= new Profesor("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
 		Cliente cliente1= new Cliente("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar","Intermedio",1,1124655611);
