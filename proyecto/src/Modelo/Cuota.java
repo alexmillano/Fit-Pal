@@ -1,13 +1,13 @@
-package proyecto;
+package Modelo;
 
 import java.time.LocalDateTime;
 
-public class Cuotas {
+public class Cuota {
 
 	private Double valor;
 	private String metodo;
 	private LocalDateTime vencimiento;
-	public Cuotas(Double valor, String metodo, LocalDateTime vencimiento) {
+	public Cuota(Double valor, String metodo, LocalDateTime vencimiento) {
 		super();
 		this.valor = 5000.00;
 		this.metodo = metodo;

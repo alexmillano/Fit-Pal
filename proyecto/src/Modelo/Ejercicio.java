@@ -1,10 +1,10 @@
-package proyecto;
+package Modelo;
 
-public class Ejercicios {
+public class Ejercicio {
 		private String nombre;
 		private int repeticion;
 		private int series;
-		public Ejercicios(String nombre, int repeticion, int series) {
+		public Ejercicio(String nombre, int repeticion, int series) {
 			super();
 			this.nombre = nombre;
 			this.repeticion = repeticion;

@@ -2,8 +2,8 @@ package Interfaces;
 
 import java.util.List;
 
+import Modelo.Cliente;
 import Modelo.Usuario;
-import proyecto.Cliente;
 
 public interface UserRepository {
 	//prototipos de metodos 

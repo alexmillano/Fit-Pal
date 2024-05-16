@@ -1,4 +1,4 @@
-package proyecto;
+package Modelo;
 
 import javax.swing.JOptionPane;
 

@@ -1,83 +1,49 @@
 package Vista;
 
-import java.util.List;
-
 import javax.swing.JOptionPane;
-import Controladores.ClienteControlador;
-import Modelo.Usuario;
 
-public class Main{
+import Modelo.Cliente;
+import Modelo.MenuIniciarSesion;
+import Modelo.Profesor;
+import Modelo.Recepcion;
+
+public class Main implements MenuIniciarSesion{
+
 	public static void main(String[] args) {
 		
-		/*
-		ClienteControlador clienteControlador = new ClienteControlador();
+		Recepcion recepcion1= new Recepcion("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
+		Profesor profesor1= new Profesor("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
+		Cliente cliente1= new Cliente("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar","Intermedio",1,1124655611);
+		String devolucion= recepcion1.IniciarSesion();
+		
+		switch (devolucion) {
+		case "profesor":
+			
+			profesor1.Menu();
+			
+			break;
+			
+		case "cliente":
+			
+			cliente1.Menu();
+					
+			break;
 
-		String[] opciones = { "Agregar usuario", "Ver usuario por id", "Ver usuarios en general", "Editar usuario",
-				"Eliminar usuario","Salir" };
-		int opcion = 0;
-		do {
-
-			opcion = JOptionPane.showOptionDialog(null, "Elegir opcion", null, 0, 0, null, opciones, opciones[0]);
-
-			switch (opcion) {
-			case 0:
-				
-				String nombre = JOptionPane.showInputDialog("Ingrese nombre");
-				String mail = JOptionPane.showInputDialog("Ingrese mail");
-				clienteControlador.addUser(new Usuario(nombre, mail));
-				break;
-			case 1:
-				String[] usuarios = new String[clienteControlador.getAllUsers().size()];
-				for (int i = 0; i < usuarios.length; i++) {
-					usuarios[i] = Integer.toString(clienteControlador.getAllUsers().get(i).getId());
-				}
-
-				String opcionselect = (String) JOptionPane.showInputDialog(null, "Seleccione usuario", null, 0, null,
-						usuarios, usuarios[0]);
-
-				Usuario seleccionado = clienteControlador.getUserById(Integer.parseInt(opcionselect));
-				JOptionPane.showMessageDialog(null, seleccionado);
-				break;
-			case 2:
-				JOptionPane.showMessageDialog(null, clienteControlador.getAllUsers());
-
-				break;
-			case 3:
-				String[] usuarioss = new String[clienteControlador.getAllUsers().size()];
-				for (int i = 0; i < usuarioss.length; i++) {
-					usuarioss[i] = Integer.toString(clienteControlador.getAllUsers().get(i).getId());
-				}
-
-				String opcions = (String) JOptionPane.showInputDialog(null, "Seleccione usuario", null, 0, null,
-						usuarioss, usuarioss[0]);
-
-				Usuario seleccionados = clienteControlador.getUserById(Integer.parseInt(opcions));
-
-				seleccionados.setNombre(JOptionPane
-						.showInputDialog("Su nombre actual es " + seleccionados.getNombre() + "Ingrese uno nuevo: "));
-				seleccionados.setEmail(JOptionPane
-						.showInputDialog("Su mail actual es " + seleccionados.getEmail() + "Ingrese uno nuevo: "));
-
-				clienteControlador.updateUser(seleccionados);
-				break;
-			case 4:
-				String[] usuariosss = new String[clienteControlador.getAllUsers().size()];
-				for (int i = 0; i < usuariosss.length; i++) {
-					usuariosss[i] = Integer.toString(clienteControlador.getAllUsers().get(i).getId());
-				}
-
-				String opcionselectss = (String) JOptionPane.showInputDialog(null, "Seleccione usuario", null, 0, null,
-						usuariosss, usuariosss[0]);
-
-				clienteControlador.deleteUser(Integer.parseInt(opcionselectss));
-				break;
-			case 5:
-				JOptionPane.showMessageDialog(null, "Hasta la proxima");
-				break;
-			default:
-				break;
-			}
-		} while (opcion != 5);*/
+		case "recepcion":
+			
+			recepcion1.Menu();
+									
+			break;
+		}
+		
 
 	}
+
+	@Override
+	public void Menu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
