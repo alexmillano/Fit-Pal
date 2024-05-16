@@ -2,17 +2,17 @@ package Interfaces;
 
 import java.util.List;
 
-import Modelo.Clases;
+import Modelo.Clase;
 
 public interface ClaseRepository {
 	
-    List<Clases> getAllUsers(); // llama a todos los clientes de la bdd
+    List<Clase> getAllClase(); // llama a todos las clientes de la bdd
     
-    Cliente getUserById(int id); //llama solo a uno, por su id
+    Clase getClaseById(int id); //llama solo a uno, por su id
     
-    void addUser(Cliente cliente); //añade cliente a la bdd
+    void addClase(Clase clase); //añade clase a la bdd
     
-    void updateUser(Cliente cliente); //actualiza los cliente de la bdd
+    void updateClase(Clase clase); //actualiza las clase de la bdd
     
-    void deleteUser(int id); //eliminar cliente de la bdd
+    void deleteClase(int id); //eliminar clase de la bdd
 }

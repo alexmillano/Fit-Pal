@@ -4,22 +4,22 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-public class Clases {
+public class Clase {
 	private LocalDate inicio;
 	private Duration duracion;
 	private int inscritos; //Misma lista que cuando los clientes se unen//
 	private String nivel;
 	private String metodologia;
-	private LinkedList<Rutinas> rutinas = new LinkedList<>();
-	public Clases(LocalDate inicio, Duration duracion, int inscritos, String nivel, String metodologia,
-			LinkedList<Rutinas> rutinas) {
+	private LinkedList<Rutina> rutina = new LinkedList<>();
+	public Clase(LocalDate inicio, Duration duracion, int inscritos, String nivel, String metodologia,
+			LinkedList<Rutina> rutina) {
 		super();
 		this.inicio = inicio;
 		this.duracion = duracion;
 		this.inscritos = inscritos;
 		this.nivel = nivel;
 		this.metodologia = metodologia;
-		this.rutinas = rutinas;
+		this.rutina = rutina;
 	}
 	public LocalDate getInicio() {
 		return inicio;
@@ -51,16 +51,16 @@ public class Clases {
 	public void setMetodologia(String metodologia) {
 		this.metodologia = metodologia;
 	}
-	public LinkedList<Rutinas> getRutinas() {
-		return rutinas;
+	public LinkedList<Rutina> getRutina() {
+		return rutina;
 	}
-	public void setRutinas(LinkedList<Rutinas> rutinas) {
-		this.rutinas = rutinas;
+	public void setRutina(LinkedList<Rutina> rutina) {
+		this.rutina = rutina;
 	}
 	@Override
 	public String toString() {
 		return "Clases de inicio: " + inicio + "\nDuracion: " + duracion + "\nInscritos: " + inscritos + "\nNivel: " + nivel
-				+ "\nMetodologia: " + metodologia + "\nRutinas: " + rutinas;
+				+ "\nMetodologia: " + metodologia + "\nRutina: " + rutina;
 	}
 	
 	
