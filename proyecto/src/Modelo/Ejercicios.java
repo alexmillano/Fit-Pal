@@ -1,4 +1,4 @@
-package proyecto;
+package Modelo;
 
 public class Ejercicios {
 		private String nombre;

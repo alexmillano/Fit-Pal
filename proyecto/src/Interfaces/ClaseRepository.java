@@ -2,12 +2,11 @@ package Interfaces;
 
 import java.util.List;
 
-import Modelo.Cliente;
-import Modelo.Usuario;
+import Modelo.Clases;
 
-public interface UserRepository {
-	//prototipos de metodos 
-    List<Cliente> getAllUsers(); // llama a todos los clientes de la bdd
+public interface ClaseRepository {
+	
+    List<Clases> getAllUsers(); // llama a todos los clientes de la bdd
     
     Cliente getUserById(int id); //llama solo a uno, por su id
     

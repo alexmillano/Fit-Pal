@@ -1,4 +1,4 @@
-package proyecto;
+package Modelo;
 
 import java.time.Duration;
 import java.util.LinkedList;

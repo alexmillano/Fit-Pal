@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.UserRepository;
+import Modelo.Cliente;
 import Modelo.Usuario;
-import proyecto.Cliente;
 
 public class ClienteControlador implements UserRepository {
     private final Connection connection;
