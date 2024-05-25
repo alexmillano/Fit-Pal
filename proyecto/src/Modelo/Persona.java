@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Persona{
+public class Persona implements MenuIniciarSesion{
 		private String nombre;
 		private String apellido;
 		private String contraseña;
@@ -51,5 +51,20 @@ public class Persona{
 					+ dni + "\nCorreo: " + correo;
 		}
 		
+		
+		@Override
+		public boolean IniciarSesion(String mail, String contrasena) {
+			if (this.getCorreo().equals(mail) && this.getContraseña().equals(contrasena)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		@Override
+		public void Menu() {
+			// TODO Auto-generated method stub
+			
+		}
 		
 }

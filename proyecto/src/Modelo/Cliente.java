@@ -4,9 +4,10 @@ import javax.swing.JOptionPane;
 
 public class Cliente extends Persona implements MenuIniciarSesion {
 	
-	private String nivel;
+	private int nivel;
 	private int ID_Cliente;
 	private int telefono;
+	private int ID_Cliente_Rutina;
 	//private Cuotas cuota;
 	
 	//Lista de clases disponibles
@@ -14,18 +15,19 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 	//Lista de rutinas (vacia);
 	//Falta poner cuota en el constructor;
 	
-	public Cliente(String nombre, String apellido, String contraseña, int dNI, String correo, String nivel, int iD_Cliente,
-			int telefono) {
+	public Cliente(String nombre, String apellido, String contraseña, int dNI, String correo, int nivel, int iD_Cliente,
+			int telefono, int ID_Cliente_Rutina) {
 		super(nombre, apellido, contraseña, dNI, correo);
 		this.nivel = nivel;
 		this.ID_Cliente = iD_Cliente;
 		this.telefono = telefono;
+		ID_Cliente_Rutina = ID_Cliente_Rutina;
 		//this.cuota=cuota;
 	}
-	public String getNivel() {
+	public int getNivel() {
 		return nivel;
 	}
-	public void setNivel(String nivel) {
+	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
 	public int getID_Cliente() {
