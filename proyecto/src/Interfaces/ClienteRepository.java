@@ -3,7 +3,8 @@ package Interfaces;
 import java.util.List;
 
 import Modelo.Cliente;
-import Modelo.Usuario;
+import Modelo.Cuota;
+
 
 public interface ClienteRepository {
 	//prototipos de metodos 
@@ -11,7 +12,7 @@ public interface ClienteRepository {
     
     Cliente getClienteById(int id); //llama solo a uno, por su id
     
-    void addCliente(Cliente cliente); //añade cliente a la bdd
+    void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota); //añade cliente a la bdd
     
     void updateCliente(Cliente cliente); //actualiza los cliente de la bdd
     

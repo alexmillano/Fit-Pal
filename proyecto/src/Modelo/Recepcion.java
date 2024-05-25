@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
 
 
@@ -50,6 +52,8 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						switch (opcionCuota) {
 						case 0://Asignar valor a cuotas
 							
+							
+							
 							break;
 							
 						case 1://Ver cuota socios
@@ -79,6 +83,23 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						
 						switch (opcionUsuario) {
 						case 0://Dar de alta
+							
+							String nombre=JOptionPane.showInputDialog("Ingrese el nombre");
+							String apellido=JOptionPane.showInputDialog("Ingrese el apellido");
+							int dni=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la contraseña"));
+							String contraseña = Integer.toString(dni);
+							String correo=JOptionPane.showInputDialog("Ingrese el correo");
+							int nivel=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nivel"));
+							int telefono=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el telefono"));
+							
+							
+							String metodo=JOptionPane.showInputDialog("Ingrese forma de pago");
+							LocalDate vencimiento = LocalDate.now();
+							vencimiento = vencimiento.plusMonths(1);
+							
+							Cuota cuotanueva = new Cuota(metodo,vencimiento);
+							
+							this.DardeAlta(nombre,apellido,dni,contraseña,correo,nivel,telefono,cuotanueva);
 							
 							break;
 							
@@ -165,7 +186,10 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 			} while (contswitchgeneral==0);
 		}
 
-		
+		public boolean DardeAlta(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota){
+			
+			return true;
+		}
 		
 		
 		

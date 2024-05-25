@@ -1,16 +1,24 @@
 package Modelo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 public class Cuota {
 
+	private int ID_Cuota;
 	private Double valor;
 	private String metodo;
-	private LocalDateTime vencimiento;
-	public Cuota(int ID_Cuota,Double valor, String metodo, LocalDateTime vencimiento) {
+	private LocalDate vencimiento;
+	public Cuota(int ID_Cuota,String metodo, LocalDate vencimiento) {
 		super();
-		this.valor = valor;
+		this.ID_Cuota = ID_Cuota;
+		this.valor = 25000.00;
+		this.metodo = metodo;
+		this.vencimiento = vencimiento;
+	}
+	public Cuota(String metodo, LocalDate vencimiento) {
+		super();
+		this.valor = 25000.00;
 		this.metodo = metodo;
 		this.vencimiento = vencimiento;
 	}
@@ -18,6 +26,9 @@ public class Cuota {
 	public void setID_Cuota(int iD_Cuota) {
 	}
 
+	public int getID_Cuota() {
+		return ID_Cuota;
+	}
 
 	public Double getValor() {
 		return valor;
@@ -31,10 +42,10 @@ public class Cuota {
 	public void setMetodo(String metodo) {
 		this.metodo = metodo;
 	}
-	public LocalDateTime getVencimiento() {
+	public LocalDate getVencimiento() {
 		return vencimiento;
 	}
-	public void setVencimiento(LocalDateTime vencimiento) {
+	public void setVencimiento(LocalDate vencimiento) {
 		this.vencimiento = vencimiento;
 	}
 	@Override

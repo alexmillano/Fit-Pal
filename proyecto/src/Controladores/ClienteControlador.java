@@ -2,12 +2,14 @@ package Controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.ClienteRepository;
 import Modelo.Cliente;
+import Modelo.Cuota;
 
 public class ClienteControlador implements ClienteRepository {
     private final Connection connection;
@@ -26,7 +28,7 @@ public class ClienteControlador implements ClienteRepository {
             while (resultSet.next()) {
             	Cliente user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
             			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
-            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cliente_Rutina"));
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cuota"));
                 users.add(user);
                
             }
@@ -36,6 +38,7 @@ public class ClienteControlador implements ClienteRepository {
         return users;
     }
 
+    /*
     @Override
     public Cliente getClienteById(int id) {
     	Cliente user = null;
@@ -52,19 +55,21 @@ public class ClienteControlador implements ClienteRepository {
             e.printStackTrace();
         }
         return user;
-    }
+    }*/
 
 	@Override
-    public void addCliente(Cliente cliente) {
+    public void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
         try {
-        	PreparedStatement statement = connection.prepareStatement("INSERT INTO clientes (nombre, apellido, contraseña, dni, correo, nivel, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        	statement.setString(1, cliente.getNombre());
-        	statement.setString(2, cliente.getApellido());
-        	statement.setString(3, cliente.getContraseña());
-        	statement.setInt(4, cliente.getDni());
-        	statement.setString(5, cliente.getCorreo());
-        	statement.setString(6, cliente.getNivel());
-        	statement.setInt(7, cliente.getTelefono());
+        	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
+        			+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+        	statement.setString(1, contraseña);
+        	statement.setString(2, apellido);
+        	statement.setInt(3, dni);
+        	statement.setString(4, correo);
+        	statement.setInt(5, telefono);
+        	statement.setString(6, nombre);
+        	statement.setInt(7, nivel);
+        	statement.setInt(8, cuota.getID_Cuota());
         
         int rowsInserted = statement.executeUpdate();
         	if (rowsInserted > 0) {
@@ -74,9 +79,9 @@ public class ClienteControlador implements ClienteRepository {
         		e.printStackTrace();
         	}
     }
-
+	/*
 	@Override
-    public void updateCliente(Cliente cliente) {/*
+    public void updateCliente(Cliente cliente) {
 		try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
             statement.setInt(1, idCliente);
@@ -89,7 +94,7 @@ public class ClienteControlador implements ClienteRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @Override
@@ -107,11 +112,7 @@ public class ClienteControlador implements ClienteRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-
-
-
-
-  
+	}
 }
