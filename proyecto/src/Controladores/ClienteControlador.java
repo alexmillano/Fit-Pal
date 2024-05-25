@@ -2,7 +2,6 @@ package Controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,32 +52,37 @@ public class ClienteControlador implements ClienteRepository {
     }
 
 	@Override
-    public void addCliente(Cliente cliente) {/*
+    public void addCliente(Cliente cliente) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)");
-            statement.setString(1, cliente.getNombre());
-            statement.setString(2, cliente.getEmail());
-            
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Usuario insertado exitosamente");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+        	PreparedStatement statement = connection.prepareStatement("INSERT INTO clientes (nombre, apellido, contraseña, dni, correo, nivel, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        	statement.setString(1, cliente.getNombre());
+        	statement.setString(2, cliente.getApellido());
+        	statement.setString(3, cliente.getContraseña());
+        	statement.setInt(4, cliente.getDni());
+        	statement.setString(5, cliente.getCorreo());
+        	statement.setString(6, cliente.getNivel());
+        	statement.setInt(7, cliente.getTelefono());
+        
+        int rowsInserted = statement.executeUpdate();
+        	if (rowsInserted > 0) {
+            System.out.println("Cliente insertado exitosamente");
+        	}
+        	} catch (SQLException e) {
+        		e.printStackTrace();
+        	}
     }
 
 	@Override
     public void updateCliente(Cliente cliente) {/*
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
-            statement.setString(1, cliente.getNombre());
-            statement.setString(2, cliente.getEmail());
-            statement.setInt(3, cliente.getId());
-            
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Usuario actualizado exitosamente");
+		try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            statement.setInt(1, idCliente);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Cliente eliminado exitosamente");
+            } else {
+                System.out.println("No se encontró el cliente con el ID proporcionado");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,18 +90,20 @@ public class ClienteControlador implements ClienteRepository {
     }
 
     @Override
-    public void deleteCliente(int id) {/*
+    public void deleteCliente(int idCliente) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-            statement.setInt(1, id);
-            
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            statement.setInt(1, idCliente);
+
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Usuario eliminado exitosamente");
+                System.out.println("Cliente eliminado exitosamente");
+            } else {
+                System.out.println("No se encontró el cliente con el ID proporcionado");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
 

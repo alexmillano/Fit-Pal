@@ -2,6 +2,7 @@ package Modelo;
 
 import javax.swing.JOptionPane;
 
+
 public class Recepcion extends Persona implements MenuIniciarSesion {
 
 		private int ID_recepcion;
@@ -21,6 +22,8 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 		public void setID_recepcion(int iD_recepcion) {
 			ID_recepcion = iD_recepcion;
 		}
+		
+		
 
 		@Override
 		public String toString() {
@@ -41,11 +44,11 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 					int cont0=0;//Contador para salir de Cuotas y volver al menu principal de Recepcion
 					do {
 						
-						String [] opcionesCuotas={"Asignar valor", "Ver cuotas socios", "Volver"};
+						String [] opcionesCuotas={"Asignar valor a cuotas", "Ver cuotas socios", "Volver"};
 						int opcionCuota= JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Menú Cliente", 0, 0, null, opcionesCuotas, opcionesCuotas[0]);
 						
 						switch (opcionCuota) {
-						case 0://Asignar valor
+						case 0://Asignar valor a cuotas
 							
 							break;
 							
@@ -79,8 +82,8 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 							
 							break;
 							
-						case 1://Dar de baja
-							
+						case 1: //Dar de baja a un cliente
+							 
 							break;
 			
 						case 2://Socios registrados
@@ -161,6 +164,7 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 				
 			} while (contswitchgeneral==0);
 		}
+
 		
 		
 		

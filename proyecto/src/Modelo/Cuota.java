@@ -2,17 +2,23 @@ package Modelo;
 
 import java.time.LocalDateTime;
 
+
 public class Cuota {
 
 	private Double valor;
 	private String metodo;
 	private LocalDateTime vencimiento;
-	public Cuota(Double valor, String metodo, LocalDateTime vencimiento) {
+	public Cuota(int ID_Cuota,Double valor, String metodo, LocalDateTime vencimiento) {
 		super();
-		this.valor = 5000.00;
+		this.valor = valor;
 		this.metodo = metodo;
 		this.vencimiento = vencimiento;
 	}
+	
+	public void setID_Cuota(int iD_Cuota) {
+	}
+
+
 	public Double getValor() {
 		return valor;
 	}
@@ -36,5 +42,9 @@ public class Cuota {
 		return "Cuotas: " + valor + "\nMetodo: " + metodo + "\nVencimiento: " + vencimiento;
 	}
 	
+	
+	public void VerInformacionCuotas() {
+		
+	}
 	
 }

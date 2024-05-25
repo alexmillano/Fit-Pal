@@ -18,7 +18,7 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 			int telefono) {
 		super(nombre, apellido, contraseña, dNI, correo);
 		this.nivel = nivel;
-		ID_Cliente = iD_Cliente;
+		this.ID_Cliente = iD_Cliente;
 		this.telefono = telefono;
 		//this.cuota=cuota;
 	}
