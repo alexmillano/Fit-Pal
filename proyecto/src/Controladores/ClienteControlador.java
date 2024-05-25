@@ -19,18 +19,21 @@ public class ClienteControlador implements ClienteRepository {
 
     @Override
     public List<Cliente> getAllCliente() {
-        List<Cliente> users = new ArrayList<>();/*
+        List<Cliente> users = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users ");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente ");
             ResultSet resultSet = statement.executeQuery();
        
             while (resultSet.next()) {
-            	Cliente user = new Cliente(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+            	Cliente user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cliente_Rutina"));
                 users.add(user);
+               
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         return users;
     }
 

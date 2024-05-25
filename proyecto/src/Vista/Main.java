@@ -10,7 +10,7 @@ import Modelo.Recepcion;
 public class Main implements MenuIniciarSesion{
 
 	public static void main(String[] args) {
-		
+		/*
 		Recepcion recepcion1= new Recepcion("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
 		Profesor profesor1= new Profesor("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
 		Cliente cliente1= new Cliente("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar","Intermedio",1,1124655611);
@@ -35,7 +35,7 @@ public class Main implements MenuIniciarSesion{
 									
 			break;
 		}
-		
+		*/
 
 	}
 
@@ -43,6 +43,12 @@ public class Main implements MenuIniciarSesion{
 	public void Menu() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean IniciarSesion(String mail, String contrasena) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
