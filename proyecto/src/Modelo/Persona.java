@@ -60,6 +60,7 @@ public class Persona implements MenuIniciarSesion{
 				return false;
 			}
 		}
+		
 		@Override
 		public void Menu() {
 			// TODO Auto-generated method stub

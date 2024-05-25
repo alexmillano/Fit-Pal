@@ -23,6 +23,21 @@ public class Prueba {
 		assertEquals(true,flag);
 	}
 	
+	
+	@Test
+	public void PruebaIniciarSesionF() {
+		ClienteControlador controlador = new ClienteControlador();
+		boolean flag =false;
+		
+		for (Cliente cliente : controlador.getAllCliente()) {
+			if (cliente.IniciarSesion("alexander@gmail.com","123")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(false,flag);
+	}
 
 	
 }

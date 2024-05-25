@@ -39,7 +39,7 @@ public class ClienteControlador implements ClienteRepository {
 
     @Override
     public Cliente getClienteById(int id) {
-    	Cliente user = null;/*
+    	Cliente user = null;
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
             statement.setInt(1, id);
@@ -51,7 +51,7 @@ public class ClienteControlador implements ClienteRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         return user;
     }
 
