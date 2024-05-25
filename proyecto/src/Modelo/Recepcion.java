@@ -1,6 +1,9 @@
 package Modelo;
 
+import java.time.LocalDate;
+
 import javax.swing.JOptionPane;
+
 
 public class Recepcion extends Persona implements MenuIniciarSesion {
 
@@ -21,6 +24,8 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 		public void setID_recepcion(int iD_recepcion) {
 			ID_recepcion = iD_recepcion;
 		}
+		
+		
 
 		@Override
 		public String toString() {
@@ -41,11 +46,13 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 					int cont0=0;//Contador para salir de Cuotas y volver al menu principal de Recepcion
 					do {
 						
-						String [] opcionesCuotas={"Asignar valor", "Ver cuotas socios", "Volver"};
+						String [] opcionesCuotas={"Asignar valor a cuotas", "Ver cuotas socios", "Volver"};
 						int opcionCuota= JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Menú Cliente", 0, 0, null, opcionesCuotas, opcionesCuotas[0]);
 						
 						switch (opcionCuota) {
-						case 0://Asignar valor
+						case 0://Asignar valor a cuotas
+							
+							
 							
 							break;
 							
@@ -77,10 +84,27 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						switch (opcionUsuario) {
 						case 0://Dar de alta
 							
+							String nombre=JOptionPane.showInputDialog("Ingrese el nombre");
+							String apellido=JOptionPane.showInputDialog("Ingrese el apellido");
+							int dni=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la contraseña"));
+							String contraseña = Integer.toString(dni);
+							String correo=JOptionPane.showInputDialog("Ingrese el correo");
+							int nivel=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nivel"));
+							int telefono=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el telefono"));
+							
+							
+							String metodo=JOptionPane.showInputDialog("Ingrese forma de pago");
+							LocalDate vencimiento = LocalDate.now();
+							vencimiento = vencimiento.plusMonths(1);
+							
+							Cuota cuotanueva = new Cuota(metodo,vencimiento);
+							
+							this.DardeAlta(nombre,apellido,dni,contraseña,correo,nivel,telefono,cuotanueva);
+							
 							break;
 							
-						case 1://Dar de baja
-							
+						case 1: //Dar de baja a un cliente
+							 
 							break;
 			
 						case 2://Socios registrados
@@ -161,7 +185,11 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 				
 			} while (contswitchgeneral==0);
 		}
-		
+
+		public boolean DardeAlta(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota){
+			
+			return true;
+		}
 		
 		
 		

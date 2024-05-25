@@ -9,6 +9,7 @@ import java.util.List;
 
 import Interfaces.ClienteRepository;
 import Modelo.Cliente;
+import Modelo.Cuota;
 
 public class ClienteControlador implements ClienteRepository {
     private final Connection connection;
@@ -27,7 +28,7 @@ public class ClienteControlador implements ClienteRepository {
             while (resultSet.next()) {
             	Cliente user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
             			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
-            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cliente_Rutina"));
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cuota"));
                 users.add(user);
                
             }
@@ -37,6 +38,7 @@ public class ClienteControlador implements ClienteRepository {
         return users;
     }
 
+    /*
     @Override
     public Cliente getClienteById(int id) {
     	Cliente user = null;/*
@@ -53,59 +55,64 @@ public class ClienteControlador implements ClienteRepository {
             e.printStackTrace();
         }*/
         return user;
-    }
+    }*/
 
 	@Override
-    public void addCliente(Cliente cliente) {/*
+    public void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)");
-            statement.setString(1, cliente.getNombre());
-            statement.setString(2, cliente.getEmail());
-            
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Usuario insertado exitosamente");
+        	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
+        			+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+        	statement.setString(1, contraseña);
+        	statement.setString(2, apellido);
+        	statement.setInt(3, dni);
+        	statement.setString(4, correo);
+        	statement.setInt(5, telefono);
+        	statement.setString(6, nombre);
+        	statement.setInt(7, nivel);
+        	statement.setInt(8, cuota.getID_Cuota());
+        
+        int rowsInserted = statement.executeUpdate();
+        	if (rowsInserted > 0) {
+            System.out.println("Cliente insertado exitosamente");
+        	}
+        	} catch (SQLException e) {
+        		e.printStackTrace();
+        	}
+    }
+	/*
+	@Override
+    public void updateCliente(Cliente cliente) {
+		try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            statement.setInt(1, idCliente);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Cliente eliminado exitosamente");
+            } else {
+                System.out.println("No se encontró el cliente con el ID proporcionado");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
-    }
-
-	@Override
-    public void updateCliente(Cliente cliente) {/*
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
-            statement.setString(1, cliente.getNombre());
-            statement.setString(2, cliente.getEmail());
-            statement.setInt(3, cliente.getId());
-            
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Usuario actualizado exitosamente");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+        }
     }
 
     @Override
-    public void deleteCliente(int id) {/*
+    public void deleteCliente(int idCliente) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-            statement.setInt(1, id);
-            
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            statement.setInt(1, idCliente);
+
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Usuario eliminado exitosamente");
+                System.out.println("Cliente eliminado exitosamente");
+            } else {
+                System.out.println("No se encontró el cliente con el ID proporcionado");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
-    }
+        }
+    }*/
 
-
-
-
-
-  
+	}
 }
