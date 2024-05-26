@@ -1,18 +1,27 @@
 package Modelo;
 
+import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
 
 public class Profesor extends Persona implements MenuIniciarSesion {
 	private int ID_Profesor;
 	
-	//Lista de clases
-	//Lista de rutinas
+	//Lista static para agregar a todos los profesores que se crean
+	static LinkedList<Profesor> profesores_general = new LinkedList<>();
 	
+	//Lista de las clases que da el profesor
+	private LinkedList<Clase> mis_clases = new LinkedList<>();
+	
+	//Lista de las rutinas que hace el profesor
+	private LinkedList<Rutina> mis_rutinas = new LinkedList<>();
+		
 
-	public Profesor(String nombre, String apellido, String contraseña, int dNI, String correo, int iD_Profesor) {
+	public Profesor(String nombre, String apellido, String contraseña, int dNI, String correo) {
 		super(nombre, apellido, contraseña, dNI, correo);
-		ID_Profesor = iD_Profesor;
+		
 	}
+
 
 	public int getID_Profesor() {
 		return ID_Profesor;
@@ -22,11 +31,41 @@ public class Profesor extends Persona implements MenuIniciarSesion {
 		ID_Profesor = iD_Profesor;
 	}
 
+	public static LinkedList<Profesor> getProfesores_general() {
+		return profesores_general;
+	}
+
+	public static void setProfesores_general(LinkedList<Profesor> profesores_general) {
+		Profesor.profesores_general = profesores_general;
+	}
+
+	public LinkedList<Clase> getMis_clases() {
+		return mis_clases;
+	}
+
+	public void setMis_clases(LinkedList<Clase> mis_clases) {
+		this.mis_clases = mis_clases;
+	}
+
+	public LinkedList<Rutina> getMis_rutinas() {
+		return mis_rutinas;
+	}
+
+	public void setMis_rutinas(LinkedList<Rutina> mis_rutinas) {
+		this.mis_rutinas = mis_rutinas;
+	}
+
+
+	
 	@Override
 	public String toString() {
-		return "ID Profesor: " + ID_Profesor;
+		return "Profesor [ID_Profesor=" + ID_Profesor + ", mis_clases=" + mis_clases + ", mis_rutinas=" + mis_rutinas
+				+ "]";
 	}
+
 	
+	
+
 	public void ArmarRutinas() {
 		
 	}

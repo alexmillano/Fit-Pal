@@ -4,37 +4,112 @@ import java.time.Duration;
 import java.util.LinkedList;
 
 public class Rutina {
-		private Duration descanso;
-		private LinkedList<Ejercicio> ejercicio = new LinkedList<>();
+	
+		private int ID_Rutinas;
 		private String nombre;
-		public Rutina(Duration descanso, LinkedList<Ejercicio> ejercicio, String nombre) {
+		private Profesor profesor;
+		private int nivel;
+		
+		//Lista donde se agregan todas las rutinas creadas. Por eso es STATIC
+		static LinkedList<Rutina> rutinas_general = new LinkedList<>();
+		
+		//Lista de los ejercicios que tiene la rutina creada
+		private LinkedList<Ejercicio> ejercicios_de_la_rutina = new LinkedList<>();
+		
+		
+		
+		public Rutina(String nombre, Profesor profesor, int nivel) {
 			super();
-			this.descanso = descanso;
-			this.ejercicio = ejercicio;
 			this.nombre = nombre;
+			this.profesor = profesor;	
+			this.nivel = nivel;	
+			
 		}
-		public Duration getDescanso() {
-			return descanso;
+
+
+
+		public int getID_Rutinas() {
+			return ID_Rutinas;
 		}
-		public void setDescanso(Duration descanso) {
-			this.descanso = descanso;
+
+
+
+		public void setID_Rutinas(int iD_Rutinas) {
+			ID_Rutinas = iD_Rutinas;
 		}
-		public LinkedList<Ejercicio> getEjercicio() {
-			return ejercicio;
-		}
-		public void setEjercicio(LinkedList<Ejercicio> ejercicio) {
-			this.ejercicio = ejercicio;
-		}
+
+
+
 		public String getNombre() {
 			return nombre;
 		}
+
+
+
 		public void setNombre(String nombre) {
 			this.nombre = nombre;
 		}
+
+
+
+		public Profesor getProfesor() {
+			return profesor;
+		}
+
+
+
+		public void setProfesor(Profesor profesor) {
+			this.profesor = profesor;
+		}
+
+
+
+		public int getNivel() {
+			return nivel;
+		}
+
+
+
+		public void setNivel(int nivel) {
+			this.nivel = nivel;
+		}
+
+
+
+		public static LinkedList<Rutina> getRutinas_general() {
+			return rutinas_general;
+		}
+
+
+
+		public static void setRutinas_general(LinkedList<Rutina> rutinas_general) {
+			Rutina.rutinas_general = rutinas_general;
+		}
+
+
+
+		public LinkedList<Ejercicio> getEjercicios_de_la_rutina() {
+			return ejercicios_de_la_rutina;
+		}
+
+
+
+		public void setEjercicios_de_la_rutina(LinkedList<Ejercicio> ejercicios_de_la_rutina) {
+			this.ejercicios_de_la_rutina = ejercicios_de_la_rutina;
+		}
+
+
+
 		@Override
 		public String toString() {
-			return "\nNombre: " + nombre + "\nDescanso: " + descanso + "\nEjercicio: " + ejercicio;
+			return "Rutina [ID_Rutinas=" + ID_Rutinas + ", nombre=" + nombre + ", profesor=" + profesor + ", nivel="
+					+ nivel + ", ejercicios_de_la_rutina=" + ejercicios_de_la_rutina + "]";
 		}
+
+		
+		
+
+		
 		
 		
 }

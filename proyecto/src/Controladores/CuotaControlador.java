@@ -15,9 +15,9 @@ public class CuotaControlador implements CuotaRepository{
 	private final Connection connection;
 	
 	
-	  public CuotaControlador() {
-	        this.connection = DatabaseConnection.getInstance().getConnection();
-	    }
+	 public CuotaControlador() {
+	       this.connection = DatabaseConnection.getInstance().getConnection();
+	   }
 
 
 	@Override

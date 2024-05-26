@@ -38,7 +38,7 @@ public class ClienteControlador implements ClienteRepository {
         return users;
     }
 
-    /*
+    
     @Override
     public Cliente getClienteById(int id) {
     	Cliente user = null;/*
@@ -55,7 +55,7 @@ public class ClienteControlador implements ClienteRepository {
             e.printStackTrace();
         }*/
         return user;
-    }*/
+    }
 
 	@Override
     public void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
@@ -79,9 +79,9 @@ public class ClienteControlador implements ClienteRepository {
         		e.printStackTrace();
         	}
     }
-	/*
+	
 	@Override
-    public void updateCliente(Cliente cliente) {
+    public void updateCliente(Cliente cliente) {/*
 		try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
             statement.setInt(1, idCliente);
@@ -94,11 +94,11 @@ public class ClienteControlador implements ClienteRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
-    public void deleteCliente(int idCliente) {
+    public void deleteCliente(int idCliente) {/*
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
             statement.setInt(1, idCliente);

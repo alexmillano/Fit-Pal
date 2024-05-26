@@ -9,12 +9,13 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 
 		private int ID_recepcion;
 		
-		//Lista de todas las cuotas
-		//Lista de todos los clientes
+		//Lista de todas las cuotas. Ya esta hecha en cuotas. ES LA STATIC EN cuotas_general
+		
+		//Lista de todos los clientes. Ya esta hecha en cliente. ES LA STATIC clientes_general
 
 		public Recepcion(String nombre, String apellido, String contraseña, int dNI, String correo, int iD_recepcion) {
 			super(nombre, apellido, contraseña, dNI, correo);
-			ID_recepcion = iD_recepcion;
+			
 		}
 
 		public int getID_recepcion() {
@@ -25,13 +26,14 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 			ID_recepcion = iD_recepcion;
 		}
 		
-		
-
+	
 		@Override
 		public String toString() {
 			return "ID Recepcion: " + ID_recepcion;
 		}
 
+		
+		
 		@Override
 		public void Menu() {
 			int contswitchgeneral=0;////Contador para salir del do general, es decir para cerrar sesion.
