@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 public class Cliente extends Persona implements MenuIniciarSesion {
 	
-
 	private int nivel;
 	private int ID_Cliente;
 	private int telefono;
@@ -35,7 +34,6 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 		super(nombre, apellido, contraseña, dNI, correo);
 		this.nivel = nivel;
 		this.telefono = telefono;
-
 		
 		//Creamos la cuota
 		String metodo=JOptionPane.showInputDialog("Ingrese forma de pago");
@@ -47,6 +45,7 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 		this.ID_Cuota=cuota.getID_Cuota();
 		
 		//Falta que se cree la cuota automaticamente en la base de datos
+		
 	}
 	
 	
