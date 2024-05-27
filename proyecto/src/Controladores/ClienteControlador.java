@@ -28,9 +28,9 @@ public class ClienteControlador implements ClienteRepository {
             while (resultSet.next()) {
             	Cliente user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
             			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
-            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cuota"));
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("Telefono"));
                 users.add(user);
-               
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,15 +82,15 @@ public class ClienteControlador implements ClienteRepository {
 	
 	@Override
     public void updateCliente(Cliente cliente) {/*
-		try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
-            statement.setInt(1, idCliente);
-
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("Cliente eliminado exitosamente");
-            } else {
-                System.out.println("No se encontró el cliente con el ID proporcionado");
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+            statement.setString(1, usuario.getNombre());
+            statement.setString(2, usuario.getEmail());
+            statement.setInt(3, usuario.getId());
+            
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Usuario actualizado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,20 +99,17 @@ public class ClienteControlador implements ClienteRepository {
 
     @Override
     public void deleteCliente(int idCliente) {/*
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
-            statement.setInt(1, idCliente);
-
+                try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
+            statement.setInt(1, id);
+            
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Cliente eliminado exitosamente");
-            } else {
-                System.out.println("No se encontró el cliente con el ID proporcionado");
+                System.out.println("Usuario eliminado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }*/
+        }*/
 
 	}
 }
