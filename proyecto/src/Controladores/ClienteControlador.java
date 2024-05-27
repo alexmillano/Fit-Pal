@@ -81,35 +81,37 @@ public class ClienteControlador implements ClienteRepository {
     }
 	
 	@Override
-    public void updateCliente(Cliente cliente) {/*
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getEmail());
-            statement.setInt(3, usuario.getId());
-            
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Usuario actualizado exitosamente");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+    public void updateCliente(Cliente cliente) {
+		try {
+			PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+	        statement.setString(1, cliente.getNombre());
+	        statement.setString(3, cliente.getCorreo());
+	        statement.setInt(6, cliente.getID_Cliente());
+
+	        
+	        int rowsUpdated = statement.executeUpdate();
+	        if (rowsUpdated > 0) {
+	            System.out.println("Cliente actualizado correctamente");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
     }
 
     @Override
-    public void deleteCliente(int idCliente) {/*
-                try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
-            statement.setInt(1, id);
-            
+    public void deleteCliente(int idCliente) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            statement.setInt(1, idCliente);
+
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Usuario eliminado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
+    }
 
-	}
+	
 }
