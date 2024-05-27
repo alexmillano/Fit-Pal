@@ -28,7 +28,7 @@ public class ClienteControlador implements ClienteRepository {
             while (resultSet.next()) {
             	Cliente user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
             			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
-            			resultSet.getInt("ID_Nivel"),resultSet.getInt("ID_Cliente"),resultSet.getInt("Telefono"),resultSet.getInt("ID_Cuota"));
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("Telefono"));
                 users.add(user);
                
             }
@@ -81,24 +81,25 @@ public class ClienteControlador implements ClienteRepository {
     }
 	
 	@Override
-    public void updateCliente(Cliente cliente) {/*
+    public void updateCliente(Cliente cliente) {
 		try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
-            statement.setInt(1, idCliente);
+			PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+	        statement.setString(1, cliente.getNombre());
+	        statement.setString(3, cliente.getCorreo());
+	        statement.setInt(6, cliente.getID_Cliente());
 
-            int rowsDeleted = statement.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("Cliente eliminado exitosamente");
-            } else {
-                System.out.println("No se encontró el cliente con el ID proporcionado");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
+	        
+	        int rowsUpdated = statement.executeUpdate();
+	        if (rowsUpdated > 0) {
+	            System.out.println("Cliente actualizado correctamente");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
     }
 
     @Override
-    public void deleteCliente(int idCliente) {/*
+    public void deleteCliente(int idCliente) {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
             statement.setInt(1, idCliente);
@@ -112,7 +113,7 @@ public class ClienteControlador implements ClienteRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
-	}
+	
 }

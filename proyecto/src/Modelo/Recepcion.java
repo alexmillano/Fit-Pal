@@ -3,6 +3,8 @@ package Modelo;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
+import Controladores.ClienteControlador;
+
 
 
 public class Recepcion extends Persona implements MenuIniciarSesion {
@@ -101,12 +103,16 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 							
 							Cuota cuotanueva = new Cuota(metodo,vencimiento);
 							
-							this.DardeAlta(nombre,apellido,dni,contraseña,correo,nivel,telefono,cuotanueva);
+							ClienteControlador controlador = new ClienteControlador();
+							controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
 							
 							break;
 							
 						case 1: //Dar de baja a un cliente
-							 
+							int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del cliente a dar de baja"));
+							ClienteControlador controlador2 = new ClienteControlador();
+							controlador2.deleteCliente(id);
+							
 							break;
 			
 						case 2://Socios registrados
@@ -187,12 +193,6 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 				
 			} while (contswitchgeneral==0);
 		}
-
-		public boolean DardeAlta(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota){
-			
-			return true;
-		}
-		
-		
+	
 		
 }
