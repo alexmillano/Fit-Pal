@@ -1,14 +1,14 @@
 package Modelo;
 
-import java.time.Duration;
-import java.time.LocalDate;
+
 import java.util.LinkedList;
+import java.time.LocalDateTime;
 
 public class Clase {
 	private int ID_Clases;
 	private String nombre;
-	private LocalDate inicio;
-	private LocalDate fin;
+	private LocalDateTime inicio;
+	private LocalDateTime fin;
 	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
 	private Profesor profesor;	
 	private int nivel;
@@ -18,7 +18,7 @@ public class Clase {
 	//Lista con las rutinas que se hacen en la clase creada
 	private LinkedList<Rutina> rutina_de_la_clase = new LinkedList<>();
 	
-	public Clase(String nombre, LocalDate inicio, LocalDate fin,int nivel) {
+	public Clase(Profesor profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
 		super();
 		this.nombre=nombre;
 		this.inicio = inicio;
@@ -43,19 +43,19 @@ public class Clase {
 		this.nombre = nombre;
 	}
 
-	public LocalDate getInicio() {
+	public LocalDateTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalDate inicio) {
+	public void setInicio(LocalDateTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalDate getFin() {
+	public LocalDateTime getFin() {
 		return fin;
 	}
 
-	public void setFin(LocalDate fin) {
+	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
 

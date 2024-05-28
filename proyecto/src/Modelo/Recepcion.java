@@ -3,7 +3,9 @@ package Modelo;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
 import Controladores.ClienteControlador;
+import Controladores.ClaseControlador;
 
 
 
@@ -55,7 +57,6 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						
 						switch (opcionCuota) {
 						case 0://Asignar valor a cuotas
-							
 							
 							
 							break;
@@ -140,6 +141,22 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						
 						switch (opcionClases) {
 						case 0://Crear clase
+							Profesor profenuevo = new Profesor("Alex", "Gimenez", "564684", 45451514,"alexgimenez@gmail.com");
+							String nombreC = JOptionPane.showInputDialog("Ingrese el nombre de la clase");
+							
+							LocalDate fecha = LocalDate.now();
+							int hora = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la hora del inicio de la clase"));
+							int minuto = Integer.parseInt(JOptionPane.showInputDialog("Ahora ingrese los minutos de inicio de la clase"));
+							LocalDateTime horainicio = fecha.atTime(hora, minuto);
+							
+							int hora2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la hora de fin de la clase"));
+							int minuto2 = Integer.parseInt(JOptionPane.showInputDialog("Ahora ingrese los minutos de fin de la clase"));
+							LocalDateTime horafin = fecha.atTime(hora2, minuto2);
+							int nivelC = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nivel de la clase"));
+							
+							ClaseControlador controlclase = new ClaseControlador();
+							controlclase.addClase(profenuevo,nombreC,horainicio,horafin,nivelC);
+							
 							
 							break;
 							
