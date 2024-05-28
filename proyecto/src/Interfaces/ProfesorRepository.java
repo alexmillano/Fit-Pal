@@ -9,7 +9,7 @@ List<Profesor> getAllProfesor(); // llama a todos los profesores de la bdd
     
     Profesor getProfesorById(int id); //llama solo a uno, por su id
     
-    void addProfesor(Profesor profesor); //añade profesor a la bdd
+    void addProfesor(String nombre, String apellido, String contraseña, int dNI, String correo); //añade profesor a la bdd
     
     void updateProfesor(Profesor profesor); //actualiza los profesores de la bdd
     

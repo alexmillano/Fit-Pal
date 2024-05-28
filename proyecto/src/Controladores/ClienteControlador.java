@@ -49,7 +49,9 @@ public class ClienteControlador implements ClienteRepository {
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-                user = new Cliente(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+            	user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("Telefono"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,7 +63,7 @@ public class ClienteControlador implements ClienteRepository {
     public void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
         try {
         	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
-        			+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+        			+ "VALUES (?,?,?,?,?,?,?,?)");
         	statement.setString(1, contraseña);
         	statement.setString(2, apellido);
         	statement.setInt(3, dni);

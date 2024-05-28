@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import java.time.LocalDateTime;
 import Controladores.ClienteControlador;
 import Controladores.ClaseControlador;
+import Controladores.ProfesorControlador;
 
 
 
@@ -83,7 +84,7 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 					int cont1=0;//Contador para salir de Usuarios y volver al menu principal de Recepcion
 					do {
 						
-						String [] opcionesUsuarios={"Dar de alta", "Dar de baja", "Socios registrados" ,  "Volver"};
+						String [] opcionesUsuarios={"Dar de alta a cliente", "Dar de baja a cliente", "Socios registrados" , "Dar de alta a profesor", "Dar de baja a profesor", "Volver"};
 						int opcionUsuario= JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Menú Cliente", 0, 0, null, opcionesUsuarios, opcionesUsuarios[0]);
 						
 						switch (opcionUsuario) {
@@ -119,8 +120,24 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						case 2://Socios registrados
 							
 							break;
+						case 3://Dar de alta a profesor
+							String nombreP=JOptionPane.showInputDialog("Ingrese el nombre");
+							String apellidoP=JOptionPane.showInputDialog("Ingrese el apellido");
+							int dniP=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la contraseña"));
+							String contraseñaP = Integer.toString(dniP);
+							String correoP=JOptionPane.showInputDialog("Ingrese el correo");
+							
+							ProfesorControlador controlador3 = new ProfesorControlador();
+							controlador3.addProfesor(nombreP, apellidoP, contraseñaP, dniP, correoP);;
+							
+							break;
+						case 4://Dar de baja a profesor
+							int idProfesor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del profesor a dar de baja"));
+							ProfesorControlador controlador4 = new ProfesorControlador();
+							controlador4.deleteProfesor(idProfesor);
+							break;
 												
-						case 3://Volver
+						case 5://Volver
 							cont1++;
 							break;
 						}
