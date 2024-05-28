@@ -23,7 +23,7 @@ public class ProfesorControlador implements ProfesorRepository{
 	public List<Profesor> getAllProfesor() {
 		List<Profesor> users = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente ");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM profesor ");
             ResultSet resultSet = statement.executeQuery();
        
             while (resultSet.next()) {
@@ -62,7 +62,7 @@ public class ProfesorControlador implements ProfesorRepository{
 	@Override
 	public void addProfesor(String nombre, String apellido, String contraseña, int dNI, String correo) {
 		 try {
-	        	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente( Apellido, Nombre, Correo, DNI, Contraseña) "
+	        	PreparedStatement statement = connection.prepareStatement("INSERT INTO profesor( Apellido, Nombre, Correo, DNI, Contraseña) "
 	        			+ "VALUES (?,?,?,?,?)");
 	        	statement.setString(1, apellido);
 	        	statement.setString(2, nombre);
@@ -84,7 +84,7 @@ public class ProfesorControlador implements ProfesorRepository{
 	@Override
 	public void updateProfesor(Profesor profesor) {
 		try {
-			PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE users SET Nombre = ?, Correo = ? WHERE ID_Profesor = ?");
 	        statement.setString(1, profesor.getNombre());
 	        statement.setString(3, profesor.getCorreo());
 	        statement.setInt(6, profesor.getID_Profesor());
@@ -92,7 +92,7 @@ public class ProfesorControlador implements ProfesorRepository{
 	        
 	        int rowsUpdated = statement.executeUpdate();
 	        if (rowsUpdated > 0) {
-	            System.out.println("Cliente actualizado correctamente");
+	            System.out.println("Profesor actualizado correctamente");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -103,12 +103,12 @@ public class ProfesorControlador implements ProfesorRepository{
 	@Override
 	public void deleteProfesor(int idProfesor) {
 		 try {
-	            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+	            PreparedStatement statement = connection.prepareStatement("DELETE FROM profesor WHERE ID_Profesor = ?");
 	            statement.setInt(1, idProfesor);
 
 	            int rowsDeleted = statement.executeUpdate();
 	            if (rowsDeleted > 0) {
-	                System.out.println("Usuario eliminado exitosamente");
+	                System.out.println("Profesor eliminado exitosamente");
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

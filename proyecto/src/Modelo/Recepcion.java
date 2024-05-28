@@ -99,11 +99,10 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 							int telefono=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el telefono"));
 							
 							
-							String metodo=JOptionPane.showInputDialog("Ingrese forma de pago");
+							int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
 							LocalDate vencimiento = LocalDate.now();
-							vencimiento = vencimiento.plusMonths(1);
-							
-							Cuota cuotanueva = new Cuota(metodo,vencimiento);
+							LocalDate vencimiento2 = vencimiento.plusMonths(1);
+							Cuota cuotanueva = new Cuota(metodo,vencimiento2);
 							
 							ClienteControlador controlador = new ClienteControlador();
 							controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);

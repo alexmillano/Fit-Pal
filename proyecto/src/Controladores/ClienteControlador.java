@@ -43,7 +43,7 @@ public class ClienteControlador implements ClienteRepository {
     public Cliente getClienteById(int id) {
     	Cliente user = null;
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE ID_Cliente = ?");
             statement.setInt(1, id);
             
             ResultSet resultSet = statement.executeQuery();
@@ -85,7 +85,7 @@ public class ClienteControlador implements ClienteRepository {
 	@Override
     public void updateCliente(Cliente cliente) {
 		try {
-			PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE users SET Nombre = ?, Correo = ? WHERE ID_Cliente = ?");
 	        statement.setString(1, cliente.getNombre());
 	        statement.setString(3, cliente.getCorreo());
 	        statement.setInt(6, cliente.getID_Cliente());
@@ -103,7 +103,7 @@ public class ClienteControlador implements ClienteRepository {
     @Override
     public void deleteCliente(int idCliente) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE ID_Cliente = ?");
             statement.setInt(1, idCliente);
 
             int rowsDeleted = statement.executeUpdate();

@@ -38,7 +38,7 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 
 		
 		//Creamos la cuota
-		String metodo=JOptionPane.showInputDialog("Ingrese forma de pago");
+		int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
 		LocalDate vencimiento = LocalDate.now().plusMonths(1);
 		Cuota cuota1 = new Cuota(metodo,vencimiento);
 		
