@@ -10,6 +10,8 @@ import Modelo.Recepcion;
 public class Main implements MenuIniciarSesion{
 
 	public static void main(String[] args) {
+
+		
 		/*
 		Recepcion recepcion1= new Recepcion("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
 		Profesor profesor1= new Profesor("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);

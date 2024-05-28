@@ -2,30 +2,42 @@ package Modelo;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 
 public class Clase {
 	private int ID_Clases;
 	private String nombre;
-	private LocalDate inicio;
-	private LocalDate fin;
-	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
-	private Profesor profesor;	
+	private LocalTime inicio;
+	private LocalTime fin;	
 	private int nivel;
+	private Profesor profesor;	
+
 	
-	//Lista con todas las clases que se crean
-	static LinkedList<Clase> clases = new LinkedList<>();
+	//Lista de los alumnos de la clase creada
+	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
+	
 	//Lista con las rutinas que se hacen en la clase creada
 	private LinkedList<Rutina> rutina_de_la_clase = new LinkedList<>();
 	
-	public Clase(String nombre, LocalDate inicio, LocalDate fin,int nivel) {
+	
+	//Lista con todas las clases que se crean. Por eso es static
+	static LinkedList<Clase> clases = new LinkedList<>();
+	
+
+	
+	public Clase(String nombre, LocalTime inicio, LocalTime fin,int nivel, Profesor profesor) {
 		super();
 		this.nombre=nombre;
 		this.inicio = inicio;
 		this.fin = fin;
 		this.nivel = nivel;
+		this.profesor=profesor;
 
 	}
+	
+	
+	
 
 	public int getID_Clases() {
 		return ID_Clases;
@@ -43,19 +55,19 @@ public class Clase {
 		this.nombre = nombre;
 	}
 
-	public LocalDate getInicio() {
+	public LocalTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalDate inicio) {
+	public void setInicio(LocalTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalDate getFin() {
+	public LocalTime getFin() {
 		return fin;
 	}
 
-	public void setFin(LocalDate fin) {
+	public void setFin(LocalTime fin) {
 		this.fin = fin;
 	}
 
@@ -99,6 +111,7 @@ public class Clase {
 		this.rutina_de_la_clase = rutina_de_la_clase;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Clase [ID_Clases=" + ID_Clases + ", nombre=" + nombre + ", inicio=" + inicio + ", fin=" + fin

@@ -1,9 +1,13 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
+
+import Controladores.RutinaControlador;
+import Controladores.ClaseControlador;
 
 public class Cliente extends Persona implements MenuIniciarSesion {
 	
@@ -207,6 +211,30 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 			
 	}
 		
+	
+	
+	public boolean UnirseClase() {
+		try {
+						
+			ClaseControlador controlador = new ClaseControlador();
+			
+			Clase[] mostrarClase = new Clase[controlador.getAllClase().size()];
+			
+			for (int i = 0; i < controlador.getAllClase().size(); i++) {
+				mostrarClase[i] = controlador.getAllClase().get(i);
+			}
+		
+			Clase claseSeleccionada= (Clase)JOptionPane.showInputDialog(null, "Seleccione la clase para unirse: " , "Elección de Clase", 0, null,  mostrarClase, mostrarClase[0]);
+			
+			mis_clases.add(claseSeleccionada);
+			
+			return true;
+			
+		} catch (Exception e) {
+			 e.printStackTrace();
+			 return false;
+		}
+	}
 	
 
 }

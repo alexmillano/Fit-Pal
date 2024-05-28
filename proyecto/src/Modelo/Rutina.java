@@ -8,6 +8,7 @@ public class Rutina {
 		private int ID_Rutinas;
 		private String nombre;
 		private Profesor profesor;
+		private int ID_Profesor;
 		private int nivel;
 		
 		//Lista donde se agregan todas las rutinas creadas. Por eso es STATIC
@@ -26,6 +27,7 @@ public class Rutina {
 			
 		}
 
+		
 
 
 		public int getID_Rutinas() {
@@ -103,7 +105,7 @@ public class Rutina {
 		@Override
 		public String toString() {
 			return "Rutina [ID_Rutinas=" + ID_Rutinas + ", nombre=" + nombre + ", profesor=" + profesor + ", nivel="
-					+ nivel + ", ejercicios_de_la_rutina=" + ejercicios_de_la_rutina + "]";
+					+ nivel + "]";
 		}
 
 		

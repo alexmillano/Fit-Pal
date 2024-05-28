@@ -1,8 +1,13 @@
 package Modelo;
 
+import java.time.LocalTime;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
+
+import Controladores.ClienteControlador;
+import Controladores.RutinaControlador;
 
 public class Profesor extends Persona implements MenuIniciarSesion {
 	private int ID_Profesor;
@@ -20,6 +25,12 @@ public class Profesor extends Persona implements MenuIniciarSesion {
 	public Profesor(String nombre, String apellido, String contraseña, int dNI, String correo) {
 		super(nombre, apellido, contraseña, dNI, correo);
 		
+	}
+	
+	//Creado solo para probar el test
+	public Profesor(int ID_Profesor,String nombre, String apellido, String contraseña, int dNI, String correo) {
+		super(nombre, apellido, contraseña, dNI, correo);
+		this.ID_Profesor=ID_Profesor;
 	}
 
 
@@ -63,12 +74,6 @@ public class Profesor extends Persona implements MenuIniciarSesion {
 				+ "]";
 	}
 
-	
-	
-
-	public void ArmarRutinas() {
-		
-	}
 
 	@Override
 	public void Menu() {
