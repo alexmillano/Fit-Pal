@@ -3,7 +3,10 @@ package Modelo;
 import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
+import java.time.LocalDateTime;
 import Controladores.ClienteControlador;
+import Controladores.ClaseControlador;
+import Controladores.ProfesorControlador;
 
 
 
@@ -57,7 +60,6 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						case 0://Asignar valor a cuotas
 							
 							
-							
 							break;
 							
 						case 1://Ver cuota socios
@@ -82,7 +84,7 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 					int cont1=0;//Contador para salir de Usuarios y volver al menu principal de Recepcion
 					do {
 						
-						String [] opcionesUsuarios={"Dar de alta", "Dar de baja", "Socios registrados" ,  "Volver"};
+						String [] opcionesUsuarios={"Dar de alta a cliente", "Dar de baja a cliente", "Socios registrados" , "Dar de alta a profesor", "Dar de baja a profesor", "Volver"};
 						int opcionUsuario= JOptionPane.showOptionDialog(null, "Seleccione una opcion", "Menú Cliente", 0, 0, null, opcionesUsuarios, opcionesUsuarios[0]);
 						
 						switch (opcionUsuario) {
@@ -97,11 +99,10 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 							int telefono=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el telefono"));
 							
 							
-							String metodo=JOptionPane.showInputDialog("Ingrese forma de pago");
+							int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
 							LocalDate vencimiento = LocalDate.now();
-							vencimiento = vencimiento.plusMonths(1);
-							
-							Cuota cuotanueva = new Cuota(metodo,vencimiento);
+							LocalDate vencimiento2 = vencimiento.plusMonths(1);
+							Cuota cuotanueva = new Cuota(metodo,vencimiento2);
 							
 							ClienteControlador controlador = new ClienteControlador();
 							controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
@@ -118,8 +119,24 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						case 2://Socios registrados
 							
 							break;
+						case 3://Dar de alta a profesor
+							String nombreP=JOptionPane.showInputDialog("Ingrese el nombre");
+							String apellidoP=JOptionPane.showInputDialog("Ingrese el apellido");
+							int dniP=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la contraseña"));
+							String contraseñaP = Integer.toString(dniP);
+							String correoP=JOptionPane.showInputDialog("Ingrese el correo");
+							
+							ProfesorControlador controlador3 = new ProfesorControlador();
+							controlador3.addProfesor(nombreP, apellidoP, contraseñaP, dniP, correoP);;
+							
+							break;
+						case 4://Dar de baja a profesor
+							int idProfesor = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del profesor a dar de baja"));
+							ProfesorControlador controlador4 = new ProfesorControlador();
+							controlador4.deleteProfesor(idProfesor);
+							break;
 												
-						case 3://Volver
+						case 5://Volver
 							cont1++;
 							break;
 						}
@@ -140,6 +157,22 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 						
 						switch (opcionClases) {
 						case 0://Crear clase
+							Profesor profenuevo = new Profesor("Alex", "Gimenez", "564684", 45451514,"alexgimenez@gmail.com");
+							String nombreC = JOptionPane.showInputDialog("Ingrese el nombre de la clase");
+							
+							LocalDate fecha = LocalDate.now();
+							int hora = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la hora del inicio de la clase"));
+							int minuto = Integer.parseInt(JOptionPane.showInputDialog("Ahora ingrese los minutos de inicio de la clase"));
+							LocalDateTime horainicio = fecha.atTime(hora, minuto);
+							
+							int hora2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la hora de fin de la clase"));
+							int minuto2 = Integer.parseInt(JOptionPane.showInputDialog("Ahora ingrese los minutos de fin de la clase"));
+							LocalDateTime horafin = fecha.atTime(hora2, minuto2);
+							int nivelC = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nivel de la clase"));
+							
+							ClaseControlador controlclase = new ClaseControlador();
+							controlclase.addClase(profenuevo,nombreC,horainicio,horafin,nivelC);
+							
 							
 							break;
 							

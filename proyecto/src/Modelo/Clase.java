@@ -1,17 +1,17 @@
 package Modelo;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.LinkedList;
+import java.time.LocalDateTime;
 
 public class Clase {
 	private int ID_Clases;
 	private String nombre;
-	private LocalTime inicio;
-	private LocalTime fin;	
-	private int nivel;
+	private LocalDateTime inicio;
+	private LocalDateTime fin;
 	private Profesor profesor;	
+	private int nivel;
+	
+	private int ID_Profesor;
 
 	
 	//Lista de los alumnos de la clase creada
@@ -21,12 +21,7 @@ public class Clase {
 	private LinkedList<Rutina> rutina_de_la_clase = new LinkedList<>();
 	
 	
-	//Lista con todas las clases que se crean. Por eso es static
-	static LinkedList<Clase> clases = new LinkedList<>();
-	
-
-	
-	public Clase(String nombre, LocalTime inicio, LocalTime fin,int nivel, Profesor profesor) {
+	public Clase(Profesor profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
 		super();
 		this.nombre=nombre;
 		this.inicio = inicio;
@@ -35,6 +30,19 @@ public class Clase {
 		this.profesor=profesor;
 
 	}
+	
+	
+	public Clase(int ID_Profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
+		super();
+		this.nombre=nombre;
+		this.inicio = inicio;
+		this.fin = fin;
+		this.nivel = nivel;
+		this.ID_Profesor=ID_Profesor;
+
+	}
+	
+	
 	
 	
 	
@@ -55,19 +63,19 @@ public class Clase {
 		this.nombre = nombre;
 	}
 
-	public LocalTime getInicio() {
+	public LocalDateTime getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(LocalTime inicio) {
+	public void setInicio(LocalDateTime inicio) {
 		this.inicio = inicio;
 	}
 
-	public LocalTime getFin() {
+	public LocalDateTime getFin() {
 		return fin;
 	}
 
-	public void setFin(LocalTime fin) {
+	public void setFin(LocalDateTime fin) {
 		this.fin = fin;
 	}
 
@@ -95,13 +103,6 @@ public class Clase {
 		this.nivel = nivel;
 	}
 
-	public static LinkedList<Clase> getClases() {
-		return clases;
-	}
-
-	public static void setClases(LinkedList<Clase> clases) {
-		Clase.clases = clases;
-	}
 
 	public LinkedList<Rutina> getRutina_de_la_clase() {
 		return rutina_de_la_clase;
@@ -111,13 +112,18 @@ public class Clase {
 		this.rutina_de_la_clase = rutina_de_la_clase;
 	}
 
-	
+
+
+
 	@Override
 	public String toString() {
 		return "Clase [ID_Clases=" + ID_Clases + ", nombre=" + nombre + ", inicio=" + inicio + ", fin=" + fin
-				+ ", alumnos_de_la_clase=" + alumnos_de_la_clase + ", profesor=" + profesor + ", nivel=" + nivel
+				+ ", profesor=" + profesor + ", nivel=" + nivel + ", alumnos_de_la_clase=" + alumnos_de_la_clase
 				+ ", rutina_de_la_clase=" + rutina_de_la_clase + "]";
 	}
+
+
+
 
 	
 	

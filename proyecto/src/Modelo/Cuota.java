@@ -1,25 +1,40 @@
 package Modelo;
 
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 public class Cuota {
 	private int ID_Cuota;
+	private int ID_cliente;
 	private Double valor;
-	private String metodo;
+	private int metodo;
 	private LocalDate vencimiento;
 	
 	//Lista donde se agregan todas las cuotas creadas
 	static LinkedList<Cuota> cuotas_general = new LinkedList<>();
 	
-	public Cuota(String metodo, LocalDate vencimiento) {
+	public Cuota(int metodo, LocalDate vencimiento) {
 		super();
 		this.valor = 5000.00;
 		this.metodo = metodo;
 		this.vencimiento = vencimiento;
 	}
+	public Cuota(int ID_cliente, Double valor, int metodo, LocalDate vencimiento) {
+		super();
+		this.ID_cliente = ID_cliente;
+		this.valor = 5000.00;
+		this.metodo = metodo;
+		this.vencimiento = vencimiento;
+	}
 	
+	
+	public int getCliente() {
+		return ID_cliente;
+	}
+	public void setCliente(int ID_cliente) {
+		this.ID_cliente = ID_cliente;
+	}
 	public int getID_Cuota() {
 		return ID_Cuota;
 	}
@@ -32,10 +47,10 @@ public class Cuota {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public String getMetodo() {
+	public int getMetodo() {
 		return metodo;
 	}
-	public void setMetodo(String metodo) {
+	public void setMetodo(int metodo) {
 		this.metodo = metodo;
 	}
 	public LocalDate getVencimiento() {

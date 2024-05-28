@@ -41,19 +41,21 @@ public class ClienteControlador implements ClienteRepository {
     
     @Override
     public Cliente getClienteById(int id) {
-    	Cliente user = null;/*
+    	Cliente user = null;
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE ID_Cliente = ?");
             statement.setInt(1, id);
             
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-                user = new Usuario(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+            	user = new Cliente(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("Telefono"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         return user;
     }
 
@@ -61,7 +63,7 @@ public class ClienteControlador implements ClienteRepository {
     public void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
         try {
         	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
-        			+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+        			+ "VALUES (?,?,?,?,?,?,?,?)");
         	statement.setString(1, contraseña);
         	statement.setString(2, apellido);
         	statement.setInt(3, dni);
@@ -83,7 +85,7 @@ public class ClienteControlador implements ClienteRepository {
 	@Override
     public void updateCliente(Cliente cliente) {
 		try {
-			PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+			PreparedStatement statement = connection.prepareStatement("UPDATE users SET Nombre = ?, Correo = ? WHERE ID_Cliente = ?");
 	        statement.setString(1, cliente.getNombre());
 	        statement.setString(3, cliente.getCorreo());
 	        statement.setInt(6, cliente.getID_Cliente());
@@ -101,7 +103,7 @@ public class ClienteControlador implements ClienteRepository {
     @Override
     public void deleteCliente(int idCliente) {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM clientes WHERE ID_Cliente = ?");
             statement.setInt(1, idCliente);
 
             int rowsDeleted = statement.executeUpdate();
