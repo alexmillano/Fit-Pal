@@ -30,7 +30,7 @@ public class ClienteControlador implements ClienteRepository {
             			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
             			resultSet.getInt("ID_Nivel"),resultSet.getInt("Telefono"));
                 users.add(user);
-               
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,7 +41,7 @@ public class ClienteControlador implements ClienteRepository {
     
     @Override
     public Cliente getClienteById(int id) {
-    	Cliente user = null;/*
+    	Cliente user = null;
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
             statement.setInt(1, id);
@@ -49,11 +49,11 @@ public class ClienteControlador implements ClienteRepository {
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-                user = new Usuario(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+                user = new Cliente(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         return user;
     }
 
@@ -106,9 +106,7 @@ public class ClienteControlador implements ClienteRepository {
 
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("Cliente eliminado exitosamente");
-            } else {
-                System.out.println("No se encontró el cliente con el ID proporcionado");
+                System.out.println("Usuario eliminado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();
