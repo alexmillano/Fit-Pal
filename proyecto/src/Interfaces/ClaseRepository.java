@@ -12,9 +12,9 @@ public interface ClaseRepository {
     
     Clase getClaseById(int id); //llama solo a uno, por su id
     
-    void addClase(Profesor profesor, String nombre, LocalDateTime inicio, LocalDateTime fin, int nivel); //añade clase a la bdd
+    boolean addClase(Profesor profesor, String nombre, LocalDateTime inicio, LocalDateTime fin, int nivel); //añade clase a la bdd
     
-    void updateClase(Clase clase); //actualiza las clase de la bdd
+    boolean updateClase(Clase clase); //actualiza las clase de la bdd
     
-    void deleteClase(int id); //eliminar clase de la bdd
+    boolean deleteClase(int id); //eliminar clase de la bdd
 }
