@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -62,11 +62,8 @@ public class PruebaAlex {
 
 
 	        controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
-	        assertTrue(true);
 	        
 	        int id = controlador.getClienteIdPorDni(dni);
-	        assertTrue(true);
-	        
 	        controlador.deleteCliente(id);
 	        assertTrue(true);
 	    }
@@ -101,6 +98,7 @@ public class PruebaAlex {
 	    
 	    @Test
 	    public void CrearClaseF() {
+	    	boolean flag = false;
 	    	Profesor profenuevo = new Profesor("Esteban", "Rodriguez", "554548", 34255264,"estebanrodri@gmail.com");
 			String nombreC = "Sumo";
 			
@@ -115,12 +113,12 @@ public class PruebaAlex {
 			int nivelC = 1;
 			
 			if (horafin.isBefore(horainicio) || horainicio.isAfter(horafin)) {
-				assertTrue(true);
+					flag=true;
 				 System.out.println("Las horas estan mal puestas ");
 			} else {
 				ClaseControlador controlclase = new ClaseControlador();
 				controlclase.addClase(profenuevo,nombreC,horainicio,horafin,nivelC);
 			}
-
+			assertEquals(true,flag);
 	    }
 }
