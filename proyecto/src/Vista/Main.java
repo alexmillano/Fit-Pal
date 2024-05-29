@@ -6,11 +6,17 @@ import Modelo.Cliente;
 import Modelo.MenuIniciarSesion;
 import Modelo.Profesor;
 import Modelo.Recepcion;
+import Validaciones.Validaciones_Interface;
 
-public class Main implements MenuIniciarSesion{
+public class Main implements MenuIniciarSesion,Validaciones_Interface{
 
 	public static void main(String[] args) {
-
+		Cliente cliente1= new Cliente("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1,1124655611);
+		
+		String correo = JOptionPane.showInputDialog("Ingrese su correo");
+		String contraseña = JOptionPane.showInputDialog("Ingrese su contraseña");
+		
+		cliente1.IniciarSesion(correo, null);
 		
 		/*
 		Recepcion recepcion1= new Recepcion("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);

@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Persona implements MenuIniciarSesion{
+public class Persona implements MenuIniciarSesion, Validaciones_Interface{
 		private String nombre;
 		private String apellido;
 		private String contraseña;
@@ -60,6 +60,7 @@ public class Persona implements MenuIniciarSesion{
 
 		@Override
 		public boolean IniciarSesion(String mail, String contrasena) {
+			ValidarEsNumero(contrasena);
 			if (this.getCorreo().equals(mail) && this.getContraseña().equals(contrasena)) {
 				return true;
 			} else {

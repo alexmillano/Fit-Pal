@@ -114,17 +114,26 @@ public class Clase {
 
 
 
-
+//Intentar no modificar este ToString. Falta agregar profesor
 	@Override
 	public String toString() {
-		return "Clase [ID_Clases=" + ID_Clases + ", nombre=" + nombre + ", inicio=" + inicio + ", fin=" + fin
-				+ ", profesor=" + profesor + ", nivel=" + nivel + ", alumnos_de_la_clase=" + alumnos_de_la_clase
-				+ ", rutina_de_la_clase=" + rutina_de_la_clase + "]";
+		String horaYMinutosInicio = String.format("%02d:%02d", inicio.getHour(), inicio.getMinute());
+		String horaYMinutosFin = String.format("%02d:%02d", fin.getHour(), fin.getMinute());
+
+		return "Clase [nombre=" + nombre + " , Inicio=" + horaYMinutosInicio + " , Fin=" + horaYMinutosFin
+				+ " , Nivel=" + nivel + " , Inscriptos=" + alumnos_de_la_clase.size()
+				+  "]";
 	}
 
 
 
-
+	public String MostrarParaAlumno() {
+		
+		
+		return "Clase: " + this.getNombre() + ". Inicio: " + this.getInicio() + ". Fin: " + this.getFin() + ". Inscriptos: " + alumnos_de_la_clase.size();
+		
+	}
+	
 	
 	
 
