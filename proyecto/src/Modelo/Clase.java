@@ -9,6 +9,8 @@ public class Clase {
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
 	private Profesor profesor;	
+	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
+	private int profesor;	
 	private int nivel;
 	
 	private int ID_Profesor;
@@ -22,6 +24,7 @@ public class Clase {
 	
 	
 	public Clase(Profesor profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
+	public Clase(int profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
 		super();
 		this.nombre=nombre;
 		this.inicio = inicio;
@@ -87,11 +90,11 @@ public class Clase {
 		this.alumnos_de_la_clase = alumnos_de_la_clase;
 	}
 
-	public Profesor getProfesor() {
+	public int getProfesor() {
 		return profesor;
 	}
 
-	public void setProfesor(Profesor profesor) {
+	public void setProfesor(int profesor) {
 		this.profesor = profesor;
 	}
 

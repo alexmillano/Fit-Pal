@@ -112,9 +112,9 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 							break;
 							
 						case 1: //Dar de baja a un cliente
-							int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del cliente a dar de baja"));
+							int dniC = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del cliente a dar de baja"));
 							ClienteControlador controlador2 = new ClienteControlador();
-							controlador2.deleteCliente(id);
+							controlador2.deleteCliente(dniC);
 							
 							break;
 			
