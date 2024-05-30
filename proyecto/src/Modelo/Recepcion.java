@@ -92,6 +92,7 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 						switch (opcionUsuario) {
 						case 0://Dar de alta
 							
+							int ID_Cliente=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del cliente"));
 							String nombre=JOptionPane.showInputDialog("Ingrese el nombre");
 							String apellido=JOptionPane.showInputDialog("Ingrese el apellido");
 							int dni=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la contraseña"));
@@ -101,13 +102,13 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 							int telefono=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el telefono"));
 							
 							
-							int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
+							/*int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
 							LocalDate vencimiento = LocalDate.now();
 							LocalDate vencimiento2 = vencimiento.plusMonths(1);
-							Cuota cuotanueva = new Cuota(metodo,vencimiento2);
+							Cuota cuotanueva = new Cuota(metodo,vencimiento2);*/
 							
 							ClienteControlador controlador = new ClienteControlador();
-							controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
+							controlador.addCliente(ID_Cliente,nombre, apellido, dni, contraseña, correo, nivel, telefono, 1);
 							
 							break;
 							

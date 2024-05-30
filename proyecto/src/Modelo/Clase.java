@@ -8,9 +8,6 @@ public class Clase {
 	private String nombre;
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
-	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
-	private int profesor;	
-	private Profesor profesor;	
 	private int nivel;
 	
 	private int ID_Profesor;
@@ -21,19 +18,7 @@ public class Clase {
 	
 	//Lista con las rutinas que se hacen en la clase creada
 	private LinkedList<Rutina> rutina_de_la_clase = new LinkedList<>();
-	
-	public Clase(int profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
-	
-	public Clase(Profesor profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
-		super();
-		this.nombre=nombre;
-		this.inicio = inicio;
-		this.fin = fin;
-		this.nivel = nivel;
-		this.profesor=profesor;
 
-	}
-	
 	
 	public Clase(int ID_Profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
 		super();
@@ -44,11 +29,6 @@ public class Clase {
 		this.ID_Profesor=ID_Profesor;
 
 	}
-	
-	
-	
-	
-	
 
 	public int getID_Clases() {
 		return ID_Clases;
@@ -90,12 +70,12 @@ public class Clase {
 		this.alumnos_de_la_clase = alumnos_de_la_clase;
 	}
 
-	public int getProfesor() {
-		return profesor;
+	public int getID_Profesor() {
+		return ID_Profesor;
 	}
 
-	public void setProfesor(int profesor) {
-		this.profesor = profesor;
+	public void setID_Profesor(int ID_Profesor) {
+		this.ID_Profesor = ID_Profesor;
 	}
 
 	public int getNivel() {

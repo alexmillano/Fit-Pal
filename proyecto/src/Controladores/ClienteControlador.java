@@ -60,10 +60,11 @@ public class ClienteControlador implements ClienteRepository {
     }
 
 	@Override
-    public boolean addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
+    public boolean addCliente(int ID_Cliente,String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, int ID_cuota) {
 		boolean creado = false;
 		try {
 			 System.out.println("Intentando agregar cliente:");
+			 	System.out.println("ID_Cliente: " + ID_Cliente);
 		        System.out.println("Nombre: " + nombre);
 		        System.out.println("Apellido: " + apellido);
 		        System.out.println("DNI: " + dni);
@@ -71,18 +72,19 @@ public class ClienteControlador implements ClienteRepository {
 		        System.out.println("Correo: " + correo);
 		        System.out.println("Nivel: " + nivel);
 		        System.out.println("Teléfono: " + telefono);
-		        System.out.println("ID Cuota: " + cuota.getID_Cuota());
+		        System.out.println("ID Cuota: " + ID_cuota);
 
-        	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
-        			+ "VALUES (?,?,?,?,?,?,?,?)");
-        	statement.setString(1, contraseña);
-        	statement.setString(2, apellido);
-        	statement.setInt(3, dni);
-        	statement.setString(4, correo);
-        	statement.setInt(5, telefono);
-        	statement.setString(6, nombre);
-        	statement.setInt(7, nivel);
-        	statement.setInt(8, cuota.getID_Cuota());
+        	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(ID_Cliente,Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
+        			+ "VALUES (?,?,?,?,?,?,?,?,?)");
+        	statement.setInt(1, ID_Cliente);
+        	statement.setString(2, contraseña);
+        	statement.setString(3, apellido);
+        	statement.setInt(4, dni);
+        	statement.setString(5, correo);
+        	statement.setInt(6, telefono);
+        	statement.setString(7, nombre);
+        	statement.setInt(8, nivel);
+        	statement.setInt(9, ID_cuota);
         
         int rowsInserted = statement.executeUpdate();
         	if (rowsInserted > 0) {
