@@ -111,6 +111,7 @@ public class ProfesorControlador implements ProfesorRepository{
 	                System.out.println("Profesor eliminado exitosamente");
 	            }
 	        } catch (SQLException e) {
+	        	System.out.println("Error en los datos ingresados o el profesor no existe");
 	            e.printStackTrace();
 	        }
 		

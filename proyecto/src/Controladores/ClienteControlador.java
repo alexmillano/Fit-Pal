@@ -132,6 +132,7 @@ public class ClienteControlador implements ClienteRepository {
                 borrado = true;
             }
         } catch (SQLException e) {
+        	System.out.println("Error en los datos ingresados o el cliente no existe");
             e.printStackTrace();
             borrado = false;
         }
