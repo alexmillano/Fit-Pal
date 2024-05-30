@@ -1,18 +1,29 @@
 package Vista;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
+import Controladores.ClienteControlador;
 import Modelo.Cliente;
+import Modelo.Cuota;
 import Modelo.MenuIniciarSesion;
 import Modelo.Profesor;
 import Modelo.Recepcion;
 import Validaciones.Validaciones_Interface;
 
-public class Main implements MenuIniciarSesion,Validaciones_Interface{
+public class Main implements MenuIniciarSesion , Validaciones_Interface{
 
 	public static void main(String[] args) {
+
+		Cliente cliente1= new Cliente("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1,1124655611);
+		
+		cliente1.UnirseClase();
 		
 
+		
 		
 		/*
 		Recepcion recepcion1= new Recepcion("Franco", "Jarc", "franco123",45415444,"franco.jarc@davinci.edu.ar",1);
@@ -54,6 +65,7 @@ public class Main implements MenuIniciarSesion,Validaciones_Interface{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 
 
 }

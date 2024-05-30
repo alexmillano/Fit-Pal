@@ -94,7 +94,7 @@ public class ClaseControlador implements ClaseRepository{
 		boolean actualizar = false;
 		try {
 			PreparedStatement statement = connection.prepareStatement("UPDATE users SET ID_Profesor = ?, ID_Nivel = ?, Nombre = ? WHERE ID_Clases = ?");
-	        statement.setInt(1, clase.getProfesor());
+	        statement.setInt(1, clase.getID_Profesor());
 	        statement.setInt(2, clase.getNivel());
 	        statement.setString(3, clase.getNombre());
 

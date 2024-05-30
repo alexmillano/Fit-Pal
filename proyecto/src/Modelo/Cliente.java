@@ -220,7 +220,8 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 	
 	public boolean UnirseClase() {
 		try {
-			
+
+					
 			ClaseControlador controlador = new ClaseControlador();
 			LinkedList<Clase> clasesACoincidir = new LinkedList<>();
 			
@@ -245,6 +246,13 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 				Clase claseSeleccionada= (Clase)JOptionPane.showInputDialog(null, "Seleccione la clase para unirse: " , "Elección de Clase", 0, null,  mostrarClase, mostrarClase[0]);
 				
 				if (claseSeleccionada!=null) {		
+					
+					/*RutinaControlador controladorRutina = new RutinaControlador();
+					
+					for (Rutina rutina : controladorRutina.getAllRutina()) {
+						claseSeleccionada.getRutina_de_la_clase().add(rutina);
+					}*/
+					
 					mis_clases.add(claseSeleccionada);
 					JOptionPane.showMessageDialog(null, "Lista de tus clases.\n" + claseSeleccionada);
 					claseSeleccionada.getAlumnos_de_la_clase().add(this);
@@ -252,7 +260,7 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 					Cliente_Rutina_ClaseControlador controladorIntermedia = new Cliente_Rutina_ClaseControlador();
 					
 					Cliente_Rutina_Clase intermedia = new Cliente_Rutina_Clase(this.getID_Cliente(), claseSeleccionada.getRutina_de_la_clase().get(0).getID_Rutinas(), claseSeleccionada.getID_Clases());
-					Cliente_Rutina_Clase intermedia2 = new Cliente_Rutina_Clase(this.getID_Cliente(), claseSeleccionada.getRutina_de_la_clase().get(0).getID_Rutinas(), claseSeleccionada.getID_Clases());
+					Cliente_Rutina_Clase intermedia2 = new Cliente_Rutina_Clase(this.getID_Cliente(), claseSeleccionada.getRutina_de_la_clase().get(1).getID_Rutinas(), claseSeleccionada.getID_Clases());
 					controladorIntermedia.addClienteRutinaClase(intermedia);
 					controladorIntermedia.addClienteRutinaClase(intermedia2);
 
