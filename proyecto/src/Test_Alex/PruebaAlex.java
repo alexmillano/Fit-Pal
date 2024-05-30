@@ -29,9 +29,9 @@ public class PruebaAlex {
 			LocalDate vencimiento2 = vencimiento.plusMonths(1);
 			Cuota cuotanueva = new Cuota(2,vencimiento2);
 	        
-			List<Object> fieldsToCheck = Arrays.asList(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
+			List<Object> chequeado = Arrays.asList(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
 
-			for (Object field : fieldsToCheck) {
+			for (Object field : chequeado) {
 		        if (isInvalid(field)) {
 		        	System.out.println("Todos los campos deben estar completos");
 		        	flag = false;
@@ -69,9 +69,9 @@ public class PruebaAlex {
 			LocalDate vencimiento2 = vencimiento.plusMonths(1);
 			Cuota cuota = new Cuota(1,vencimiento2);
 
-			List<Object> fieldsToCheck = Arrays.asList(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuota);
+			List<Object> chequeado = Arrays.asList(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuota);
 
-		    for (Object field : fieldsToCheck) {
+		    for (Object field : chequeado) {
 		        if (isInvalid2(field)) {
 		        	System.out.println("Todos los campos deben estar completos");
 		        	flag = false;
