@@ -1,6 +1,5 @@
 package Modelo;
 
-
 import java.util.LinkedList;
 import java.time.LocalDateTime;
 
@@ -11,21 +10,45 @@ public class Clase {
 	private LocalDateTime fin;
 	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
 	private int profesor;	
+	private Profesor profesor;	
 	private int nivel;
 	
-	//Lista con todas las clases que se crean
-	static LinkedList<Clase> clases = new LinkedList<>();
+	private int ID_Profesor;
+
+	
+	//Lista de los alumnos de la clase creada
+	private LinkedList<Cliente> alumnos_de_la_clase = new LinkedList<>();
+	
 	//Lista con las rutinas que se hacen en la clase creada
 	private LinkedList<Rutina> rutina_de_la_clase = new LinkedList<>();
 	
 	public Clase(int profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
+	
+	public Clase(Profesor profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
 		super();
 		this.nombre=nombre;
 		this.inicio = inicio;
 		this.fin = fin;
 		this.nivel = nivel;
+		this.profesor=profesor;
 
 	}
+	
+	
+	public Clase(int ID_Profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
+		super();
+		this.nombre=nombre;
+		this.inicio = inicio;
+		this.fin = fin;
+		this.nivel = nivel;
+		this.ID_Profesor=ID_Profesor;
+
+	}
+	
+	
+	
+	
+	
 
 	public int getID_Clases() {
 		return ID_Clases;
@@ -83,13 +106,6 @@ public class Clase {
 		this.nivel = nivel;
 	}
 
-	public static LinkedList<Clase> getClases() {
-		return clases;
-	}
-
-	public static void setClases(LinkedList<Clase> clases) {
-		Clase.clases = clases;
-	}
 
 	public LinkedList<Rutina> getRutina_de_la_clase() {
 		return rutina_de_la_clase;
@@ -99,13 +115,28 @@ public class Clase {
 		this.rutina_de_la_clase = rutina_de_la_clase;
 	}
 
+
+
+//Intentar no modificar este ToString. Falta agregar profesor
 	@Override
 	public String toString() {
-		return "Clase [ID_Clases=" + ID_Clases + ", nombre=" + nombre + ", inicio=" + inicio + ", fin=" + fin
-				+ ", alumnos_de_la_clase=" + alumnos_de_la_clase + ", profesor=" + profesor + ", nivel=" + nivel
-				+ ", rutina_de_la_clase=" + rutina_de_la_clase + "]";
+		String horaYMinutosInicio = String.format("%02d:%02d", inicio.getHour(), inicio.getMinute());
+		String horaYMinutosFin = String.format("%02d:%02d", fin.getHour(), fin.getMinute());
+
+		return "Clase [nombre=" + nombre + " , Inicio=" + horaYMinutosInicio + " , Fin=" + horaYMinutosFin
+				+ " , Nivel=" + nivel + " , Inscriptos=" + alumnos_de_la_clase.size()
+				+  "]";
 	}
 
+
+
+	public String MostrarParaAlumno() {
+		
+		
+		return "Clase: " + this.getNombre() + ". Inicio: " + this.getInicio() + ". Fin: " + this.getFin() + ". Inscriptos: " + alumnos_de_la_clase.size();
+		
+	}
+	
 	
 	
 

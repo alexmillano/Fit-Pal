@@ -60,6 +60,7 @@ public class Persona implements MenuIniciarSesion{
 
 		@Override
 		public boolean IniciarSesion(String mail, String contrasena) {
+			
 			if (this.getCorreo().equals(mail) && this.getContraseña().equals(contrasena)) {
 				return true;
 			} else {

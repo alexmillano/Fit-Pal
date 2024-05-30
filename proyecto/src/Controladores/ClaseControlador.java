@@ -3,12 +3,15 @@ package Controladores;
 import java.sql.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.ClaseRepository;
 import Modelo.Clase;
+import Modelo.Cliente;
 import Modelo.Profesor;
 
 public class ClaseControlador implements ClaseRepository{
@@ -22,15 +25,41 @@ public class ClaseControlador implements ClaseRepository{
 
 	@Override
 	public List<Clase> getAllClase() {
-		// TODO Auto-generated method stub
-		return null;
+        List<Clase> clases = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM clases ");
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	Clase clase = new Clase(resultSet.getInt("ID_Profesor"), resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
+            	clases.add(clase);
+                
+            
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clases;
 	}
 
 
 	@Override
 	public Clase getClaseById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Clase clase = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM clases WHERE ID_Clases = ?");
+            statement.setInt(1, id);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+            	clase = new Clase(resultSet.getInt("ID_Profesor"), resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clase;
+
 	}
 
 

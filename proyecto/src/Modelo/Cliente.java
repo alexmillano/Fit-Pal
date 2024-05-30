@@ -1,13 +1,20 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import Controladores.RutinaControlador;
+import Validaciones.Validaciones_Interface;
+import Controladores.ClaseControlador;
+import Controladores.ClienteControlador;
+import Controladores.Cliente_Rutina_ClaseControlador;
+
 public class Cliente extends Persona implements MenuIniciarSesion {
 	
-
 	private int nivel;
 	private int ID_Cliente;
 	private int telefono;
@@ -35,18 +42,19 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 		super(nombre, apellido, contraseña, dNI, correo);
 		this.nivel = nivel;
 		this.telefono = telefono;
-
 		
 		//Creamos la cuota
+		/*
 		int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
 		LocalDate vencimiento = LocalDate.now().plusMonths(1);
 		Cuota cuota1 = new Cuota(metodo,vencimiento);
 		
 		//Agregamos la Cuota y el ID_Cuota a los atributos cuota e ID_Cuota de Cliente
 		this.cuota=cuota1;
-		this.ID_Cuota=cuota.getID_Cuota();
+		this.ID_Cuota=cuota.getID_Cuota();*/
 		
 		//Falta que se cree la cuota automaticamente en la base de datos
+		
 	}
 	
 	
@@ -209,5 +217,84 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 	}
 		
 	
+	
+	public boolean UnirseClase() {
+		try {
+			
+			ClaseControlador controlador = new ClaseControlador();
+			LinkedList<Clase> clasesACoincidir = new LinkedList<>();
+			
+			if (controlador.getAllClase().size()>0) {
+				for (int i = 0; i < controlador.getAllClase().size(); i++) {
+					
+					if (this.getNivel()==controlador.getAllClase().get(i).getNivel()) {		
+						clasesACoincidir.add(controlador.getAllClase().get(i));	
+						
+					}
+				}
+				
+			}
+			
+			if (clasesACoincidir.size()>0) {
+				Clase[] mostrarClase = new Clase[clasesACoincidir.size()];
+				
+				for (int i = 0; i < clasesACoincidir.size(); i++) {
+					mostrarClase[i]= clasesACoincidir.get(i);
+				}
+				
+				Clase claseSeleccionada= (Clase)JOptionPane.showInputDialog(null, "Seleccione la clase para unirse: " , "Elección de Clase", 0, null,  mostrarClase, mostrarClase[0]);
+				
+				if (claseSeleccionada!=null) {		
+					mis_clases.add(claseSeleccionada);
+					JOptionPane.showMessageDialog(null, "Lista de tus clases.\n" + claseSeleccionada);
+					claseSeleccionada.getAlumnos_de_la_clase().add(this);
+					
+					Cliente_Rutina_ClaseControlador controladorIntermedia = new Cliente_Rutina_ClaseControlador();
+					
+					Cliente_Rutina_Clase intermedia = new Cliente_Rutina_Clase(this.getID_Cliente(), claseSeleccionada.getRutina_de_la_clase().get(0).getID_Rutinas(), claseSeleccionada.getID_Clases());
+					Cliente_Rutina_Clase intermedia2 = new Cliente_Rutina_Clase(this.getID_Cliente(), claseSeleccionada.getRutina_de_la_clase().get(0).getID_Rutinas(), claseSeleccionada.getID_Clases());
+					controladorIntermedia.addClienteRutinaClase(intermedia);
+					controladorIntermedia.addClienteRutinaClase(intermedia2);
 
+					return true;
+				}else {
+					
+					JOptionPane.showMessageDialog(null, "Por favor seleccione una clase");
+					return false;
+				}
+			
+			} else {				
+				JOptionPane.showMessageDialog(null, "Por el momento no hay clases de tu nivel para unirte");
+				return false;
+			}
+
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Hubo un error");
+			 e.printStackTrace();
+			 return false;
+		}
+	}
+	
+
+	
+	
+	@Override
+	public boolean IniciarSesion(String mail, String contrasena) {
+		ClienteControlador controlador = new ClienteControlador();
+		mail = Validaciones_Interface.ValidarEsMail(mail);
+		contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
+		boolean flag=false;
+		
+		for (Cliente cliente : controlador.getAllCliente()) {
+			if (cliente.getCorreo().equals(mail) && cliente.getContraseña().equals(contrasena)) {	
+				/*JOptionPane.showMessageDialog(null, "Email correcto");*/
+				flag=true;
+				break;
+			}
+		}
+		
+		return flag;
+	}
+	
 }
