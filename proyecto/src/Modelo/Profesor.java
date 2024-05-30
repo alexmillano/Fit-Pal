@@ -7,9 +7,12 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import Controladores.ClienteControlador;
+import Controladores.ProfesorControlador;
 import Controladores.RutinaControlador;
+import Validaciones.Validaciones_Interface;
 
-public class Profesor extends Persona implements MenuIniciarSesion {
+
+public class Profesor extends Persona implements MenuIniciarSesion, Validaciones_Interface {
 	private int ID_Profesor;
 	
 	//Lista static para agregar a todos los profesores que se crean
@@ -229,6 +232,24 @@ public class Profesor extends Persona implements MenuIniciarSesion {
 		} while (contswitchgeneral==0);
 	}
 	
+	
+	@Override
+	public boolean IniciarSesion(String mail, String contrasena) {
+		ProfesorControlador controlador = new ProfesorControlador();
+		mail = Validaciones_Interface.ValidarEsMail(mail);
+		contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
+		boolean flag=false;
+		
+		for (Profesor profesor : controlador.getAllProfesor()) {
+			if (profesor.getCorreo().equals(mail) && profesor.getContraseña().equals(contrasena)) {	
+				/*JOptionPane.showMessageDialog(null, "Email correcto");*/
+				flag=true;
+				break;
+			}
+		}
+		
+		return flag;
+	}
 	
 	
 }

@@ -6,11 +6,13 @@ import javax.swing.JOptionPane;
 import java.time.LocalDateTime;
 import Controladores.ClienteControlador;
 import Controladores.ClaseControlador;
+import Controladores.RecepcionControlador;
 import Controladores.ProfesorControlador;
+import Validaciones.Validaciones_Interface;
 
 
 
-public class Recepcion extends Persona implements MenuIniciarSesion {
+public class Recepcion extends Persona implements MenuIniciarSesion, Validaciones_Interface {
 
 		private int ID_recepcion;
 		
@@ -18,9 +20,9 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 		
 		//Lista de todos los clientes. Ya esta hecha en cliente. ES LA STATIC clientes_general
 
-		public Recepcion(String nombre, String apellido, String contraseña, int dNI, String correo, int iD_recepcion) {
+		public Recepcion(String nombre, String apellido, String contraseña, int dNI, String correo, int ID_Recepcion) {
 			super(nombre, apellido, contraseña, dNI, correo);
-			
+			this.ID_recepcion=ID_Recepcion;
 		}
 
 		public int getID_recepcion() {
@@ -227,5 +229,25 @@ public class Recepcion extends Persona implements MenuIniciarSesion {
 			} while (contswitchgeneral==0);
 		}
 	
+		
+		
+		
+		@Override
+		public boolean IniciarSesion(String mail, String contrasena) {
+			RecepcionControlador controlador = new RecepcionControlador();
+			mail = Validaciones_Interface.ValidarEsMail(mail);
+			contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
+			boolean flag=false;
+			
+			for (Recepcion recepcion : controlador.getAllRecepcion()) {
+				if (recepcion.getCorreo().equals(mail) && recepcion.getContraseña().equals(contrasena)) {	
+					/*JOptionPane.showMessageDialog(null, "Email correcto");*/
+					flag=true;
+					break;
+				}
+			}
+			
+			return flag;
+		}
 		
 }

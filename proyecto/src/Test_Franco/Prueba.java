@@ -1,6 +1,8 @@
 package Test_Franco;
 import Modelo.Clase;
 import Modelo.Cliente;
+import Modelo.Profesor;
+import Modelo.Recepcion;
 import Validaciones.Validaciones_Interface;
 
 import static org.junit.Assert.assertEquals;
@@ -13,15 +15,19 @@ import org.junit.Test;
 
 import Controladores.ClaseControlador;
 import Controladores.ClienteControlador;
+import Controladores.ProfesorControlador;
+import Controladores.RecepcionControlador;
 
 public class Prueba implements Validaciones_Interface{
+	
+	
 	@Test
-	public void PruebaIniciarSesionV() {
+	public void PruebaIniciarSesionClienteV() {
 		ClienteControlador controlador = new ClienteControlador();
 		boolean flag =false;
 		
 		for (Cliente cliente : controlador.getAllCliente()) {
-			if (cliente.IniciarSesion("pablo.fernandez@davinci.edu.ar", ValidarEsNumero("123"))==true) {
+			if (cliente.IniciarSesion("pablo.fernandez@davinci.edu.ar","123")==true) {
 				flag=true;
 				break;
 			}
@@ -32,12 +38,12 @@ public class Prueba implements Validaciones_Interface{
 	
 	
 	@Test
-	public void PruebaIniciarSesionF() {
+	public void PruebaIniciarSesionClienteF() {
 		ClienteControlador controlador = new ClienteControlador();
 		boolean flag =false;
 		
 		for (Cliente cliente : controlador.getAllCliente()) {
-			if (cliente.IniciarSesion("alexander@gmail.com",ValidarEsNumero(""))==true) {
+			if (cliente.IniciarSesion("alexander@gmail.com","123")==true) {
 				flag=true;
 				break;
 			}
@@ -45,6 +51,121 @@ public class Prueba implements Validaciones_Interface{
 		
 		assertEquals(false,flag);
 	}
+	
+	
+	@Test
+	public void PruebaIniciarSesionClienteF2() {
+		ClienteControlador controlador = new ClienteControlador();
+		boolean flag =false;
+		
+		for (Cliente cliente : controlador.getAllCliente()) {
+			if (cliente.IniciarSesion("pablo.fernandez@davinci.edu.ar","1234")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(false,flag);
+	}
+	
+	
+	@Test
+	public void PruebaIniciarSesionProfesorV() {
+		ProfesorControlador controlador = new ProfesorControlador();
+		boolean flag =false;
+		
+		for (Profesor profesor : controlador.getAllProfesor()) {
+			if (profesor.IniciarSesion("pedro.perez@davinci.edu.ar","123")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(true,flag);
+	}
+	
+	
+	@Test
+	public void PruebaIniciarSesionProfesorF() {
+		ProfesorControlador controlador = new ProfesorControlador();
+		boolean flag =false;
+		
+		for (Profesor profesor : controlador.getAllProfesor()) {
+			if (profesor.IniciarSesion("asasr@davinci.edu.ar","123")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(false,flag);
+	}
+	
+	
+	@Test
+	public void PruebaIniciarSesionProfesorF2() {
+		ProfesorControlador controlador = new ProfesorControlador();
+		boolean flag =false;
+		
+		for (Profesor profesor : controlador.getAllProfesor()) {
+			if (profesor.IniciarSesion("pedro.perez@davinci.edu.ar","1235")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(false,flag);
+	}
+	
+	
+	
+	@Test
+	public void PruebaIniciarSesionRecepcionV() {
+		RecepcionControlador controlador = new RecepcionControlador();
+		boolean flag =false;
+		
+		for (Recepcion recepcion : controlador.getAllRecepcion()) {
+			if (recepcion.IniciarSesion("franco.jarc@davinci.edu.ar","123")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(true,flag);
+	}
+	
+	
+	@Test
+	public void PruebaIniciarSesionRecepcionF() {
+		RecepcionControlador controlador = new RecepcionControlador();
+		boolean flag =false;
+		
+		for (Recepcion recepcion : controlador.getAllRecepcion()) {
+			if (recepcion.IniciarSesion("asasc@davinci.edu.ar","123")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(false,flag);
+	}
+	
+	
+	
+	@Test
+	public void PruebaIniciarSesionRecepcionF2() {
+		RecepcionControlador controlador = new RecepcionControlador();
+		boolean flag =false;
+		
+		for (Recepcion recepcion : controlador.getAllRecepcion()) {
+			if (recepcion.IniciarSesion("franco.jarc@davinci.edu.ar","1235")==true) {
+				flag=true;
+				break;
+			}
+		}
+		
+		assertEquals(false,flag);
+	}
+
 
 	
 	/* Tiene opciones para elegir

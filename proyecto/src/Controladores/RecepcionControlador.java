@@ -1,9 +1,14 @@
 package Controladores;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.RecepcionRepository;
+import Modelo.Profesor;
 import Modelo.Recepcion;
 
 public class RecepcionControlador implements RecepcionRepository{
@@ -15,8 +20,21 @@ public class RecepcionControlador implements RecepcionRepository{
 
 	@Override
 	public List<Recepcion> getAllRecepcion() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Recepcion> recepcionLista = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM recepcion ");
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	Recepcion recepcion = new Recepcion(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"),  resultSet.getInt("ID_Recepcion"));
+            	recepcionLista.add(recepcion);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recepcionLista;
 	}
 
 	@Override

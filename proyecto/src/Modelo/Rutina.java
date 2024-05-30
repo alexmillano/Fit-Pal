@@ -27,7 +27,14 @@ public class Rutina {
 			
 		}
 
-		
+		public Rutina(int ID_Rutinas ,int ID_Profesor, int ID_Nivel,String nombre) {
+			super();
+			this.nombre = nombre;
+			this.ID_Profesor = ID_Profesor;	
+			this.nivel = ID_Nivel;	
+			this.ID_Rutinas=ID_Rutinas;
+			
+		}
 
 
 		public int getID_Rutinas() {

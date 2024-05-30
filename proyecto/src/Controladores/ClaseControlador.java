@@ -45,8 +45,21 @@ public class ClaseControlador implements ClaseRepository{
 
 	@Override
 	public Clase getClaseById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Clase clase = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM clases WHERE ID_Clases = ?");
+            statement.setInt(1, id);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+            	clase = new Clase(resultSet.getInt("ID_Profesor"), resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clase;
+
 	}
 
 
