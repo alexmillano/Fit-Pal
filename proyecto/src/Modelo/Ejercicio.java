@@ -7,6 +7,7 @@ public class Ejercicio {
 		private int repeticion;
 		private int series;
 		private int ID_Zona_Ejercicio;
+		
 		static LinkedList<Ejercicio> ejercicio = new LinkedList<>();
 		
 		public Ejercicio(String nombre, int repeticion, int series) {
