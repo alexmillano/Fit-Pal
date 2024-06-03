@@ -15,6 +15,9 @@ public class Persona implements MenuIniciarSesion{
 			this.dni = dni;
 			this.correo = correo;
 		}
+		public Persona() {
+			
+		}
 
 		
 		public String getNombre() {

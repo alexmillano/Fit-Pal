@@ -22,7 +22,7 @@ public class Main implements MenuIniciarSesion , Validaciones_Interface{
 		
 		cliente1.UnirseClase();
 		
-
+		PantallaInicio ventana = new PantallaInicio();
 		
 		
 		/*
