@@ -16,6 +16,7 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.TextField;
+import java.awt.Color;
 
 public class PantallaInicio extends JFrame {
 
@@ -55,19 +56,23 @@ public class PantallaInicio extends JFrame {
 		contentPane.add(correoLvl);
 				
 		Label contraseñaLvl = new Label("Contraseña");
-		contraseñaLvl.setBounds(113, 117, 62, 22);
+		contraseñaLvl.setBounds(113, 117, 95, 22);
 		contentPane.add(contraseñaLvl);
 		
 		
 		Label sesioniniciada = new Label("Sesion Iniciada");
-		sesioniniciada.setBounds(113, 216, 95, 22);
+		sesioniniciada.setForeground(new Color(0, 255, 0));
+		sesioniniciada.setBounds(113, 216, 128, 22);
 		contentPane.add(sesioniniciada);
 		sesioniniciada.setVisible(false);
 		
+		
 		Label error = new Label("Error en el inicio de sesion");
-		error.setBounds(113, 216, 62, 22);
+		error.setForeground(new Color(255, 0, 0));
+		error.setBounds(113, 216, 212, 22);
 		contentPane.add(error);
 		error.setVisible(false);
+		
 		
 		TextField correoTF = new TextField();
 		correoTF.setBounds(113, 78, 195, 22);

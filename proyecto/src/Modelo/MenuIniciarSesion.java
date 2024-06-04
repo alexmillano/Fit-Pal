@@ -1,5 +1,7 @@
 package Modelo;
 
+import javax.swing.JOptionPane;
+
 import Controladores.ClienteControlador;
 import Controladores.ProfesorControlador;
 import Controladores.RecepcionControlador;
@@ -7,7 +9,7 @@ import Validaciones.Validaciones_Interface;
 
 public interface MenuIniciarSesion {
 	
-		static boolean IniciarSesion(String mail, String contrasena) {
+		default boolean IniciarSesion(String mail, String contrasena) {
 			mail = Validaciones_Interface.ValidarEsMail(mail);
 			contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
 			
