@@ -288,16 +288,16 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 	
 	
 	@Override
-	public boolean IniciarSesion(String mail, String contrasena) {
+	public String IniciarSesion(String mail, String contrasena) {
 		ClienteControlador controlador = new ClienteControlador();
 		mail = Validaciones_Interface.ValidarEsMail(mail);
 		contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
-		boolean flag=false;
+		String flag="";
 		
 		for (Cliente cliente : controlador.getAllCliente()) {
 			if (cliente.getCorreo().equals(mail) && cliente.getContraseña().equals(contrasena)) {	
 				/*JOptionPane.showMessageDialog(null, "Email correcto");*/
-				flag=true;
+				flag="Sesion iniciada";
 				break;
 			}
 		}

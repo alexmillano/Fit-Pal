@@ -9,7 +9,7 @@ import Validaciones.Validaciones_Interface;
 
 public interface MenuIniciarSesion {
 	
-		default boolean IniciarSesion(String mail, String contrasena) {
+		default String IniciarSesion(String mail, String contrasena) {
 			mail = Validaciones_Interface.ValidarEsMail(mail);
 			contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
 			
@@ -17,34 +17,29 @@ public interface MenuIniciarSesion {
 			RecepcionControlador recepcioncontrolador = new RecepcionControlador();
 			ProfesorControlador profesorcontrolador = new ProfesorControlador();
 
-			boolean flag=false;
+		
 			
 			for (Cliente cliente : clientecontrolador.getAllCliente()) {
 				if (cliente.getCorreo().equals(mail) && cliente.getContraseña().equals(contrasena)) {	
-					JOptionPane.showMessageDialog(null, "Email correcto");
-					flag=true;
-					break;
+					return "Email correcto cliente";
 				}
 			}
 			
 			for (Recepcion recepcion : recepcioncontrolador.getAllRecepcion()) {
 				if (recepcion.getCorreo().equals(mail) && recepcion.getContraseña().equals(contrasena)) {	
-					JOptionPane.showMessageDialog(null, "Email correcto");
-					flag=true;
-					break;
+					return "Email correcto recepcion";
+					
 				}
 			}
 			
 			for (Profesor profesor : profesorcontrolador.getAllProfesor()) {
 				if (profesor.getCorreo().equals(mail) && profesor.getContraseña().equals(contrasena)) {	
-					JOptionPane.showMessageDialog(null, "Email correcto");
-					flag=true;
-					break;
+					return "Email correcto profesor";
 				}
 			}
 			
 			
-			return flag;
+			return "ok";
 			
 		};
 		

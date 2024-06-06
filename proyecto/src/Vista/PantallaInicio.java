@@ -88,11 +88,16 @@ public class PantallaInicio extends JFrame {
 				
 				Persona persona = new Persona();
 			
-				boolean iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
+				String iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
 			
-				if (iniciarsesion==true) {
+				if (iniciarsesion.equals("Email correcto cliente" ) ) {
 					sesioniniciada.setVisible(true);
-				}else {
+				}else if (iniciarsesion.equals("Email correcto recepcion" ) ) {
+					sesioniniciada.setVisible(true);
+				}else if (iniciarsesion.equals("Email correcto profesor" ) ) {
+					sesioniniciada.setVisible(true);
+				}else	{
+					error.setText(iniciarsesion);
 					error.setVisible(true);
 				}
 				

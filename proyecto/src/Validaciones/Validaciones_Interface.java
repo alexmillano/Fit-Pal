@@ -25,7 +25,7 @@ public interface Validaciones_Interface {
 				}
 				
 				if (flag==false || Integer.parseInt(cadena)<0) {
-					cadena=JOptionPane.showInputDialog("Error. Debe ingresar un número válido.");
+					cadena="Error. Debe ingresar unna contraseña numerica valida.";
 				}
 				
 			} while (flag==false);
@@ -33,7 +33,7 @@ public interface Validaciones_Interface {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado");
+			return "Ocurrió un error inesperado";
 		}
 		
 
@@ -53,14 +53,14 @@ public static String ValidarEsMail(String cadena) {
 				
 				if (cadena.length()==0 || !cadena.contains("@")) {
 					flag=false;	 
-					cadena = JOptionPane.showInputDialog("Ingrese correctamente el mail");
+					cadena = "Ingrese correctamente el mail";
 				}
 				
 			} while (flag==false);
 					
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado");
+			return "Ocurrió un error inesperado";
 		}
 		return cadena;
 	}
