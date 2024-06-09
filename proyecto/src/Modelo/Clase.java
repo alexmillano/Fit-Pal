@@ -32,7 +32,10 @@ public class Clase {
 
 	}
 	
-	
+	public Clase() {
+		super();
+
+	}
 
 	public int getID_Clases() {
 		return ID_Clases;

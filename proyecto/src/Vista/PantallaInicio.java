@@ -44,7 +44,7 @@ public class PantallaInicio extends JFrame {
 	 */
 	public PantallaInicio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 485, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -62,17 +62,17 @@ public class PantallaInicio extends JFrame {
 		
 		Label sesioniniciada = new Label("Sesion Iniciada");
 		sesioniniciada.setForeground(new Color(0, 255, 0));
-		sesioniniciada.setBounds(113, 216, 128, 22);
+		sesioniniciada.setBounds(108, 218, 211, 20); 
 		contentPane.add(sesioniniciada);
 		sesioniniciada.setVisible(false);
 		
 		
 		Label error = new Label("Error en el inicio de sesion");
 		error.setForeground(new Color(255, 0, 0));
-		error.setBounds(113, 216, 212, 22);
+		error.setBounds(108, 218, 313, 20); 
 		contentPane.add(error);
 		error.setVisible(false);
-		
+
 		
 		TextField correoTF = new TextField();
 		correoTF.setBounds(113, 78, 195, 22);
@@ -84,32 +84,28 @@ public class PantallaInicio extends JFrame {
 		
 		Button button = new Button("Ingresar");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {			
 				
-				Persona persona = new Persona();
-			
-				String iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
-			
-				if (iniciarsesion.equals("Email correcto cliente" ) ) {
-					sesioniniciada.setVisible(true);
-				}else if (iniciarsesion.equals("Email correcto recepcion" ) ) {
-					sesioniniciada.setVisible(true);
-				}else if (iniciarsesion.equals("Email correcto profesor" ) ) {
-					sesioniniciada.setVisible(true);
-				}else	{
-					error.setText(iniciarsesion);
-					error.setVisible(true);
+				try {		
+					
+					Persona persona = new Persona();			
+					String iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
+				
+					if (iniciarsesion.equals("Email correcto cliente" ) ||  iniciarsesion.equals("Email correcto recepcion" ) || iniciarsesion.equals("Email correcto profesor" )) {
+						sesioniniciada.setVisible(true);
+					}else if (iniciarsesion.equals("Ingrese correctamente el mail") || iniciarsesion.equals("Ocurrió un error inesperado con su mail") || iniciarsesion.equals("Error. Debe ingresar una contraseña numerica valida") || iniciarsesion.equals("Ocurrió un error inesperado en su contraseña")) {
+						error.setText(iniciarsesion);
+						error.setVisible(true);
+					}else	{
+						error.setText(iniciarsesion);
+						error.setVisible(true);
+					}
+									
+					System.out.println("Resultado del inicio de sesión: " + iniciarsesion);
+				} catch (Exception e2) {
+					System.out.println(e2.getStackTrace());
 				}
-				
-				
-				
-				
-				
-				
-			}
-			
-			
-			
+			}		
 		});
 		
 		button.setBounds(185, 189, 70, 22);

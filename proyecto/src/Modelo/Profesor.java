@@ -233,23 +233,7 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 	}
 	
 	
-	@Override
-	public boolean IniciarSesion(String mail, String contrasena) {
-		ProfesorControlador controlador = new ProfesorControlador();
-		mail = Validaciones_Interface.ValidarEsMail(mail);
-		contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
-		boolean flag=false;
-		
-		for (Profesor profesor : controlador.getAllProfesor()) {
-			if (profesor.getCorreo().equals(mail) && profesor.getContraseña().equals(contrasena)) {	
-				/*JOptionPane.showMessageDialog(null, "Email correcto");*/
-				flag=true;
-				break;
-			}
-		}
-		
-		return flag;
-	}
+
 	
 	
 }

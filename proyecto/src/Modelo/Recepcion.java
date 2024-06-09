@@ -232,22 +232,4 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 		
 		
 		
-		@Override
-		public boolean IniciarSesion(String mail, String contrasena) {
-			RecepcionControlador controlador = new RecepcionControlador();
-			mail = Validaciones_Interface.ValidarEsMail(mail);
-			contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
-			boolean flag=false;
-			
-			for (Recepcion recepcion : controlador.getAllRecepcion()) {
-				if (recepcion.getCorreo().equals(mail) && recepcion.getContraseña().equals(contrasena)) {	
-					/*JOptionPane.showMessageDialog(null, "Email correcto");*/
-					flag=true;
-					break;
-				}
-			}
-			
-			return flag;
-		}
-		
 }

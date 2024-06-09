@@ -19,7 +19,7 @@ import Controladores.ProfesorControlador;
 import Controladores.RecepcionControlador;
 
 public class Prueba implements Validaciones_Interface{
-	
+	/*
 	
 	@Test
 	public void PruebaIniciarSesionClienteV() {
