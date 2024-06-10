@@ -90,9 +90,17 @@ public class PantallaInicio extends JFrame {
 					
 					Persona persona = new Persona();			
 					String iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
-				
-					if (iniciarsesion.equals("Email correcto cliente" ) ||  iniciarsesion.equals("Email correcto recepcion" ) || iniciarsesion.equals("Email correcto profesor" )) {
+					error.setVisible(false);
+					sesioniniciada.setVisible(false);
+								
+					if (iniciarsesion.equals("Email correcto cliente" )) {
 						sesioniniciada.setVisible(true);
+						ClienteControlador clientecontrolador = new ClienteControlador();
+						UnirseClases nueva = new UnirseClases(clientecontrolador.getClienteById(0));
+					}else if (iniciarsesion.equals("Email correcto recepcion" )) {
+						sesioniniciada.setVisible(true);
+					}else if (iniciarsesion.equals("Email correcto profesor" )) {
+						sesioniniciada.setVisible(true);						
 					}else if (iniciarsesion.equals("Ingrese correctamente el mail") || iniciarsesion.equals("Ocurrió un error inesperado con su mail") || iniciarsesion.equals("Error. Debe ingresar una contraseña numerica valida") || iniciarsesion.equals("Ocurrió un error inesperado en su contraseña")) {
 						error.setText(iniciarsesion);
 						error.setVisible(true);
@@ -102,6 +110,7 @@ public class PantallaInicio extends JFrame {
 					}
 									
 					System.out.println("Resultado del inicio de sesión: " + iniciarsesion);
+				
 				} catch (Exception e2) {
 					System.out.println(e2.getStackTrace());
 				}

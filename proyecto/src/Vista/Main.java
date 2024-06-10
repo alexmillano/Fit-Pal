@@ -30,6 +30,9 @@ public class Main implements MenuIniciarSesion , Validaciones_Interface{
 		
 			if (iniciarsesion.equals("Email correcto cliente" ) ||  iniciarsesion.equals("Email correcto recepcion" ) || iniciarsesion.equals("Email correcto profesor" )) {
 				JOptionPane.showMessageDialog(null, iniciarsesion);
+				ClienteControlador clientecontrolador = new ClienteControlador();
+				clientecontrolador.getClienteById(0);
+				
 			}else if (iniciarsesion.equals("Ingrese correctamente el mail") || iniciarsesion.equals("Ocurrió un error inesperado con su mail") || iniciarsesion.equals("Ocurrió un error inesperado en su contraseña")) {
 				JOptionPane.showMessageDialog(null, iniciarsesion);
 			}else	{

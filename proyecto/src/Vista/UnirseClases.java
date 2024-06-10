@@ -45,7 +45,7 @@ public class UnirseClases extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UnirseClases frame = new UnirseClases();
+					UnirseClases frame = new UnirseClases(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +57,7 @@ public class UnirseClases extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UnirseClases() {
+	public UnirseClases(Cliente cliente) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 938, 463);
 		contentPane = new JPanel();
@@ -99,9 +99,7 @@ public class UnirseClases extends JFrame {
 	    		
 	    		if (seleccionado.getID_Clases()!=0) {
 	    			/*Se uniria a la clase*/
-	    			Cliente.class.getmis(seleccionado);
-	    			
-	    			controlador.deleteUser(seleccionado.getID_Clases());
+	    			cliente.UnirseClase();
 	    			JOptionPane.showMessageDialog(null, "Te uniste a la calse");
 	    			 actualizarTabla();
 				} else {
