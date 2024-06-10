@@ -10,13 +10,13 @@ public interface Validaciones_Interface {
 		try {	
 			
 	          if (cadena.isEmpty() || !cadena.chars().allMatch(Character::isDigit) || Integer.parseInt(cadena) < 0) {
-	                return "Error. Debe ingresar una contraseña numerica valida.";
+	                return "Debe ingresar una contraseña numerica valida.";
 	            }
 	        } catch (NumberFormatException e) {
 	            e.printStackTrace();
 	            return "Ocurrió un error inesperado en su contraseña";
 	        }
-	        return cadena;
+	        return null;
 	    }
 			
 			
@@ -66,7 +66,7 @@ public interface Validaciones_Interface {
 	            e.printStackTrace();
 	            return "Ocurrió un error inesperado con su mail";
 	        }
-	        return cadena;
+	        return null;
 	    }
 	  
 	

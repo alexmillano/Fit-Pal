@@ -8,8 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controladores.ClienteControlador;
+import Controladores.RecepcionControlador;
+import Controladores.ProfesorControlador;
 import Modelo.Cliente;
 import Modelo.Persona;
+import Modelo.Profesor;
+import Modelo.Recepcion;
 
 import java.awt.Label;
 import java.awt.Button;
@@ -89,27 +93,36 @@ public class PantallaInicio extends JFrame {
 				try {		
 					
 					Persona persona = new Persona();			
-					String iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
+					Object iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
+					
 					error.setVisible(false);
 					sesioniniciada.setVisible(false);
-								
-					if (iniciarsesion.equals("Email correcto cliente" )) {
-						sesioniniciada.setVisible(true);
-						ClienteControlador clientecontrolador = new ClienteControlador();
-						UnirseClases nueva = new UnirseClases(clientecontrolador.getClienteById(0));
-					}else if (iniciarsesion.equals("Email correcto recepcion" )) {
-						sesioniniciada.setVisible(true);
-					}else if (iniciarsesion.equals("Email correcto profesor" )) {
-						sesioniniciada.setVisible(true);						
-					}else if (iniciarsesion.equals("Ingrese correctamente el mail") || iniciarsesion.equals("Ocurrió un error inesperado con su mail") || iniciarsesion.equals("Error. Debe ingresar una contraseña numerica valida") || iniciarsesion.equals("Ocurrió un error inesperado en su contraseña")) {
-						error.setText(iniciarsesion);
-						error.setVisible(true);
-					}else	{
-						error.setText(iniciarsesion);
-						error.setVisible(true);
-					}
-									
-					System.out.println("Resultado del inicio de sesión: " + iniciarsesion);
+					
+					
+					
+					 if (iniciarsesion instanceof String) {
+						 
+						 String mensajeError = (String) iniciarsesion;
+			             error.setText(mensajeError);
+			             error.setVisible(true);
+			         } else if (iniciarsesion instanceof Persona) {			 
+			                if (iniciarsesion instanceof Cliente) {
+			                    MenuCliente menucliente = new MenuCliente((Cliente) iniciarsesion);
+			                    menucliente.setVisible(true);
+			                    dispose();
+			                } else if (iniciarsesion instanceof Recepcion) {
+			                    MenuRecepcion menurecepcion = new MenuRecepcion((Recepcion) iniciarsesion);
+			                    menurecepcion.setVisible(true);
+			                    dispose();
+			                } else if (iniciarsesion instanceof Profesor) {
+			                    MenuProfesor menuprofesor = new MenuProfesor((Profesor) iniciarsesion);
+			                    menuprofesor.setVisible(true);
+			                    dispose();
+			                }
+			         } else {
+			              error.setText("Resultado inesperado.");
+			              error.setVisible(true);
+			         }
 				
 				} catch (Exception e2) {
 					System.out.println(e2.getStackTrace());
