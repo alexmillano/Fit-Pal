@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import Modelo.Profesor;
 
 import javax.swing.JLabel;
+import java.awt.Button;
 
 public class MenuProfesor extends JFrame {
 
@@ -41,9 +42,36 @@ public class MenuProfesor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Esto es menu profesor");
+		lblNewLabel.setSize(121, 32);
+		lblNewLabel.setLocation(130, 11);
 		contentPane.add(lblNewLabel);
+		
+		Button rutinasbtn = new Button("Rutinas");
+		rutinasbtn.setBounds(84, 100, 70, 22);
+		contentPane.add(rutinasbtn);
+		
+		Button ejerciciosbtn = new Button("Ejercicios");
+		ejerciciosbtn.setBounds(160, 100, 70, 22);
+		contentPane.add(ejerciciosbtn);
+		
+		Button clasesbtn = new Button("Clases");
+		clasesbtn.setBounds(238, 100, 70, 22);
+		contentPane.add(clasesbtn);
+		
+		Button clientesbtn = new Button("Clientes");
+		clientesbtn.setBounds(85, 135, 70, 22);
+		contentPane.add(clientesbtn);
+		
+		Button perfilbtn = new Button("Perfil");
+		perfilbtn.setBounds(160, 135, 70, 22);
+		contentPane.add(perfilbtn);
+		
+		Button cerrarsesionbtn = new Button("Cerrar Sesion");
+		cerrarsesionbtn.setBounds(238, 135, 81, 22);
+		contentPane.add(cerrarsesionbtn);
 	}
 
 }

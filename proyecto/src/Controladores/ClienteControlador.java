@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import Interfaces.ClienteRepository;
 import Modelo.Cliente;
 import Modelo.Cuota;
@@ -38,12 +40,13 @@ public class ClienteControlador implements ClienteRepository {
         return users;
     }
 
+
     
     @Override
     public Cliente getClienteById(int id) {
     	Cliente user = null;
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE ID_Cliente = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente WHERE ID_Cliente = ?");
             statement.setInt(1, id);
             
             ResultSet resultSet = statement.executeQuery();
@@ -58,7 +61,9 @@ public class ClienteControlador implements ClienteRepository {
         }
         return user;
     }
-
+    
+    
+ 
 	@Override
     public boolean addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
 		boolean creado = false;
@@ -74,7 +79,8 @@ public class ClienteControlador implements ClienteRepository {
 		        System.out.println("ID Cuota: " + cuota.getID_Cuota());
 
         	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
-        			+ "VALUES (?,?,?,?,?,?,?,?)");
+        			+ "VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        	
         	statement.setString(1, contraseña);
         	statement.setString(2, apellido);
         	statement.setInt(3, dni);
@@ -87,6 +93,30 @@ public class ClienteControlador implements ClienteRepository {
         int rowsInserted = statement.executeUpdate();
         	if (rowsInserted > 0) {
             System.out.println("Cliente insertado exitosamente");
+            
+	            ResultSet generatedKeys = statement.getGeneratedKeys();
+	            if (generatedKeys.next()) {
+	                int id = generatedKeys.getInt(1);
+	                System.out.println("ID del cliente generado: " + id);
+	               
+                
+	                Cliente clienteSetearId = new Cliente();
+	                clienteSetearId.setID_Cliente(id);
+	                clienteSetearId.setNombre(nombre);
+	                clienteSetearId.setApellido(apellido);
+	                clienteSetearId.setDni(dni);
+	                clienteSetearId.setContraseña(contraseña);
+	                clienteSetearId.setCorreo(correo);
+	                clienteSetearId.setNivel(nivel);
+	                clienteSetearId.setTelefono(telefono);
+	                clienteSetearId.setCuota(cuota);
+	                
+	                System.out.println("ID del cliente actual: " + clienteSetearId.getID_Cliente());
+	                creado = true;
+	            } else {
+	            	System.out.println("Fallo al obtener el ID del cliente insertado.");
+	            }
+            
             creado = true;
         	}
         	} catch (SQLException e) {
@@ -110,6 +140,8 @@ public class ClienteControlador implements ClienteRepository {
 	        int rowsUpdated = statement.executeUpdate();
 	        if (rowsUpdated > 0) {
 	            System.out.println("Cliente actualizado correctamente");
+	            
+	            
 	            actualizar = true;
 	        }
 	    } catch (SQLException e) {
@@ -156,4 +188,26 @@ public class ClienteControlador implements ClienteRepository {
         return id;
     }
 	
+    
+    
+    @Override
+    public List<Cliente> getAllClienteConID_Cliente() {
+        List<Cliente> users = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente ");
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	Cliente user = new Cliente( resultSet.getInt("ID_Cliente"), resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), 
+            			resultSet.getInt("ID_Nivel"),resultSet.getInt("Telefono"));
+                users.add(user);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
 }

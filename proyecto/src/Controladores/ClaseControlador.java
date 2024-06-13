@@ -31,10 +31,9 @@ public class ClaseControlador implements ClaseRepository{
             ResultSet resultSet = statement.executeQuery();
        
             while (resultSet.next()) {
-            	Clase clase = new Clase(resultSet.getInt("ID_Profesor"), resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
+            	Clase clase = new Clase(resultSet.getInt("ID_Clases"), resultSet.getInt("ID_Profesor"), resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
             	clases.add(clase);
-                
-            
+                        
             }
         } catch (SQLException e) {
             e.printStackTrace();

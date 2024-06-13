@@ -52,7 +52,7 @@ public class CuotaControlador implements CuotaRepository{
 	public Cuota getCuotaById(int idCuota) {
 		Cuota cuota = null;
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT ID_Metodo, ID_Cliente, Valor, vencimiento FROM users WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT ID_Metodo, ID_Cliente, Valor, vencimiento FROM cuota WHERE ID_Cliente = ?");
             statement.setInt(1, idCuota);
             
             ResultSet resultSet = statement.executeQuery();

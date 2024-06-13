@@ -57,6 +57,29 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 		
 	}
 	
+	public Cliente(int ID_Cliente , String nombre, String apellido, String contraseña, int dNI, String correo, int nivel,
+			int telefono) {
+		super(nombre, apellido, contraseña, dNI, correo);
+		this.ID_Cliente=ID_Cliente;
+		this.nivel = nivel;
+		this.telefono = telefono;
+		
+		//Creamos la cuota
+		/*
+		int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
+		LocalDate vencimiento = LocalDate.now().plusMonths(1);
+		Cuota cuota1 = new Cuota(metodo,vencimiento);
+		
+		//Agregamos la Cuota y el ID_Cuota a los atributos cuota e ID_Cuota de Cliente
+		this.cuota=cuota1;
+		this.ID_Cuota=cuota.getID_Cuota();*/
+		
+		//Falta que se cree la cuota automaticamente en la base de datos
+		
+	}
+	
+	public Cliente() {}
+	
 	
 	public int getNivel() {
 		return nivel;
@@ -66,12 +89,22 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 		this.nivel = nivel;
 	}
 
+
+
 	public int getID_Cliente() {
 		return ID_Cliente;
 	}
 
 	public void setID_Cliente(int iD_Cliente) {
 		ID_Cliente = iD_Cliente;
+	}
+
+	public LinkedList<Rutina> getMis_rutinas() {
+		return mis_rutinas;
+	}
+
+	public void setMis_rutinas(LinkedList<Rutina> mis_rutinas) {
+		this.mis_rutinas = mis_rutinas;
 	}
 
 	public int getTelefono() {
@@ -125,14 +158,15 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 	}
 
 
+
 	@Override
 	public String toString() {
 		return "Cliente [nivel=" + nivel + ", ID_Cliente=" + ID_Cliente + ", telefono=" + telefono + ", cuota=" + cuota
 				+ ", ID_Cuota=" + ID_Cuota + ", mis_clases=" + mis_clases + ", clases_realizadas=" + clases_realizadas
-				+ "]";
+				+ ", mis_rutinas=" + mis_rutinas + "]";
 	}
 
-
+	
 	@Override
 	public void Menu() {
 		int contswitchgeneral=0; //Contador para salir del do general, es decir para cerrar sesion.
@@ -216,12 +250,9 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 			
 	}
 		
-	
-	
-	public boolean UnirseClase() {
+	public LinkedList<Clase> ClaseSegunNivel() {
+		
 		try {
-
-					
 			ClaseControlador controlador = new ClaseControlador();
 			LinkedList<Clase> clasesACoincidir = new LinkedList<>();
 			
@@ -229,11 +260,65 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 				for (int i = 0; i < controlador.getAllClase().size(); i++) {
 					
 					if (this.getNivel()==controlador.getAllClase().get(i).getNivel()) {		
-						clasesACoincidir.add(controlador.getAllClase().get(i));	
-						
+						clasesACoincidir.add(controlador.getAllClase().get(i));		
 					}
-				}
-				
+				}	
+			}
+			
+			if (clasesACoincidir.isEmpty()) {
+				return null;
+			}
+			
+			return clasesACoincidir;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+			
+
+		
+	}
+	
+	public boolean UnirseClase(Clase clase) {
+		try {
+			this.mis_clases.add(clase);
+			clase.getAlumnos_de_la_clase().add(this);
+			
+			RutinaControlador controladorRutina = new RutinaControlador();
+			
+			for (Rutina rutina : controladorRutina.getAllRutina()) {
+				clase.getRutina_de_la_clase().add(rutina);
+			}
+			//Verificar el ID del cliente que da 0 pero es 1
+			Cliente_Rutina_ClaseControlador controladorIntermedia = new Cliente_Rutina_ClaseControlador();		
+			Cliente_Rutina_Clase intermedia = new Cliente_Rutina_Clase(this.getID_Cliente(), clase.getRutina_de_la_clase().get(0).getID_Rutinas(), clase.getID_Clases());
+			Cliente_Rutina_Clase intermedia2 = new Cliente_Rutina_Clase(this.getID_Cliente(), clase.getRutina_de_la_clase().get(1).getID_Rutinas(), clase.getID_Clases());
+			controladorIntermedia.addClienteRutinaClase(intermedia);
+			controladorIntermedia.addClienteRutinaClase(intermedia2);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+	}
+	
+	/*
+	public boolean UnirseClase1() {
+		try {
+			
+			ClaseControlador controlador = new ClaseControlador();
+			LinkedList<Clase> clasesACoincidir = new LinkedList<>();
+			
+			if (controlador.getAllClase().size()>0) {
+				for (int i = 0; i < controlador.getAllClase().size(); i++) {
+					
+					if (this.getNivel()==controlador.getAllClase().get(i).getNivel()) {		
+						clasesACoincidir.add(controlador.getAllClase().get(i));		
+					}
+				}	
 			}
 			
 			if (clasesACoincidir.size()>0) {
@@ -252,7 +337,7 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 					for (Rutina rutina : controladorRutina.getAllRutina()) {
 						claseSeleccionada.getRutina_de_la_clase().add(rutina);
 					}*/
-					
+					/*
 					mis_clases.add(claseSeleccionada);
 					JOptionPane.showMessageDialog(null, "Lista de tus clases.\n" + claseSeleccionada);
 					claseSeleccionada.getAlumnos_de_la_clase().add(this);
@@ -284,7 +369,7 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 		}
 	}
 	
-
+*/
 	
 	
 	@Override

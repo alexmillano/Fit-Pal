@@ -73,20 +73,14 @@ public class UnirseClases extends JFrame {
 	    String[] columnNames = {"ID", "Nombre", "Inicio","Fin", "Profesor", "Nivel"};
 	    model = new DefaultTableModel(columnNames, 0);
 	    table = new JTable(model);
-	    actualizarTabla();
+	    actualizarTabla(cliente);
 	    contentPane.setLayout(null);
-	    
-	    elemento = new JLabel("Seleccionado:");
-	    elemento.setBounds(5, 0, 853, 14);
-	    contentPane.add(elemento);
 
 	    // Crear el JScrollPane y agregar la tabla
 	    JScrollPane scrollPane = new JScrollPane(table);
 	    scrollPane.setBounds(5, 19, 911, 190);
 	    contentPane.add(scrollPane);
 	    
-	    table = new JTable();
-	    scrollPane.setColumnHeaderView(table);
 
 	    // Crear el JLabel para mostrar la selección
 	    elemento = new JLabel("Seleccionado:");
@@ -99,18 +93,17 @@ public class UnirseClases extends JFrame {
 	    		
 	    		if (seleccionado.getID_Clases()!=0) {
 	    			/*Se uniria a la clase*/
-	    			cliente.UnirseClase();
-	    			JOptionPane.showMessageDialog(null, "Te uniste a la calse");
-	    			 actualizarTabla();
+	    			cliente.UnirseClase(seleccionado);    			
+	    			 System.out.println("Te uniste a la clase");
+	    			 actualizarTabla(cliente);
 				} else {
-					JOptionPane.showMessageDialog(null, "Seleccione una clase");
+					 System.out.println("No te uniste a la clase");
 				}
-	    		
-	    		
-	    		
+	
 	    	}
 	    });
-	    btnUnirse.setBounds(179, 217, 166, 38);
+	    
+	    btnUnirse.setBounds(198, 220, 166, 38);
 	    contentPane.add(btnUnirse);
 	    
 	    JMenuBar menuBar = new JMenuBar();
@@ -126,18 +119,14 @@ public class UnirseClases extends JFrame {
 	    selectionModel.addListSelectionListener(new ListSelectionListener() {
 	        @Override
 	        public void valueChanged(ListSelectionEvent e) {
-	            if (!e.getValueIsAdjusting()) {
+	            if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
 	                int selectedRow = table.getSelectedRow();
 	                int id = (int) table.getValueAt(selectedRow, 0);
 	                String nombre = (String) table.getValueAt(selectedRow, 1);
-	                java.sql.Timestamp inicio1 = (java.sql.Timestamp) table.getValueAt(selectedRow, 2);
-	                java.sql.Timestamp fin1 = (java.sql.Timestamp) table.getValueAt(selectedRow, 3);
+	                LocalDateTime inicio = (LocalDateTime) table.getValueAt(selectedRow, 2);
+	                LocalDateTime fin = (LocalDateTime) table.getValueAt(selectedRow, 3);
 	                int profesor = (int) table.getValueAt(selectedRow, 4);
 	                int nivel = (int) table.getValueAt(selectedRow, 5);
-
-	                // Convertir java.sql.Timestamp a java.time.LocalDateTime
-	                LocalDateTime inicio = inicio1.toLocalDateTime();
-	                LocalDateTime fin = fin1.toLocalDateTime();
 
 	                elemento.setText("Seleccionado: ID= " + id + ", Nombre= " + nombre + ", Inicio= " + inicio + " Fin= " + fin + " Profesor= " + profesor + " Nivel= " + nivel );
 
@@ -148,39 +137,20 @@ public class UnirseClases extends JFrame {
 	                seleccionado.setID_Profesor(profesor);
 	                seleccionado.setNivel(nivel);
 	                }
-			     }
-			 
+			     }	 
 	    });
-	
-	
 	}
 	
-	
-	
-	
-	
 		
-		private void actualizarTabla() {
+		private void actualizarTabla(Cliente cliente) {
 		    // Limpiar el modelo de la tabla
 		    model.setRowCount(0);
 		
 		    // Obtener la lista actualizada de usuarios
-	    
-		    LinkedList<Clase> clasesACoincidir = new LinkedList<>();
-			
-			if (controlador.getAllClase().size()>0) {
-				for (int i = 0; i < controlador.getAllClase().size(); i++) {
-					
-					if (this.getNivel()==controlador.getAllClase().get(i).getNivel()) {		
-						clasesACoincidir.add(controlador.getAllClase().get(i));	
-						
-					}
-				}
-				
-			}
-		
+		    cliente.ClaseSegunNivel();
+	    	
 		    // Agregar los datos al modelo
-		    for (Clase clase : clasesACoincidir) {
+		    for (Clase clase : cliente.ClaseSegunNivel()) {
 		        model.addRow(
 		        		new Object[]
 		        				{
@@ -193,7 +163,10 @@ public class UnirseClases extends JFrame {
 		        						}
 		        		);
 		    }
-	
-
 		}
+		
+	
+		
+		
+		
 }

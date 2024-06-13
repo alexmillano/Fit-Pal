@@ -17,4 +17,7 @@ public interface ClienteRepository {
     boolean updateCliente(Cliente cliente); //actualiza los cliente de la bdd
     
     boolean deleteCliente(int id); //eliminar cliente de la bdd
+
+	List<Cliente> getAllClienteConID_Cliente(); // para que devuelva un cliente con su ID_Cliente traido de la base de datos
+
 }

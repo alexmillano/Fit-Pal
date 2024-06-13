@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import Modelo.Recepcion;
 
 import javax.swing.JLabel;
+import java.awt.Button;
 
 public class MenuRecepcion extends JFrame {
 
@@ -41,9 +42,36 @@ public class MenuRecepcion extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Esto es menu recepcion");
+		lblNewLabel.setSize(233, 37);
+		lblNewLabel.setLocation(97, 11);
 		contentPane.add(lblNewLabel);
+		
+		Button cuotasbtn = new Button("Cuotas");
+		cuotasbtn.setBounds(94, 110, 70, 22);
+		contentPane.add(cuotasbtn);
+		
+		Button usuariosbtn = new Button("Usuarios");
+		usuariosbtn.setBounds(170, 110, 70, 22);
+		contentPane.add(usuariosbtn);
+		
+		Button clasesbtn = new Button("Clases");
+		clasesbtn.setBounds(246, 110, 70, 22);
+		contentPane.add(clasesbtn);
+		
+		Button cronogramabtn = new Button("Cronograma");
+		cronogramabtn.setBounds(94, 138, 70, 22);
+		contentPane.add(cronogramabtn);
+		
+		Button perfilbtn = new Button("Perfil");
+		perfilbtn.setBounds(170, 138, 70, 22);
+		contentPane.add(perfilbtn);
+		
+		Button cerrarsesionbtn = new Button("Cerrar Sesión");
+		cerrarsesionbtn.setBounds(246, 138, 70, 22);
+		contentPane.add(cerrarsesionbtn);
 	}
 
 }

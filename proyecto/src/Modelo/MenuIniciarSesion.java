@@ -20,13 +20,12 @@ public interface MenuIniciarSesion {
 	        if (contrasenaValidacion != null) {
 	            return contrasenaValidacion;
 	        }
-			
-			
+						
 			ClienteControlador clientecontrolador = new ClienteControlador();
 			RecepcionControlador recepcioncontrolador = new RecepcionControlador();
 			ProfesorControlador profesorcontrolador = new ProfesorControlador();
 			
-			for (Cliente cliente : clientecontrolador.getAllCliente()) {
+			for (Cliente cliente : clientecontrolador.getAllClienteConID_Cliente()) {
 				if (cliente.getCorreo().equals(mail) && cliente.getContraseña().equals(contrasena)) {	
 					return cliente;
 				}

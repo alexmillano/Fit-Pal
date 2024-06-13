@@ -19,36 +19,6 @@ public class Main implements MenuIniciarSesion , Validaciones_Interface{
 
 	public static void main(String[] args) {
 
-		
-		try {				
-			Persona persona = new Persona();
-			
-			String correoTF = JOptionPane.showInputDialog("Ingrese su correo");
-			String contraseñaTF = JOptionPane.showInputDialog("Ingrese su contraseñ");
-			String iniciarsesion= persona.IniciarSesion(correoTF, contraseñaTF);
-
-		
-			if (iniciarsesion.equals("Email correcto cliente" ) ||  iniciarsesion.equals("Email correcto recepcion" ) || iniciarsesion.equals("Email correcto profesor" )) {
-				JOptionPane.showMessageDialog(null, iniciarsesion);
-				ClienteControlador clientecontrolador = new ClienteControlador();
-				clientecontrolador.getClienteById(0);
-				
-			}else if (iniciarsesion.equals("Ingrese correctamente el mail") || iniciarsesion.equals("Ocurrió un error inesperado con su mail") || iniciarsesion.equals("Ocurrió un error inesperado en su contraseña")) {
-				JOptionPane.showMessageDialog(null, iniciarsesion);
-			}else	{
-				JOptionPane.showMessageDialog(null, iniciarsesion);
-			}
-							
-			System.out.println("Resultado del inicio de sesión: " + iniciarsesion);
-		} catch (Exception e2) {
-			System.out.println(e2.getStackTrace());
-		}
-		
-		
-		
-		
-		
-		PantallaInicio ventana = new PantallaInicio();
 
 		
 		

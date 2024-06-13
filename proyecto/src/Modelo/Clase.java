@@ -32,6 +32,18 @@ public class Clase {
 
 	}
 	
+	public Clase(int ID_Clases, int ID_Profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
+		super();
+		this.ID_Clases=ID_Clases;
+		this.nombre=nombre;
+		this.inicio = inicio;
+		this.fin = fin;
+		this.nivel = nivel;
+		this.ID_Profesor=ID_Profesor;
+
+	}
+	
+	
 	public Clase() {
 		super();
 

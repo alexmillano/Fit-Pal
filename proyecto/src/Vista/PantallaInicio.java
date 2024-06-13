@@ -10,10 +10,12 @@ import javax.swing.border.EmptyBorder;
 import Controladores.ClienteControlador;
 import Controladores.RecepcionControlador;
 import Controladores.ProfesorControlador;
+import Controladores.CuotaControlador;
 import Modelo.Cliente;
 import Modelo.Persona;
 import Modelo.Profesor;
 import Modelo.Recepcion;
+import Modelo.Cuota;
 
 import java.awt.Label;
 import java.awt.Button;
@@ -90,15 +92,13 @@ public class PantallaInicio extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				
-				try {		
-					
+				try {	
+										
 					Persona persona = new Persona();			
 					Object iniciarsesion= persona.IniciarSesion(correoTF.getText(), contraseñaTF.getText());
 					
 					error.setVisible(false);
-					sesioniniciada.setVisible(false);
-					
-					
+					sesioniniciada.setVisible(false);				
 					
 					 if (iniciarsesion instanceof String) {
 						 
@@ -106,7 +106,7 @@ public class PantallaInicio extends JFrame {
 			             error.setText(mensajeError);
 			             error.setVisible(true);
 			         } else if (iniciarsesion instanceof Persona) {			 
-			                if (iniciarsesion instanceof Cliente) {
+			                if (iniciarsesion instanceof Cliente) {			                	
 			                    MenuCliente menucliente = new MenuCliente((Cliente) iniciarsesion);
 			                    menucliente.setVisible(true);
 			                    dispose();
@@ -130,10 +130,9 @@ public class PantallaInicio extends JFrame {
 			}		
 		});
 		
-		button.setBounds(185, 189, 70, 22);
+		button.setBounds(186, 189, 70, 22);
 		contentPane.add(button);
 		
-
 
 	}
 }
