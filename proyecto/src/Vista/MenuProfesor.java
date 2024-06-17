@@ -10,6 +10,8 @@ import Modelo.Profesor;
 
 import javax.swing.JLabel;
 import java.awt.Button;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuProfesor extends JFrame {
 
@@ -45,7 +47,7 @@ public class MenuProfesor extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Esto es menu profesor");
-		lblNewLabel.setSize(121, 32);
+		lblNewLabel.setSize(175, 32);
 		lblNewLabel.setLocation(130, 11);
 		contentPane.add(lblNewLabel);
 		
@@ -54,6 +56,14 @@ public class MenuProfesor extends JFrame {
 		contentPane.add(rutinasbtn);
 		
 		Button ejerciciosbtn = new Button("Ejercicios");
+		ejerciciosbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuEjerciciosProfesor menuejercicios = new MenuEjerciciosProfesor(profesor);
+				menuejercicios.setVisible(true);
+				dispose();
+				
+			}
+		});
 		ejerciciosbtn.setBounds(160, 100, 70, 22);
 		contentPane.add(ejerciciosbtn);
 		

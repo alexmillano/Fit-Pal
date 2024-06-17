@@ -22,8 +22,6 @@ public interface MenuIniciarSesion {
 	        }
 						
 			ClienteControlador clientecontrolador = new ClienteControlador();
-			RecepcionControlador recepcioncontrolador = new RecepcionControlador();
-			ProfesorControlador profesorcontrolador = new ProfesorControlador();
 			
 			for (Cliente cliente : clientecontrolador.getAllClienteConID_Cliente()) {
 				if (cliente.getCorreo().equals(mail) && cliente.getContraseña().equals(contrasena)) {	
@@ -31,14 +29,16 @@ public interface MenuIniciarSesion {
 				}
 			}
 			
-			for (Recepcion recepcion : recepcioncontrolador.getAllRecepcion()) {
+			RecepcionControlador recepcioncontrolador = new RecepcionControlador();
+			for (Recepcion recepcion : recepcioncontrolador.getAllRecepcionConIDRecepcion()) {
 				if (recepcion.getCorreo().equals(mail) && recepcion.getContraseña().equals(contrasena)) {	
 					return recepcion;
 					
 				}
 			}
 			
-			for (Profesor profesor : profesorcontrolador.getAllProfesor()) {
+			ProfesorControlador profesorcontrolador = new ProfesorControlador();
+			for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
 				if (profesor.getCorreo().equals(mail) && profesor.getContraseña().equals(contrasena)) {	
 					return profesor;
 				}

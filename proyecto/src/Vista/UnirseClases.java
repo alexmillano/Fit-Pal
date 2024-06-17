@@ -104,12 +104,7 @@ public class UnirseClases extends JFrame {
 	    });
 	    
 	    btnUnirse.setBounds(198, 220, 166, 38);
-	    contentPane.add(btnUnirse);
-	    
-	    JMenuBar menuBar = new JMenuBar();
-	    menuBar.setBounds(15, 220, 101, 22);
-	    contentPane.add(menuBar);
-	   
+	    contentPane.add(btnUnirse);  
 	   
 	    // Configurar el modelo de selección
 	    ListSelectionModel selectionModel = table.getSelectionModel();

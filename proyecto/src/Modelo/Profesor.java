@@ -10,6 +10,7 @@ import Controladores.ClienteControlador;
 import Controladores.ProfesorControlador;
 import Controladores.RutinaControlador;
 import Validaciones.Validaciones_Interface;
+import Controladores.ZonaControlador;
 
 
 public class Profesor extends Persona implements MenuIniciarSesion, Validaciones_Interface {
@@ -30,7 +31,7 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 		
 	}
 	
-	//Creado solo para probar el test
+	//Creado solo para probar el test. Lo usa franco para el iniciar sesion , no borrar
 	public Profesor(int ID_Profesor,String nombre, String apellido, String contraseña, int dNI, String correo) {
 		super(nombre, apellido, contraseña, dNI, correo);
 		this.ID_Profesor=ID_Profesor;
@@ -233,7 +234,25 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 	}
 	
 	
+	public String CrearZona(String nombre) {
 
+		try {
+			if (!nombre.isEmpty() && nombre.chars().allMatch(Character::isLetter)) {
+				ZonaControlador controlador = new ZonaControlador();
+				Zona_Ejercicio zona = new Zona_Ejercicio(nombre);
+				controlador.addZona(zona);
+				return "Su zona fue creada correctamente";
+			}else {
+				return "Ingrese un nombre correcto";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error al crear su zona";
+		}
+
+		
+	}
 	
 	
 }

@@ -10,6 +10,17 @@ public class Zona_Ejercicio {
 		super();
 		this.Nombre = Nombre;
 	}
+	
+	public Zona_Ejercicio() {
+		super();
+
+	}
+	
+	public Zona_Ejercicio(int ID_Zona_Ejercicio,String Nombre) {
+		super();
+		this.ID_Zona_Ejercicio=ID_Zona_Ejercicio;
+		this.Nombre = Nombre;
+	}
 
 	public int getID_Zona_Ejercicio() {
 		return ID_Zona_Ejercicio;
@@ -26,6 +37,11 @@ public class Zona_Ejercicio {
 
 	public void setNombre(String nombre) {
 		Nombre = nombre;
+	}
+
+	@Override
+	public String toString() {
+		return "Zona_Ejercicio [ID_Zona_Ejercicio=" + ID_Zona_Ejercicio + ", Nombre=" + Nombre + "]";
 	}
 
 	

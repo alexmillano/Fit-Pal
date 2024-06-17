@@ -116,5 +116,25 @@ public class ProfesorControlador implements ProfesorRepository{
 	        }
 		
 	}
+	
+	
+	
+	public List<Profesor> getAllProfesorConIDProfesor() {
+		List<Profesor> users = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM profesor ");
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	Profesor user = new Profesor(resultSet.getInt("ID_Profesor"),resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"));
+                users.add(user);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+	}
 	  
 }

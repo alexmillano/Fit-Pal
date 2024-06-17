@@ -39,8 +39,21 @@ public class RecepcionControlador implements RecepcionRepository{
 
 	@Override
 	public Recepcion getRecepcionById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Recepcion recepcion = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM recepcion WHERE ID_Recepcion = ?");
+            statement.setInt(1, id);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+            	recepcion = new Recepcion(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"), resultSet.getInt("ID_Recepcion"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recepcion;
 	}
 
 	@Override
@@ -59,6 +72,26 @@ public class RecepcionControlador implements RecepcionRepository{
 	public void deleteRecepcion(int id) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	
+	public List<Recepcion> getAllRecepcionConIDRecepcion() {
+		List<Recepcion> recepciones = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM recepcion ");
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	Recepcion recepcion = new Recepcion(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"),resultSet.getInt("ID_Recepcion"));
+            	recepciones.add(recepcion);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recepciones;
 	}
 
 
