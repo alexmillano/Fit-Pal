@@ -51,6 +51,13 @@ public class MenuEjerciciosProfesor extends JFrame {
 		contentPane.add(label);
 		
 		Button btnCrearEjercicio = new Button("Crear Ejercicio");
+		btnCrearEjercicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearEjercicioProfesor crearejercicio = new CrearEjercicioProfesor(profesor);
+				crearejercicio.setVisible(true);
+				dispose();
+			}
+		});
 		btnCrearEjercicio.setBounds(10, 114, 88, 22);
 		contentPane.add(btnCrearEjercicio);
 		

@@ -16,8 +16,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import Controladores.EjercicioControlador;
 import Controladores.ZonaControlador;
-import Modelo.Clase;
+import Modelo.Ejercicio;
 import Modelo.Profesor;
 import Modelo.Zona_Ejercicio;
 import java.awt.Label;
@@ -25,7 +26,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 
 
-public class ZonaEjercicioVista extends JFrame {
+public class CrearEjercicioProfesor extends JFrame {
 
 		private static final long serialVersionUID = 1L;
 		private JPanel contentPane;
@@ -40,7 +41,7 @@ public class ZonaEjercicioVista extends JFrame {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						ZonaEjercicioVista frame = new ZonaEjercicioVista(null);
+						CrearEjercicioProfesor frame = new CrearEjercicioProfesor(null);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -52,7 +53,7 @@ public class ZonaEjercicioVista extends JFrame {
 		/**
 		 * Create the frame.
 		 */
-		public ZonaEjercicioVista(Profesor profesor) {
+		public CrearEjercicioProfesor(Profesor profesor) {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 602, 390);
 			contentPane = new JPanel();
@@ -61,11 +62,11 @@ public class ZonaEjercicioVista extends JFrame {
 			contentPane.setLayout(null);
 
 			// Inicializar controlador
-			ZonaControlador controlador = new ZonaControlador();
-			Zona_Ejercicio seleccionado = new Zona_Ejercicio();
+			EjercicioControlador controlador = new EjercicioControlador();
+			Ejercicio seleccionado = new Ejercicio();
 
 			// Crear el modelo de la tabla
-			String[] columnNames = { "ID", "Nombre" };
+			String[] columnNames = { "ID", "Nombre", "Series" , "Repeticiones" , "Zona"};
 			model = new DefaultTableModel(columnNames, 0);
 			table = new JTable(model);
 
@@ -103,8 +104,8 @@ public class ZonaEjercicioVista extends JFrame {
 			JButton btnCrearZona = new JButton("Añadir");
 			btnCrearZona.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					CrearZonaEjercicio crearzonaejercicio = new CrearZonaEjercicio(profesor);
-					crearzonaejercicio.setVisible(true);
+					AnadirEjercicio anadirejercicio = new AnadirEjercicio(profesor);
+					anadirejercicio.setVisible(true);
 					dispose();
 				}
 			});
@@ -116,21 +117,18 @@ public class ZonaEjercicioVista extends JFrame {
 			JButton btnEditar = new JButton("Editar");
 			btnEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (seleccionado.getID_Zona_Ejercicio()!=0) {
-						EditarZonaEjercicio editarzonaejercicio = new EditarZonaEjercicio(seleccionado,profesor);
-						editarzonaejercicio.setVisible(true);
+					if (seleccionado.getID_Ejercicios()!=0) {				
+						EditarEjercicio editar = new EditarEjercicio(profesor,seleccionado);
+						editar.setVisible(true);
 						dispose();
-					}
-
-					
+					}		
 				}
 			});
+			
+			
 			btnEditar.setBounds(167, 229, 120, 38);
 			contentPane.add(btnEditar);
 			
-
-			
-
 
 			// Configurar el modelo de selección de la tabla
 			ListSelectionModel selectionModel = table.getSelectionModel();
@@ -144,10 +142,23 @@ public class ZonaEjercicioVista extends JFrame {
 						int selectedRow = table.getSelectedRow();
 						int id = (int) table.getValueAt(selectedRow, 0);
 						String nombre = (String) table.getValueAt(selectedRow, 1);
-
-						elemento.setText("Seleccionado: ID= " + id + ", Nombre= " + nombre);
-						seleccionado.setID_Zona_Ejercicio(id);
+						int repeticiones = (int) table.getValueAt(selectedRow, 2);
+						int series = (int) table.getValueAt(selectedRow, 3);
+						int idzona =0 ;
+						ZonaControlador controladorZona = new ZonaControlador();
+						
+						for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
+							if (zona.getNombre().equals(table.getValueAt(selectedRow, 4))) {
+								idzona=zona.getID_Zona_Ejercicio();
+							}
+						}
+						
+						elemento.setText("Seleccionado: ID= " + id + ", Nombre= " + nombre + ", Repeticiones= " + repeticiones + ", Series= " + series + ", ID_Zona_Ejercicio= " + idzona);
+						seleccionado.setID_Ejercicios(id);
 						seleccionado.setNombre(nombre);
+						seleccionado.setRepeticion(repeticiones);
+						seleccionado.setSeries(series);
+						seleccionado.setID_Zona_Ejercicio(idzona); 	
 					}
 				}
 			});
@@ -158,14 +169,17 @@ public class ZonaEjercicioVista extends JFrame {
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-		    		if (seleccionado.getID_Zona_Ejercicio()!=0) {
-						controlador.deleteZona(seleccionado.getID_Zona_Ejercicio());
-						System.out.println("Eliminaste la zona");
-						lvlResultado.setText("Eliminaste la zona correctamente");
+		    		if (seleccionado.getID_Ejercicios()!=0) {
+						controlador.deleteEjercicio(seleccionado.getID_Ejercicios());;
+						System.out.println("Eliminaste el ejercicio");
+						lvlResultado.setText("Eliminaste el ejercicio correctamente");
 						lvlResultado.setVisible(true);
 						actualizarTabla();
-						seleccionado.setID_Zona_Ejercicio(0);
-					} 		    						
+						seleccionado.setID_Ejercicios(0);
+					}else {
+						lvlResultado.setText("");
+					}
+		    						
 				}
 			});
 			
@@ -197,11 +211,19 @@ public class ZonaEjercicioVista extends JFrame {
 			model.setRowCount(0);
 
 			// Obtener la lista actualizada de zonas de ejercicio
-			ZonaControlador controlador = new ZonaControlador();
+			EjercicioControlador controlador = new EjercicioControlador();
+			ZonaControlador controladorZona = new ZonaControlador();
+			String nombreZona = "";
 
 			// Agregar los datos al modelo
-			for (Zona_Ejercicio zona : controlador.getAllZonas()) {
-				model.addRow(new Object[] { zona.getID_Zona_Ejercicio(), zona.getNombre() });
+			for (Ejercicio ejercicio : controlador.getAllEjercicio()) {
+				for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
+					if (zona.getID_Zona_Ejercicio()==ejercicio.getID_Zona_Ejercicio()) {
+						nombreZona = zona.getNombre();
+					}
+				}
+				
+				model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
 			}
 		}
 	}

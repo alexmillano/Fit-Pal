@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import Controladores.ClienteControlador;
 import Controladores.ProfesorControlador;
 import Controladores.RutinaControlador;
+import Controladores.EjercicioControlador;
+import Controladores.ZonaControlador;
 import Validaciones.Validaciones_Interface;
 import Controladores.ZonaControlador;
 
@@ -252,6 +254,44 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 		}
 
 		
+	}
+	
+	public String CrearEjercicio(String nombre,String repeticiones, String series, String ID_ZonaEjercicio) {
+		try {
+			if (!nombre.isEmpty() && nombre.chars().allMatch(Character::isLetter) ) {
+				if (!repeticiones.isEmpty() && repeticiones.chars().allMatch(Character::isDigit)) {
+					if (!series.isEmpty() && series.chars().allMatch(Character::isDigit)) {
+						
+						EjercicioControlador controlador = new EjercicioControlador();
+						ZonaControlador zonacontrolador = new ZonaControlador();
+						int idZona = 0;
+						int repeticionesInt = Integer.parseInt(repeticiones);
+						int seriesInt= Integer.parseInt(series);
+						
+						for (Zona_Ejercicio zona : zonacontrolador.getAllZonas()) {
+							if (zona.getNombre().equalsIgnoreCase(ID_ZonaEjercicio)) {
+								idZona = zona.getID_Zona_Ejercicio();
+							}
+						}
+						Ejercicio ejercicio = new Ejercicio(nombre,repeticionesInt,seriesInt,idZona);
+						controlador.addEjercicio(ejercicio);
+						
+						return "Su ejercicio fue creado correctamente";
+					} else {
+						return "Ingrese las series correctamente";
+					}
+					
+				}else {
+					return "Ingrese las repeticiones correctamente";
+				}
+
+			}else {
+				return "Ingrese un nombre correcto";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error al crear su ejercicio";
+		}
 	}
 	
 	
