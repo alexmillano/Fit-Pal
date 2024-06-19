@@ -24,6 +24,7 @@ import Modelo.Zona_Ejercicio;
 import java.awt.Label;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.TextField;
 
 
 public class CrearEjercicioProfesor extends JFrame {
@@ -87,7 +88,7 @@ public class CrearEjercicioProfesor extends JFrame {
 			Label lvlResultado = new Label("New label");
 			lvlResultado.setForeground(new Color(0, 255, 0));
 			lvlResultado.setBackground(SystemColor.control);
-			lvlResultado.setBounds(157, 290, 301, 22);
+			lvlResultado.setBounds(167, 305, 301, 22);
 			contentPane.add(lvlResultado);
 			lvlResultado.setVisible(false);
 			
@@ -96,7 +97,7 @@ public class CrearEjercicioProfesor extends JFrame {
 			lvlError.setForeground(new Color(255, 0, 0));
 			lvlError.setBackground(SystemColor.control);
 			lvlError.setVisible(false);
-			lvlError.setBounds(157, 290, 301, 22);
+			lvlError.setBounds(167, 305, 301, 22);
 			contentPane.add(lvlError);
 			
 
@@ -109,7 +110,7 @@ public class CrearEjercicioProfesor extends JFrame {
 					dispose();
 				}
 			});
-			btnCrearZona.setBounds(37, 229, 120, 38);  // Ajustar tamaño para mejorar la visualización
+			btnCrearZona.setBounds(37, 260, 120, 38);  // Ajustar tamaño para mejorar la visualización
 			contentPane.add(btnCrearZona);
 			
 			
@@ -126,7 +127,7 @@ public class CrearEjercicioProfesor extends JFrame {
 			});
 			
 			
-			btnEditar.setBounds(167, 229, 120, 38);
+			btnEditar.setBounds(167, 260, 120, 38);
 			contentPane.add(btnEditar);
 			
 
@@ -183,7 +184,7 @@ public class CrearEjercicioProfesor extends JFrame {
 				}
 			});
 			
-			btnEliminar.setBounds(297, 229, 120, 38);
+			btnEliminar.setBounds(297, 260, 120, 38);
 			contentPane.add(btnEliminar);
 			
 			JButton btnSalir = new JButton("Salir");
@@ -194,17 +195,34 @@ public class CrearEjercicioProfesor extends JFrame {
 					dispose();
 				}
 			});
-			btnSalir.setBounds(422, 229, 120, 38);
+			btnSalir.setBounds(422, 260, 120, 38);
 			contentPane.add(btnSalir);
 			
-
+			TextField txtFiltro = new TextField();
+			txtFiltro.setBounds(95, 211, 119, 22);
+			contentPane.add(txtFiltro);
 			
+			JButton btnFiltrar = new JButton("Filtrar");
+			btnFiltrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {			
+					Filtrar(txtFiltro.getText());			
+				}
+			});
+			btnFiltrar.setBounds(15, 211, 73, 22);
+			contentPane.add(btnFiltrar);
 			
+			JButton btnRestablecer = new JButton("Restablecer");
+			btnRestablecer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actualizarTabla();
+					txtFiltro.setText("");
+				}
+			});
+			btnRestablecer.setBounds(220, 211, 120, 22);
+			contentPane.add(btnRestablecer);
+				
 		}
-		
-		
-		
-		
+				
 
 		private void actualizarTabla() {
 			// Limpiar el modelo de la tabla
@@ -225,5 +243,36 @@ public class CrearEjercicioProfesor extends JFrame {
 				
 				model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
 			}
+		}
+		
+		
+		private void Filtrar(String criterio) {
+			// Limpiar el modelo de la tabla
+			if (!criterio.isEmpty()) {
+				
+				model.setRowCount(0);
+				
+				// Obtener la lista actualizada de zonas de ejercicio
+				EjercicioControlador controlador = new EjercicioControlador();
+				ZonaControlador controladorZona = new ZonaControlador();
+				String nombreZona = "";
+				criterio = criterio.toLowerCase();
+				
+				
+				for (Ejercicio ejercicio : controlador.getAllEjercicio()) {
+					
+					for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
+						if (zona.getID_Zona_Ejercicio()==ejercicio.getID_Zona_Ejercicio()) {
+							nombreZona = zona.getNombre();
+						}
+					}
+					String nombreEjercicio = ejercicio.getNombre().toLowerCase();
+					String nombreZonaMinusculas = nombreZona.toLowerCase();
+					if (criterio.contains(nombreEjercicio) || criterio.contains(nombreZonaMinusculas)){
+						model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
+					}		
+				}
+			}
+			
 		}
 	}
