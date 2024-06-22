@@ -60,7 +60,7 @@ public class ClienteControlador implements ClienteRepository {
     }
 
 	@Override
-    public boolean addCliente(int ID_Cliente,String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, int ID_cuota) {
+    public boolean addCliente(int ID_Cliente,String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota) {
 		boolean creado = false;
 		try {
 			 System.out.println("Intentando agregar cliente:");
@@ -72,7 +72,7 @@ public class ClienteControlador implements ClienteRepository {
 		        System.out.println("Correo: " + correo);
 		        System.out.println("Nivel: " + nivel);
 		        System.out.println("Teléfono: " + telefono);
-		        System.out.println("ID Cuota: " + ID_cuota);
+		        System.out.println("ID Cuota: " + cuota);
 
         	PreparedStatement statement = connection.prepareStatement("INSERT INTO cliente(ID_Cliente,Contraseña, Apellido, DNI, Correo, Telefono, Nombre, ID_Nivel, ID_Cuota) "
         			+ "VALUES (?,?,?,?,?,?,?,?,?)");
@@ -84,7 +84,7 @@ public class ClienteControlador implements ClienteRepository {
         	statement.setInt(6, telefono);
         	statement.setString(7, nombre);
         	statement.setInt(8, nivel);
-        	statement.setInt(9, ID_cuota);
+        	statement.setInt(9, cuota.getID_Cuota());
         
         int rowsInserted = statement.executeUpdate();
         	if (rowsInserted > 0) {
