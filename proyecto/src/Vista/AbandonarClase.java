@@ -37,7 +37,7 @@ import Modelo.Profesor;
 import Modelo.Usuario;
 import Modelo.Zona_Ejercicio;
 
-public class UnirseClases extends JFrame {
+public class AbandonarClase extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -66,7 +66,7 @@ public class UnirseClases extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UnirseClases(Cliente cliente) {
+	public AbandonarClase(Cliente cliente) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 938, 463);
 		contentPane = new JPanel();
@@ -89,6 +89,7 @@ public class UnirseClases extends JFrame {
 	    JScrollPane scrollPane = new JScrollPane(table);
 	    scrollPane.setBounds(5, 19, 911, 190);
 	    contentPane.add(scrollPane);
+	   
 	    
 
 	    // Crear el JLabel para mostrar la selección
@@ -110,47 +111,36 @@ public class UnirseClases extends JFrame {
 		contentPane.add(lvlResultadoNegativo);
 		lvlResultadoNegativo.setVisible(false);
 		
-	    JButton btnUnirse = new JButton("Unirse");
-	    btnUnirse.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent e) {
-	    		
-	    		if (seleccionado.getID_Clases()!=0) {
-	    			/*Se uniria a la clase*/
-	    			 cliente.UnirseClase(seleccionado);    			
-	    			 actualizarTabla(cliente);
-	    			 lvlResultadoPositivo.setText("Te uniste a la clase correctamente");
-	    			 lvlResultadoPositivo.setVisible(true);
-	    			 
-				} else {
-					System.out.println("Error al unirse a una clase");
-				}
-	
-	    	}
-	    });
-	    btnUnirse.setBounds(244, 220, 120, 38);
-	    contentPane.add(btnUnirse);  
 	    
 	    
-		JButton btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("Volver");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuCliente atras = new MenuCliente(cliente);
+				UnirseClases atras = new UnirseClases(cliente);
 				atras.setVisible(true);
 				dispose();
 			}
 		});
-		btnSalir.setBounds(506, 220, 120, 38);
+		btnSalir.setBounds(468, 220, 120, 38);
 		contentPane.add(btnSalir);
 		
-		JButton btnAbandonar = new JButton("Mis Clases");
+		JButton btnAbandonar = new JButton("Abandonar");
 		btnAbandonar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AbandonarClase abandonar = new AbandonarClase(cliente);
-				abandonar.setVisible(true);
-				dispose();
+				
+	    		if (seleccionado.getID_Clases()!=0) {
+	    			 cliente.AbandonarClase(seleccionado, cliente); 			
+	    			 lvlResultadoPositivo.setText("Abandonaste la clase correctamente");
+	    			 lvlResultadoPositivo.setVisible(true);
+	    			 actualizarTabla(cliente);
+	    			 
+				} else {
+					 System.out.println("Error al abandonar una clase");
+				}
+			
 			}
 		});
-		btnAbandonar.setBounds(374, 220, 120, 38);
+		btnAbandonar.setBounds(338, 220, 120, 38);
 		contentPane.add(btnAbandonar);
 	    
 	   
@@ -205,7 +195,7 @@ public class UnirseClases extends JFrame {
 			String nombreProfesor = "";
 	    	
 		    // Agregar los datos al modelo
-		    for (Clase clase : cliente.ClaseSegunNivel()) {
+		    for (Clase clase : cliente.ClaseSegunNivelABorrar()) {
 		    	
 		    	for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
 					if (profesor.getID_Profesor()==clase.getID_Profesor()) {

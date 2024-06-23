@@ -10,6 +10,8 @@ import Modelo.Recepcion;
 
 import javax.swing.JLabel;
 import java.awt.Button;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MenuRecepcion extends JFrame {
 
@@ -70,6 +72,11 @@ public class MenuRecepcion extends JFrame {
 		contentPane.add(perfilbtn);
 		
 		Button cerrarsesionbtn = new Button("Cerrar Sesión");
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		cerrarsesionbtn.setBounds(246, 138, 70, 22);
 		contentPane.add(cerrarsesionbtn);
 	}

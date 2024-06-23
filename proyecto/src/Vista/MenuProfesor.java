@@ -80,6 +80,11 @@ public class MenuProfesor extends JFrame {
 		contentPane.add(perfilbtn);
 		
 		Button cerrarsesionbtn = new Button("Cerrar Sesion");
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		cerrarsesionbtn.setBounds(238, 135, 81, 22);
 		contentPane.add(cerrarsesionbtn);
 	}

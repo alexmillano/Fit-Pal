@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Modelo.Cliente;
+import Vista.UnirseClases;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,7 +53,7 @@ public class MenuCliente extends JFrame {
 		Button clasesbtn = new Button("Clases");
 		clasesbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClasesCliente clasesclientes= new ClasesCliente(cliente);
+				UnirseClases clasesclientes= new UnirseClases(cliente);
 				clasesclientes.setVisible(true);
 				dispose();
 			}
@@ -79,6 +80,11 @@ public class MenuCliente extends JFrame {
 		contentPane.add(perfilbtn);
 		
 		Button cerrarsesionbtn = new Button("Cerrar sesion");
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		cerrarsesionbtn.setBounds(347, 133, 77, 31);
 		contentPane.add(cerrarsesionbtn);
 	}
