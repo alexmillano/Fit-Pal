@@ -52,6 +52,15 @@ public class MenuProfesor extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		Button rutinasbtn = new Button("Rutinas");
+		rutinasbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RutinaTabla rutinatabla = new RutinaTabla(profesor);
+				rutinatabla.setVisible(true);
+				dispose();
+				
+				
+			}
+		});
 		rutinasbtn.setBounds(84, 100, 70, 22);
 		contentPane.add(rutinasbtn);
 		
@@ -82,6 +91,7 @@ public class MenuProfesor extends JFrame {
 		Button cerrarsesionbtn = new Button("Cerrar Sesion");
 		cerrarsesionbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				dispose();
 			}
 		});

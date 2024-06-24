@@ -35,6 +35,11 @@ public class Rutina {
 			this.ID_Rutinas=ID_Rutinas;
 			
 		}
+		
+		
+		public Rutina() {
+		
+		}
 
 
 		public int getID_Rutinas() {
@@ -82,8 +87,15 @@ public class Rutina {
 		public void setNivel(int nivel) {
 			this.nivel = nivel;
 		}
+	
 
+		public int getID_Profesor() {
+			return ID_Profesor;
+		}
 
+		public void setID_Profesor(int iD_Profesor) {
+			ID_Profesor = iD_Profesor;
+		}
 
 		public static LinkedList<Rutina> getRutinas_general() {
 			return rutinas_general;

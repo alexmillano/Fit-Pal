@@ -9,9 +9,9 @@ List<Rutina> getAllRutina(); // llama a todos las rutinas de la bdd
     
     Profesor getRutinaById(int id); //llama solo a una, por su id
     
-    void addRutina(Profesor profesor); //añade rutina a la bdd
+    void addRutina(Rutina rutina); //añade rutina a la bdd
     
-    void updateRutina(Profesor profesor); //actualiza las rutinas de la bdd
+    void updateRutina(Rutina rutina); //actualiza las rutinas de la bdd
     
     void deleteRutina(int id); //eliminar rutina de la bdd
 }
