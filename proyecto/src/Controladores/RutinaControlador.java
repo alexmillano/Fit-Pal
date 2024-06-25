@@ -11,6 +11,7 @@ import Interfaces.RutinaRepository;
 import Modelo.Cliente;
 import Modelo.Profesor;
 import Modelo.Rutina;
+import Modelo.Zona_Ejercicio;
 
 public class RutinaControlador implements RutinaRepository {
 	private final Connection connection;
@@ -42,21 +43,41 @@ public class RutinaControlador implements RutinaRepository {
 
 
 	@Override
-	public Profesor getRutinaById(int id) {
+	public Rutina getRutinaById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public String getRutinaByNombre(String id) {
+		String flag="";
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM rutinas WHERE Nombre = ?");
+            statement.setString(1, id);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+            	flag ="Ya hay una rutina con ese nombre";
+            }else {
+            	flag = "No hay una rutina con ese nombre";
+            	
+			}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+	}
+	
 
 	@Override
 	public void addRutina(Rutina rutina) {
 		 try {
-	        	PreparedStatement statement = connection.prepareStatement("INSERT INTO rutinas( ID_Rutinas, ID_Profesor, ID_Nivel, Nombre) "
-	        			+ "VALUES (?,?,?,?)");
-	        	statement.setInt(1, rutina.getID_Rutinas());
-	        	statement.setInt(2, rutina.getID_Profesor());
-	        	statement.setInt(3, rutina.getNivel());
-	        	statement.setString(4, rutina.getNombre());
+	        	PreparedStatement statement = connection.prepareStatement("INSERT INTO rutinas(ID_Profesor, ID_Nivel, Nombre) "
+	        			+ "VALUES (?,?,?)");
+	        	statement.setInt(1, rutina.getID_Profesor());
+	        	statement.setInt(2, rutina.getNivel());
+	        	statement.setString(3, rutina.getNombre());
   
 	        int rowsInserted = statement.executeUpdate();
 	        	if (rowsInserted > 0) {
@@ -73,10 +94,10 @@ public class RutinaControlador implements RutinaRepository {
 	public void updateRutina(Rutina rutina) {
 	try {
 			
-			PreparedStatement statement = connection.prepareStatement("UPDATE rutinas SET ID_Profesor = ? ,ID_Nivel= ? ,Nombre= ? ");
-        	statement.setInt(1, rutina.getID_Profesor());
-        	statement.setInt(2, rutina.getNivel());
-        	statement.setString(3, rutina.getNombre());
+			PreparedStatement statement = connection.prepareStatement("UPDATE rutinas SET ID_Nivel= ? ,Nombre= ? WHERE ID_Rutinas = ?");
+        	statement.setInt(1, rutina.getNivel());
+        	statement.setString(2, rutina.getNombre());
+        	statement.setInt(3, rutina.getID_Rutinas());
 	        
 	        int rowsUpdated = statement.executeUpdate();
 	        if (rowsUpdated > 0) {

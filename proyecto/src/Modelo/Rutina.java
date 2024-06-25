@@ -32,10 +32,21 @@ public class Rutina {
 			this.nombre = nombre;
 			this.ID_Profesor = ID_Profesor;	
 			this.nivel = ID_Nivel;	
-			this.ID_Rutinas=ID_Rutinas;
-			
+			this.ID_Rutinas=ID_Rutinas;		
 		}
 		
+		public Rutina(int ID_Profesor, int ID_Nivel,String nombre) {
+			super();
+			this.nombre = nombre;
+			this.ID_Profesor = ID_Profesor;	
+			this.nivel = ID_Nivel;			
+		}
+		
+		public Rutina(int ID_Nivel,String nombre) {
+			super();
+			this.nombre = nombre;
+			this.nivel = ID_Nivel;			
+		}
 		
 		public Rutina() {
 		

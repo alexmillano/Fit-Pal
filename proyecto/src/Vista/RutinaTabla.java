@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import Controladores.EjercicioControlador;
 import Controladores.ProfesorControlador;
 import Controladores.RutinaControlador;
+import Controladores.Rutina_EjerciciosControlador;
 import Controladores.ZonaControlador;
 import Modelo.Clase;
 import Modelo.Ejercicio;
@@ -109,8 +110,8 @@ public class RutinaTabla extends JFrame {
 			JButton btnCrearZona = new JButton("Añadir");
 			btnCrearZona.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					AnadirEjercicio anadirejercicio = new AnadirEjercicio(profesor);
-					anadirejercicio.setVisible(true);
+					AnadirRutina anadirrutina = new AnadirRutina(seleccionado,profesor);
+					anadirrutina.setVisible(true);
 					dispose();
 				}
 			});
@@ -123,7 +124,7 @@ public class RutinaTabla extends JFrame {
 			btnEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (seleccionado.getID_Rutinas()!=0) {				
-						EditarEjercicio editar = new EditarEjercicio(profesor,seleccionado);
+						EditarRutina editar = new EditarRutina(profesor,seleccionado);
 						editar.setVisible(true);
 						dispose();
 					}		
@@ -179,12 +180,19 @@ public class RutinaTabla extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					
 		    		if (seleccionado.getID_Rutinas()!=0) {
+		    			//borro intermedia
+		    			Rutina_EjerciciosControlador controladorintermedia = new Rutina_EjerciciosControlador();
+		    			controladorintermedia.deleteRutinaEjercicio(seleccionado.getID_Rutinas());
+		    			
+		    			//borro rutina
 						controlador.deleteRutina(seleccionado.getID_Rutinas());;
 						System.out.println("Eliminaste la rutina");
 						lvlResultado.setText("Eliminaste la rutina correctamente");
 						lvlResultado.setVisible(true);
 						actualizarTabla();
 						seleccionado.setID_Rutinas(0);
+						
+						
 					}else {
 						lvlResultado.setText("");
 					}
@@ -259,6 +267,7 @@ public class RutinaTabla extends JFrame {
 							);
 				} 	
 		    }
+		    
 		}
 		
 	
@@ -266,29 +275,39 @@ public class RutinaTabla extends JFrame {
 			// Limpiar el modelo de la tabla
 			if (!criterio.isEmpty()) {
 				
-				model.setRowCount(0);
-				
-				// Obtener la lista actualizada de zonas de ejercicio
-				EjercicioControlador controlador = new EjercicioControlador();
-				ZonaControlador controladorZona = new ZonaControlador();
-				String nombreZona = "";
+			    model.setRowCount(0);
+	    	    
+				RutinaControlador controlador = new RutinaControlador();
+				ProfesorControlador profesorcontrolador = new ProfesorControlador();
+				String nombreProfesor = "";
 				criterio = criterio.toLowerCase();
-				
-				
-				for (Ejercicio ejercicio : controlador.getAllEjercicio()) {
-					
-					for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
-						if (zona.getID_Zona_Ejercicio()==ejercicio.getID_Zona_Ejercicio()) {
-							nombreZona = zona.getNombre();
+		    	
+			    // Agregar los datos al modelo
+			    for (Rutina rutina : controlador.getAllRutina()) {
+			    	for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
+			    		
+						if (profesor.getID_Profesor()==rutina.getID_Profesor()) {
+							nombreProfesor = profesor.getNombre() +" " + profesor.getApellido();
+						}			
+						String nombreRutina = rutina.getNombre().toLowerCase();
+						if (nombreRutina.contains(criterio)){
+						model.addRow(
+								new Object[]
+										{
+												rutina.getID_Rutinas()
+												, rutina.getNombre()
+												, nombreProfesor
+												, rutina.getNivel()
+												
+										}
+									);
 						}
-					}
-					String nombreEjercicio = ejercicio.getNombre().toLowerCase();
-					String nombreZonaMinusculas = nombreZona.toLowerCase();
-					if (criterio.contains(nombreEjercicio) || criterio.contains(nombreZonaMinusculas)){
-						model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
-					}		
-				}
-			}
-		
+					} 	
+			    }
+
+			}	
 		}
+		
+		
+		
 }
