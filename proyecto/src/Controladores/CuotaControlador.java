@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 import Interfaces.CuotaRepository;
 import Modelo.Cliente;
 import Modelo.Cuota;
@@ -52,7 +54,7 @@ public class CuotaControlador implements CuotaRepository{
 	public Cuota getCuotaById(int idCuota) {
 		Cuota cuota = null;
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT ID_Metodo, ID_Cliente, Valor, vencimiento FROM users WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT ID_Metodo, ID_Cliente, Valor, vencimiento FROM cuota WHERE ID_Cliente = ?");
             statement.setInt(1, idCuota);
             
             ResultSet resultSet = statement.executeQuery();
@@ -74,25 +76,44 @@ public class CuotaControlador implements CuotaRepository{
 
 
 	@Override
-	public void addCuota(Cliente cliente, Cuota cuota) {
-		try {
-            PreparedStatement statement = connection.prepareStatement(
-                "INSERT INTO cuotas (cliente_id, valor, metodo, vencimiento) VALUES (?, ?, ?, ?)"
-            );
-            statement.setInt(1, cliente.getID_Cliente());
-            statement.setDouble(2, cuota.getValor());
-            statement.setInt(3, cuota.getMetodo());
-            LocalDate vencimiento = cuota.getVencimiento();
-            LocalDateTime vencimientoDateTime = vencimiento.atStartOfDay();
-            Timestamp vencimientoTimestamp = Timestamp.valueOf(vencimientoDateTime);
-            statement.setTimestamp(4, vencimientoTimestamp);
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                System.out.println("Cuota insertada exitosamente");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+	public void addCuota(Cuota cuota, int clienteID) {
+		  try {
+		        String sqlCuota = "INSERT INTO cuota (valor, metodo, vencimiento) VALUES (?, ?, ?)";
+		        PreparedStatement statementCuota = connection.prepareStatement(sqlCuota, Statement.RETURN_GENERATED_KEYS);
+		        statementCuota.setDouble(1, cuota.getValor());
+		        statementCuota.setInt(2, cuota.getMetodo());
+		        statementCuota.setDate(3, java.sql.Date.valueOf(cuota.getVencimiento()));
+
+		        int rowsInsertedCuota = statementCuota.executeUpdate();
+		        if (rowsInsertedCuota > 0) {
+		            ResultSet generatedKeysCuota = statementCuota.getGeneratedKeys();
+		            if (generatedKeysCuota.next()) {
+		                int cuotaID = generatedKeysCuota.getInt(1);
+		                cuota.setID_Cuota(cuotaID);
+		                System.out.println("Cuota insertada exitosamente con ID: " + cuotaID);
+
+		                // Actualizar el cliente con el nuevo ID_Cuota
+		                String sqlUpdateCliente = "UPDATE cliente SET ID_Cuota = ? WHERE ID_Cliente = ?";
+		                PreparedStatement statementUpdateCliente = connection.prepareStatement(sqlUpdateCliente);
+		                statementUpdateCliente.setInt(1, cuotaID);
+		                statementUpdateCliente.setInt(2, clienteID);
+
+		                int rowsUpdatedCliente = statementUpdateCliente.executeUpdate();
+		                if (rowsUpdatedCliente > 0) {
+		                    System.out.println("Cliente actualizado con el nuevo ID_Cuota.");
+		                } else {
+		                    System.out.println("Fallo al actualizar el cliente con el nuevo ID_Cuota.");
+		                }
+		            } else {
+		                System.out.println("Fallo al obtener el ID de la cuota insertada.");
+		            }
+		        } else {
+		            System.out.println("No se insertó ninguna fila en la tabla cuota.");
+		        }
+		    } catch (SQLException e) {
+		        System.out.println("Error al agregar cuota: " + e.getMessage());
+		        e.printStackTrace();
+		    }
 		
 	}
 

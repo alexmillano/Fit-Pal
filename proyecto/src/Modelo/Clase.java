@@ -18,9 +18,8 @@ public class Clase {
 	
 	//Lista con las rutinas que se hacen en la clase creada
 	private LinkedList<Rutina> rutina_de_la_clase = new LinkedList<>();
-
 	
-	public Clase(int ID_Profesor,String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
+	public Clase(int ID_Profesor,int i, String nombre, LocalDateTime inicio, LocalDateTime fin,int nivel) {
 		super();
 		this.nombre=nombre;
 		this.inicio = inicio;
@@ -77,6 +76,7 @@ public class Clase {
 	public void setID_Profesor(int ID_Profesor) {
 		this.ID_Profesor = ID_Profesor;
 	}
+
 
 	public int getNivel() {
 		return nivel;

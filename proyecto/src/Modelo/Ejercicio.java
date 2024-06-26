@@ -3,19 +3,51 @@ package Modelo;
 import java.util.LinkedList;
 
 public class Ejercicio {
+		private int ID_Ejercicios;
 		private String nombre;
 		private int repeticion;
 		private int series;
 		private int ID_Zona_Ejercicio;
+		
 		static LinkedList<Ejercicio> ejercicio = new LinkedList<>();
 		
-		public Ejercicio(String nombre, int repeticion, int series) {
+		public Ejercicio(String nombre, int repeticion, int series, int ID_Zona_Ejercicio) {
 			super();
 			this.nombre = nombre;
 			this.repeticion = repeticion;
 			this.series = series;
+			this.ID_Zona_Ejercicio=ID_Zona_Ejercicio;
 			
 		}
+		
+		
+		public Ejercicio(int ID_Ejercicios, String nombre, int repeticion, int series, int ID_Zona_Ejercicio) {
+			super();
+			this.ID_Ejercicios=ID_Ejercicios;
+			this.nombre = nombre;
+			this.repeticion = repeticion;
+			this.series = series;
+			this.ID_Zona_Ejercicio=ID_Zona_Ejercicio;
+			
+		}
+		
+		
+		public Ejercicio() {
+			super();
+			
+		}
+		
+		
+		
+		
+		public int getID_Ejercicios() {
+			return ID_Ejercicios;
+		}
+
+		public void setID_Ejercicios(int iD_Ejercicios) {
+			ID_Ejercicios = iD_Ejercicios;
+		}
+
 		public String getNombre() {
 			return nombre;
 		}

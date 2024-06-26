@@ -15,6 +15,9 @@ public class Persona implements MenuIniciarSesion{
 			this.dni = dni;
 			this.correo = correo;
 		}
+		public Persona() {
+			
+		}
 
 		
 		public String getNombre() {
@@ -58,19 +61,11 @@ public class Persona implements MenuIniciarSesion{
 		}
 
 
-		@Override
-		public boolean IniciarSesion(String mail, String contrasena) {
-			
-			if (this.getCorreo().equals(mail) && this.getContraseña().equals(contrasena)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		
 		
 		@Override
 		public void Menu() {
-			// TODO Auto-generated method stub
+			
 			
 		}
 		

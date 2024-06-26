@@ -12,9 +12,12 @@ public interface ClienteRepository {
     
     Cliente getClienteById(int id); //llama solo a uno, por su id
     
-    boolean addCliente(int ID_Cliente,String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota); //añade cliente a la bdd
+    void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota); //añade cliente a la bdd
     
     boolean updateCliente(Cliente cliente); //actualiza los cliente de la bdd
     
-    boolean deleteCliente(int id); //eliminar cliente de la bdd
+    void deleteCliente(int id); //eliminar cliente de la bdd
+
+	List<Cliente> getAllClienteConID_Cliente(); // para que devuelva un cliente con su ID_Cliente traido de la base de datos
+
 }

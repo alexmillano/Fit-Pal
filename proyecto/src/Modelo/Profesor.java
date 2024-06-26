@@ -9,7 +9,10 @@ import javax.swing.JOptionPane;
 import Controladores.ClienteControlador;
 import Controladores.ProfesorControlador;
 import Controladores.RutinaControlador;
+import Controladores.EjercicioControlador;
+import Controladores.ZonaControlador;
 import Validaciones.Validaciones_Interface;
+import Controladores.ZonaControlador;
 
 
 public class Profesor extends Persona implements MenuIniciarSesion, Validaciones_Interface {
@@ -30,7 +33,7 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 		
 	}
 	
-	//Creado solo para probar el test
+	//Creado solo para probar el test. Lo usa franco para el iniciar sesion , no borrar
 	public Profesor(int ID_Profesor,String nombre, String apellido, String contraseña, int dNI, String correo) {
 		super(nombre, apellido, contraseña, dNI, correo);
 		this.ID_Profesor=ID_Profesor;
@@ -233,22 +236,62 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 	}
 	
 	
-	@Override
-	public boolean IniciarSesion(String mail, String contrasena) {
-		ProfesorControlador controlador = new ProfesorControlador();
-		mail = Validaciones_Interface.ValidarEsMail(mail);
-		contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
-		boolean flag=false;
-		
-		for (Profesor profesor : controlador.getAllProfesor()) {
-			if (profesor.getCorreo().equals(mail) && profesor.getContraseña().equals(contrasena)) {	
-				/*JOptionPane.showMessageDialog(null, "Email correcto");*/
-				flag=true;
-				break;
+	public String CrearZona(String nombre) {
+
+		try {
+			if (!nombre.isEmpty() && nombre.chars().allMatch(Character::isLetter)) {
+				ZonaControlador controlador = new ZonaControlador();
+				Zona_Ejercicio zona = new Zona_Ejercicio(nombre);
+				controlador.addZona(zona);
+				return "Su zona fue creada correctamente";
+			}else {
+				return "Ingrese un nombre correcto";
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error al crear su zona";
 		}
+
 		
-		return flag;
+	}
+	
+	public String CrearEjercicio(String nombre,String repeticiones, String series, String ID_ZonaEjercicio) {
+		try {
+			if (!nombre.isEmpty() && nombre.chars().allMatch(Character::isLetter) ) {
+				if (!repeticiones.isEmpty() && repeticiones.chars().allMatch(Character::isDigit)) {
+					if (!series.isEmpty() && series.chars().allMatch(Character::isDigit)) {
+						
+						EjercicioControlador controlador = new EjercicioControlador();
+						ZonaControlador zonacontrolador = new ZonaControlador();
+						int idZona = 0;
+						int repeticionesInt = Integer.parseInt(repeticiones);
+						int seriesInt= Integer.parseInt(series);
+						
+						for (Zona_Ejercicio zona : zonacontrolador.getAllZonas()) {
+							if (zona.getNombre().equalsIgnoreCase(ID_ZonaEjercicio)) {
+								idZona = zona.getID_Zona_Ejercicio();
+							}
+						}
+						Ejercicio ejercicio = new Ejercicio(nombre,repeticionesInt,seriesInt,idZona);
+						controlador.addEjercicio(ejercicio);
+						
+						return "Su ejercicio fue creado correctamente";
+					} else {
+						return "Ingrese las series correctamente";
+					}
+					
+				}else {
+					return "Ingrese las repeticiones correctamente";
+				}
+
+			}else {
+				return "Ingrese un nombre correcto";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Error al crear su ejercicio";
+		}
 	}
 	
 	

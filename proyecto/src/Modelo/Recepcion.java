@@ -14,7 +14,7 @@ import Validaciones.Validaciones_Interface;
 
 public class Recepcion extends Persona implements MenuIniciarSesion, Validaciones_Interface {
 
-		private int ID_recepcion;
+		private int ID_Recepcion;
 		
 		//Lista de todas las cuotas. Ya esta hecha en cuotas. ES LA STATIC EN cuotas_general
 		
@@ -22,21 +22,26 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 
 		public Recepcion(String nombre, String apellido, String contraseña, int dNI, String correo, int ID_Recepcion) {
 			super(nombre, apellido, contraseña, dNI, correo);
-			this.ID_recepcion=ID_Recepcion;
+			this.ID_Recepcion=ID_Recepcion;
 		}
 
-		public int getID_recepcion() {
-			return ID_recepcion;
-		}
 
-		public void setID_recepcion(int iD_recepcion) {
-			ID_recepcion = iD_recepcion;
-		}
 		
 	
+		public int getID_Recepcion() {
+			return ID_Recepcion;
+		}
+
+
+		public void setID_Recepcion(int iD_Recepcion) {
+			ID_Recepcion = iD_Recepcion;
+		}
+
+
+
 		@Override
 		public String toString() {
-			return "ID Recepcion: " + ID_recepcion;
+			return "ID Recepcion: " + ID_Recepcion;
 		}
 
 		
@@ -252,23 +257,5 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 	
 		
 		
-		
-		@Override
-		public boolean IniciarSesion(String mail, String contrasena) {
-			RecepcionControlador controlador = new RecepcionControlador();
-			mail = Validaciones_Interface.ValidarEsMail(mail);
-			contrasena = Validaciones_Interface.ValidarEsNumero(contrasena);
-			boolean flag=false;
-			
-			for (Recepcion recepcion : controlador.getAllRecepcion()) {
-				if (recepcion.getCorreo().equals(mail) && recepcion.getContraseña().equals(contrasena)) {	
-					/*JOptionPane.showMessageDialog(null, "Email correcto");*/
-					flag=true;
-					break;
-				}
-			}
-			
-			return flag;
-		}
 		
 }

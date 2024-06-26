@@ -3,12 +3,23 @@ package Modelo;
 public class Zona_Ejercicio {
 	
 	private int ID_Zona_Ejercicio;
-	private String Zona;
+	private String Nombre;
 	
 	
-	public Zona_Ejercicio(String zona) {
+	public Zona_Ejercicio(String Nombre) {
 		super();
-		this.Zona = zona;
+		this.Nombre = Nombre;
+	}
+	
+	public Zona_Ejercicio() {
+		super();
+
+	}
+	
+	public Zona_Ejercicio(int ID_Zona_Ejercicio,String Nombre) {
+		super();
+		this.ID_Zona_Ejercicio=ID_Zona_Ejercicio;
+		this.Nombre = Nombre;
 	}
 
 	public int getID_Zona_Ejercicio() {
@@ -19,16 +30,20 @@ public class Zona_Ejercicio {
 	public void setID_Zona_Ejercicio(int iD_Zona_Ejercicio) {
 		ID_Zona_Ejercicio = iD_Zona_Ejercicio;
 	}
-	public String getZona() {
-		return Zona;
+
+	public String getNombre() {
+		return Nombre;
 	}
-	public void setZona(String zona) {
-		Zona = zona;
+
+	public void setNombre(String nombre) {
+		Nombre = nombre;
 	}
+
 	@Override
 	public String toString() {
-		return "Zona_Ejercicio [ID_Zona_Ejercicio=" + ID_Zona_Ejercicio + ", Zona=" + Zona + "]";
+		return "Zona_Ejercicio [ID_Zona_Ejercicio=" + ID_Zona_Ejercicio + ", Nombre=" + Nombre + "]";
 	}
+
 	
 	
 	

@@ -7,12 +7,27 @@ public interface Validaciones_Interface {
 
 	public static String ValidarEsNumero(String cadena) {
 		
-		try {
+		try {	
 			
+	          if (cadena.isEmpty() || !cadena.chars().allMatch(Character::isDigit) || Integer.parseInt(cadena) < 0) {
+	                return "Debe ingresar una contraseña numerica valida.";
+	            }
+	        } catch (NumberFormatException e) {
+	            e.printStackTrace();
+	            return "Ocurrió un error inesperado en su contraseña";
+	        }
+	        return null;
+	    }
+			
+			
+			
+			
+			
+			/*	
 			boolean flag;
 			do {
 				flag=true;
-							
+				
 				if (cadena.length()==0) {
 					flag=false;
 				}else {
@@ -25,7 +40,7 @@ public interface Validaciones_Interface {
 				}
 				
 				if (flag==false || Integer.parseInt(cadena)<0) {
-					cadena=JOptionPane.showInputDialog("Error. Debe ingresar un número válido.");
+					cadena="Error. Debe ingresar unna contraseña numerica valida.";
 				}
 				
 			} while (flag==false);
@@ -33,17 +48,30 @@ public interface Validaciones_Interface {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado");
+			return "Ocurrió un error inesperado en su contraseña";
 		}
-		
 
 		return cadena;
 
-	}
+	}*/
 	
 	
 	
-public static String ValidarEsMail(String cadena) {
+	  public static String ValidarEsMail(String cadena) {
+	        try {
+	            if (cadena.isEmpty() || !cadena.contains("@")) {
+	                return "Ingrese correctamente el mail";
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return "Ocurrió un error inesperado con su mail";
+	        }
+	        return null;
+	    }
+	  
+	
+	/*
+	public static String ValidarEsMail(String cadena) {
 		
 		try {
 			boolean flag;
@@ -53,17 +81,17 @@ public static String ValidarEsMail(String cadena) {
 				
 				if (cadena.length()==0 || !cadena.contains("@")) {
 					flag=false;	 
-					cadena = JOptionPane.showInputDialog("Ingrese correctamente el mail");
+					cadena = "Ingrese correctamente el mail";
 				}
 				
 			} while (flag==false);
 					
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado");
+			return "Ocurrió un error inesperado con su mail";
 		}
 		return cadena;
-	}
+	}*/
 	
 }
 

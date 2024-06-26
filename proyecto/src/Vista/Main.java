@@ -12,11 +12,12 @@ import Controladores.ClienteControlador;
 import Modelo.Cliente;
 import Modelo.Cuota;
 import Modelo.MenuIniciarSesion;
+import Modelo.Persona;
 import Modelo.Profesor;
 import Modelo.Recepcion;
 import Validaciones.Validaciones_Interface;
 
-public class Main implements MenuIniciarSesion,Validaciones_Interface{
+public class Main implements MenuIniciarSesion , Validaciones_Interface{
 
 	/*public static void main(String[] args) {
 		
@@ -91,11 +92,6 @@ public class Main implements MenuIniciarSesion,Validaciones_Interface{
 		
 	}
 
-	@Override
-	public boolean IniciarSesion(String mail, String contrasena) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
 }
