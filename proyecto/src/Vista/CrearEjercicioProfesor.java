@@ -268,7 +268,9 @@ public class CrearEjercicioProfesor extends JFrame {
 					}
 					String nombreEjercicio = ejercicio.getNombre().toLowerCase();
 					String nombreZonaMinusculas = nombreZona.toLowerCase();
-					if (criterio.contains(nombreEjercicio) || criterio.contains(nombreZonaMinusculas)){
+					
+					
+					if (nombreEjercicio.contains(criterio) || nombreZonaMinusculas.contains(criterio)){
 						model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
 					}		
 				}

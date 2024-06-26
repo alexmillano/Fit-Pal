@@ -36,6 +36,7 @@ import Modelo.Ejercicio;
 import Modelo.Profesor;
 import Modelo.Usuario;
 import Modelo.Zona_Ejercicio;
+import java.awt.Font;
 
 public class AbandonarClase extends JFrame {
 
@@ -98,6 +99,7 @@ public class AbandonarClase extends JFrame {
 	    contentPane.add(elemento);
 	    
 		Label lvlResultadoPositivo = new Label("");
+		lvlResultadoPositivo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoPositivo.setBackground(SystemColor.control);
 		lvlResultadoPositivo.setForeground(new Color(0, 255, 0));
 		lvlResultadoPositivo.setBounds(53, 289, 516, 22);
@@ -106,6 +108,7 @@ public class AbandonarClase extends JFrame {
 
 		
 		Label lvlResultadoNegativo = new Label("");
+		lvlResultadoNegativo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoNegativo.setForeground(new Color(255, 0, 0));
 		lvlResultadoNegativo.setBounds(53, 289, 516, 22);
 		contentPane.add(lvlResultadoNegativo);

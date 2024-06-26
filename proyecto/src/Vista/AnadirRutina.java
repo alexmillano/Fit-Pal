@@ -24,6 +24,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.List;
 import javax.swing.JComboBox;
+import java.awt.Font;
 
 public class AnadirRutina extends JFrame {
 
@@ -51,22 +52,25 @@ public class AnadirRutina extends JFrame {
 	 */
 	public AnadirRutina(Rutina rutina,Profesor profesor) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 376);
+		setBounds(100, 100, 450, 329);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Label label = new Label("Cree su ejercicio");
-		label.setBounds(139, 10, 214, 22);
+		Label label = new Label("Crear Rutina");
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(152, 22, 214, 22);
 		contentPane.add(label);
 		
 		Label label_1 = new Label("Nivel");
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1.setBounds(50, 60, 113, 22);
 		contentPane.add(label_1);
 		
 		Label lvlResultadoPositivo = new Label("");
+		lvlResultadoPositivo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoPositivo.setBackground(SystemColor.control);
 		lvlResultadoPositivo.setForeground(new Color(0, 255, 0));
 		lvlResultadoPositivo.setBounds(50, 244, 316, 22);
@@ -75,12 +79,14 @@ public class AnadirRutina extends JFrame {
 
 		
 		Label lvlResultadoNegativo = new Label("");
+		lvlResultadoNegativo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoNegativo.setForeground(new Color(255, 0, 0));
 		lvlResultadoNegativo.setBounds(50, 244, 316, 22);
 		contentPane.add(lvlResultadoNegativo);
 		lvlResultadoNegativo.setVisible(false);
 		
 		Label label_1_1 = new Label("Nombre");
+		label_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1_1.setBounds(219, 60, 205, 22);
 		contentPane.add(label_1_1);
 		
@@ -101,6 +107,7 @@ public class AnadirRutina extends JFrame {
 		EjercicioControlador controladorejercicio = new EjercicioControlador();
 		
 		Label label_1_2 = new Label("Ejercicio 1");
+		label_1_2.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1_2.setBounds(50, 127, 113, 22);
 		contentPane.add(label_1_2);
 		
@@ -109,6 +116,7 @@ public class AnadirRutina extends JFrame {
 		contentPane.add(comboBoxEj2);
 		
 		Label label_1_2_1 = new Label("Ejercicio 2");
+		label_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1_2_1.setBounds(212, 127, 113, 22);
 		contentPane.add(label_1_2_1);
 		
@@ -196,7 +204,7 @@ public class AnadirRutina extends JFrame {
 		});
 		
 		
-		btnCrear.setBounds(139, 204, 70, 22);
+		btnCrear.setBounds(132, 205, 70, 22);
 		contentPane.add(btnCrear);
 		
 		Button btnSalir = new Button("Salir");
@@ -207,7 +215,7 @@ public class AnadirRutina extends JFrame {
 				dispose();
 			}
 		});
-		btnSalir.setBounds(237, 204, 70, 22);
+		btnSalir.setBounds(208, 205, 70, 22);
 		contentPane.add(btnSalir);
 
 	}

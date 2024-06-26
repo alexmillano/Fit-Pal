@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Font;
 
 public class CrearZonaEjercicio extends JFrame {
 
@@ -42,26 +43,29 @@ public class CrearZonaEjercicio extends JFrame {
 	 */
 	public CrearZonaEjercicio(Profesor profesor) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 256);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Label label = new Label("Cree su zona ejercicio");
-		label.setBounds(139, 10, 214, 22);
+		Label label = new Label("Crear Zona Ejercicio");
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(139, 20, 214, 22);
 		contentPane.add(label);
 		
 		TextField txtNombre = new TextField();
-		txtNombre.setBounds(53, 88, 113, 22);
+		txtNombre.setBounds(50, 88, 113, 22);
 		contentPane.add(txtNombre);
 		
 		Label label_1 = new Label("Ingrese el nombre de la zona");
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1.setBounds(50, 60, 205, 22);
 		contentPane.add(label_1);
 		
 		Label lvlResultadoPositivo = new Label("");
+		lvlResultadoPositivo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoPositivo.setBackground(SystemColor.control);
 		lvlResultadoPositivo.setForeground(new Color(0, 255, 0));
 		lvlResultadoPositivo.setBounds(51, 129, 256, 22);
@@ -70,6 +74,7 @@ public class CrearZonaEjercicio extends JFrame {
 
 		
 		Label lvlResultadoNegativo = new Label("");
+		lvlResultadoNegativo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoNegativo.setForeground(new Color(255, 0, 0));
 		lvlResultadoNegativo.setBounds(51, 129, 158, 22);
 		contentPane.add(lvlResultadoNegativo);
@@ -92,7 +97,7 @@ public class CrearZonaEjercicio extends JFrame {
 		});
 		
 		
-		btnCrear.setBounds(139, 176, 70, 22);
+		btnCrear.setBounds(139, 167, 70, 22);
 		contentPane.add(btnCrear);
 		
 		Button btnSalir = new Button("Salir");
@@ -103,7 +108,7 @@ public class CrearZonaEjercicio extends JFrame {
 				dispose();
 			}
 		});
-		btnSalir.setBounds(220, 176, 70, 22);
+		btnSalir.setBounds(223, 167, 70, 22);
 		contentPane.add(btnSalir);
 		
 

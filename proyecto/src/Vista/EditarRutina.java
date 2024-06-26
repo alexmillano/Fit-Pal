@@ -23,6 +23,7 @@ import Modelo.Rutinas_Ejercicios;
 import Modelo.Zona_Ejercicio;
 import Controladores.RutinaControlador;
 import Controladores.Rutina_EjerciciosControlador;
+import java.awt.Font;
 
 public class EditarRutina extends JFrame {
 
@@ -57,11 +58,13 @@ public class EditarRutina extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Label label = new Label("Edite su rutina");
-		label.setBounds(139, 10, 214, 22);
+		Label label = new Label("Editar Rutina");
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(145, 27, 214, 22);
 		contentPane.add(label);
 		
 		Label lvlResultadoPositivo = new Label("");
+		lvlResultadoPositivo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoPositivo.setBackground(SystemColor.control);
 		lvlResultadoPositivo.setForeground(new Color(0, 255, 0));
 		lvlResultadoPositivo.setBounds(51, 340, 256, 22);
@@ -70,6 +73,7 @@ public class EditarRutina extends JFrame {
 
 		
 		Label lvlResultadoNegativo = new Label("");
+		lvlResultadoNegativo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoNegativo.setForeground(new Color(255, 0, 0));
 		lvlResultadoNegativo.setBounds(51, 340, 256, 22);
 		contentPane.add(lvlResultadoNegativo);
@@ -83,12 +87,14 @@ public class EditarRutina extends JFrame {
 		comboBox.addItem(3);
 		
 		Label label_1_1_1_1 = new Label("Nivel");
-		label_1_1_1_1.setBounds(46, 55, 205, 22);
+		label_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1_1_1_1.setBounds(51, 55, 205, 22);
 		contentPane.add(label_1_1_1_1);
 		
 		
 		Label label_1_1_1_1_1 = new Label("Nombre");
-		label_1_1_1_1_1.setBounds(46, 125, 205, 22);
+		label_1_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1_1_1_1_1.setBounds(51, 125, 205, 22);
 		contentPane.add(label_1_1_1_1_1);
 		
 		TextField txtNombre = new TextField();
@@ -101,7 +107,8 @@ public class EditarRutina extends JFrame {
 		contentPane.add(comboBoxEj1);
 		
 		Label label_1_1_1_1_2 = new Label("Ejercicio 1");
-		label_1_1_1_1_2.setBounds(46, 185, 63, 22);
+		label_1_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1_1_1_1_2.setBounds(51, 190, 63, 22);
 		contentPane.add(label_1_1_1_1_2);
 		
 		JComboBox<String> comboBoxEj2 = new JComboBox<String>();
@@ -109,7 +116,8 @@ public class EditarRutina extends JFrame {
 		contentPane.add(comboBoxEj2);
 		
 		Label label_1_1_1_1_2_1 = new Label("Ejercicio 2");
-		label_1_1_1_1_2_1.setBounds(46, 261, 205, 22);
+		label_1_1_1_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1_1_1_1_2_1.setBounds(51, 264, 205, 22);
 		contentPane.add(label_1_1_1_1_2_1);
 		
 		

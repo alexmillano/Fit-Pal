@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.TextField;
 import java.awt.Color;
+import java.awt.Font;
 
 public class PantallaInicio extends JFrame {
 
@@ -58,11 +59,13 @@ public class PantallaInicio extends JFrame {
 		contentPane.setLayout(null);
 		
 		Label correoLvl = new Label("Correo");
-		correoLvl.setBounds(113, 50, 62, 22);
+		correoLvl.setFont(new Font("Dialog", Font.PLAIN, 12));
+		correoLvl.setBounds(124, 64, 62, 22);
 		contentPane.add(correoLvl);
 				
 		Label contraseñaLvl = new Label("Contraseña");
-		contraseñaLvl.setBounds(113, 117, 95, 22);
+		contraseñaLvl.setFont(new Font("Dialog", Font.PLAIN, 12));
+		contraseñaLvl.setBounds(124, 131, 95, 22);
 		contentPane.add(contraseñaLvl);
 		
 		
@@ -73,19 +76,20 @@ public class PantallaInicio extends JFrame {
 		sesioniniciada.setVisible(false);
 		
 		
-		Label error = new Label("Error en el inicio de sesion");
+		Label error = new Label("Error en el inicio de sesión");
+		error.setFont(new Font("Dialog", Font.PLAIN, 12));
 		error.setForeground(new Color(255, 0, 0));
-		error.setBounds(108, 218, 313, 20); 
+		error.setBounds(124, 188, 313, 20); 
 		contentPane.add(error);
 		error.setVisible(false);
 
 		
 		TextField correoTF = new TextField();
-		correoTF.setBounds(113, 78, 195, 22);
+		correoTF.setBounds(124, 92, 195, 22);
 		contentPane.add(correoTF);
 		
 		TextField contraseñaTF = new TextField();
-		contraseñaTF.setBounds(113, 146, 195, 22);
+		contraseñaTF.setBounds(124, 160, 195, 22);
 		contentPane.add(contraseñaTF);
 		
 		Button button = new Button("Ingresar");
@@ -130,8 +134,13 @@ public class PantallaInicio extends JFrame {
 			}		
 		});
 		
-		button.setBounds(186, 189, 70, 22);
+		button.setBounds(197, 214, 70, 22);
 		contentPane.add(button);
+		
+		Label label = new Label("Iniciar Sesión");
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(165, 22, 136, 22);
+		contentPane.add(label);
 		
 
 	}

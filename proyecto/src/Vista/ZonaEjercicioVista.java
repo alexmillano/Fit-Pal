@@ -23,6 +23,7 @@ import Modelo.Zona_Ejercicio;
 import java.awt.Label;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Font;
 
 
 public class ZonaEjercicioVista extends JFrame {
@@ -84,6 +85,7 @@ public class ZonaEjercicioVista extends JFrame {
 			
 			
 			Label lvlResultado = new Label("New label");
+			lvlResultado.setFont(new Font("Dialog", Font.PLAIN, 12));
 			lvlResultado.setForeground(new Color(0, 255, 0));
 			lvlResultado.setBackground(SystemColor.control);
 			lvlResultado.setBounds(157, 290, 301, 22);
@@ -92,6 +94,7 @@ public class ZonaEjercicioVista extends JFrame {
 			
 			
 			Label lvlError = new Label("New label");
+			lvlError.setFont(new Font("Dialog", Font.PLAIN, 12));
 			lvlError.setForeground(new Color(255, 0, 0));
 			lvlError.setBackground(SystemColor.control);
 			lvlError.setVisible(false);

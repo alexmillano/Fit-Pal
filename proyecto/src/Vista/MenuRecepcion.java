@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class MenuRecepcion extends JFrame {
 
@@ -46,9 +48,10 @@ public class MenuRecepcion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Esto es menu recepcion");
+		JLabel lblNewLabel = new JLabel("Menú Principal");
+		lblNewLabel.setFont(new Font("Calisto MT", Font.PLAIN, 16));
 		lblNewLabel.setSize(233, 37);
-		lblNewLabel.setLocation(97, 11);
+		lblNewLabel.setLocation(150, 11);
 		contentPane.add(lblNewLabel);
 		
 		Button cuotasbtn = new Button("Cuotas");

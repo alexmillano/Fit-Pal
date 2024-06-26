@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class MenuProfesor extends JFrame {
 
@@ -46,9 +47,10 @@ public class MenuProfesor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Esto es menu profesor");
+		JLabel lblNewLabel = new JLabel("Menú Principal");
+		lblNewLabel.setFont(new Font("Calisto MT", Font.PLAIN, 16));
 		lblNewLabel.setSize(175, 32);
-		lblNewLabel.setLocation(130, 11);
+		lblNewLabel.setLocation(144, 11);
 		contentPane.add(lblNewLabel);
 		
 		Button rutinasbtn = new Button("Rutinas");
@@ -77,7 +79,7 @@ public class MenuProfesor extends JFrame {
 		contentPane.add(ejerciciosbtn);
 		
 		Button clasesbtn = new Button("Clases");
-		clasesbtn.setBounds(238, 100, 70, 22);
+		clasesbtn.setBounds(238, 100, 81, 22);
 		contentPane.add(clasesbtn);
 		
 		Button clientesbtn = new Button("Clientes");

@@ -12,6 +12,7 @@ import java.awt.Label;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class MenuEjerciciosProfesor extends JFrame {
 
@@ -39,7 +40,7 @@ public class MenuEjerciciosProfesor extends JFrame {
 	 */
 	public MenuEjerciciosProfesor(Profesor profesor) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 490, 312);
+		setBounds(100, 100, 490, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -47,7 +48,8 @@ public class MenuEjerciciosProfesor extends JFrame {
 		contentPane.setLayout(null);
 		
 		Label label = new Label("Ejercicios");
-		label.setBounds(149, 33, 62, 22);
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(164, 34, 121, 22);
 		contentPane.add(label);
 		
 		Button btnCrearEjercicio = new Button("Ejercicio");
