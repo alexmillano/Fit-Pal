@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Font;
 
 public class EditarZonaEjercicio extends JFrame {
 
@@ -44,15 +45,16 @@ public class EditarZonaEjercicio extends JFrame {
 	 */
 	public EditarZonaEjercicio(Zona_Ejercicio seleccionado, Profesor profesor) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 423, 266);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Label label = new Label("Cree su zona ejercicio");
-		label.setBounds(139, 10, 214, 22);
+		Label label = new Label("Editar Zona Ejercicio");
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(139, 20, 214, 22);
 		contentPane.add(label);
 		
 		TextField txtNombre = new TextField();
@@ -60,7 +62,8 @@ public class EditarZonaEjercicio extends JFrame {
 		contentPane.add(txtNombre);
 		txtNombre.setText(seleccionado.getNombre());
 		
-		Label label_1 = new Label("Ingrese el nuevo nombre de la zona");
+		Label label_1 = new Label("Nombre");
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1.setBounds(50, 60, 205, 22);
 		contentPane.add(label_1);
 		

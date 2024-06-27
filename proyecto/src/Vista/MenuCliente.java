@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Modelo.Cliente;
+import Vista.UnirseClases;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import java.awt.Button;
 import javax.swing.JTree;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class MenuCliente extends JFrame {
 
@@ -52,34 +54,40 @@ public class MenuCliente extends JFrame {
 		Button clasesbtn = new Button("Clases");
 		clasesbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClasesCliente clasesclientes= new ClasesCliente(cliente);
+				UnirseClases clasesclientes= new UnirseClases(cliente);
 				clasesclientes.setVisible(true);
 				dispose();
 			}
 		});
 		clasesbtn.setSize(70, 31);
-		clasesbtn.setLocation(10, 133);
+		clasesbtn.setLocation(86, 96);
 		contentPane.add(clasesbtn);
 		
-		JLabel lblNewLabel = new JLabel("Esto es menu de cliente");
+		JLabel lblNewLabel = new JLabel("Menú Principal");
+		lblNewLabel.setFont(new Font("Calisto MT", Font.PLAIN, 16));
 		lblNewLabel.setSize(237, 31);
-		lblNewLabel.setLocation(92, 11);
+		lblNewLabel.setLocation(156, 11);
 		contentPane.add(lblNewLabel);
 		
 		Button clasesrealizadasbtn = new Button("Clases Realizadas");
-		clasesrealizadasbtn.setBounds(90, 133, 97, 31);
+		clasesrealizadasbtn.setBounds(166, 96, 97, 31);
 		contentPane.add(clasesrealizadasbtn);
 		
 		Button rutinasbtn = new Button("Rutinas");
-		rutinasbtn.setBounds(195, 133, 70, 31);
+		rutinasbtn.setBounds(271, 96, 70, 31);
 		contentPane.add(rutinasbtn);
 		
 		Button perfilbtn = new Button("Perfil");
-		perfilbtn.setBounds(271, 133, 70, 31);
+		perfilbtn.setBounds(136, 133, 70, 31);
 		contentPane.add(perfilbtn);
 		
 		Button cerrarsesionbtn = new Button("Cerrar sesion");
-		cerrarsesionbtn.setBounds(347, 133, 77, 31);
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		cerrarsesionbtn.setBounds(212, 133, 77, 31);
 		contentPane.add(cerrarsesionbtn);
 		cerrarsesionbtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {

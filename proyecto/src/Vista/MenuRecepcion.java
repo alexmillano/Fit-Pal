@@ -12,6 +12,10 @@ import Modelo.Recepcion;
 
 import javax.swing.JLabel;
 import java.awt.Button;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class MenuRecepcion extends JFrame {
 
@@ -46,9 +50,10 @@ public class MenuRecepcion extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Esto es menu recepcion");
-		lblNewLabel.setSize(157, 37);
-		lblNewLabel.setLocation(132, 23);
+		JLabel lblNewLabel = new JLabel("Menú Principal");
+		lblNewLabel.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		lblNewLabel.setSize(233, 37);
+		lblNewLabel.setLocation(150, 11);
 		contentPane.add(lblNewLabel);
 		
 		Button cuotasbtn = new Button("Cuotas");
@@ -76,6 +81,11 @@ public class MenuRecepcion extends JFrame {
 		contentPane.add(perfilbtn);
 		
 		Button cerrarsesionbtn = new Button("Cerrar Sesión");
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		cerrarsesionbtn.setBounds(246, 138, 70, 22);
 		contentPane.add(cerrarsesionbtn);
 		cerrarsesionbtn.addActionListener(new ActionListener() {

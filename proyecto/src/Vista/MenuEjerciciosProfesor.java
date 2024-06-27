@@ -12,6 +12,7 @@ import java.awt.Label;
 import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class MenuEjerciciosProfesor extends JFrame {
 
@@ -39,7 +40,7 @@ public class MenuEjerciciosProfesor extends JFrame {
 	 */
 	public MenuEjerciciosProfesor(Profesor profesor) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 490, 312);
+		setBounds(100, 100, 490, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -47,10 +48,11 @@ public class MenuEjerciciosProfesor extends JFrame {
 		contentPane.setLayout(null);
 		
 		Label label = new Label("Ejercicios");
-		label.setBounds(149, 33, 62, 22);
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(164, 34, 121, 22);
 		contentPane.add(label);
 		
-		Button btnCrearEjercicio = new Button("Crear Ejercicio");
+		Button btnCrearEjercicio = new Button("Ejercicio");
 		btnCrearEjercicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearEjercicioProfesor crearejercicio = new CrearEjercicioProfesor(profesor);
@@ -58,12 +60,8 @@ public class MenuEjerciciosProfesor extends JFrame {
 				dispose();
 			}
 		});
-		btnCrearEjercicio.setBounds(10, 114, 88, 22);
+		btnCrearEjercicio.setBounds(55, 113, 88, 22);
 		contentPane.add(btnCrearEjercicio);
-		
-		Button btnVerEjercicios = new Button("Ver Ejercicios");
-		btnVerEjercicios.setBounds(104, 114, 84, 22);
-		contentPane.add(btnVerEjercicios);
 		
 		Button btnZonaEjercicio = new Button("Zona Ejercicio");
 		btnZonaEjercicio.addActionListener(new ActionListener() {
@@ -74,7 +72,7 @@ public class MenuEjerciciosProfesor extends JFrame {
 				
 			}
 		});
-		btnZonaEjercicio.setBounds(194, 114, 121, 22);
+		btnZonaEjercicio.setBounds(149, 113, 121, 22);
 		contentPane.add(btnZonaEjercicio);
 		
 		Button btnSalir = new Button("Salir");
@@ -85,7 +83,7 @@ public class MenuEjerciciosProfesor extends JFrame {
 				dispose();
 			}
 		});
-		btnSalir.setBounds(321, 114, 121, 22);
+		btnSalir.setBounds(276, 113, 121, 22);
 		contentPane.add(btnSalir);
 	}
 }

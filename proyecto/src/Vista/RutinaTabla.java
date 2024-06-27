@@ -17,9 +17,14 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controladores.EjercicioControlador;
+import Controladores.ProfesorControlador;
+import Controladores.RutinaControlador;
+import Controladores.Rutina_EjerciciosControlador;
 import Controladores.ZonaControlador;
+import Modelo.Clase;
 import Modelo.Ejercicio;
 import Modelo.Profesor;
+import Modelo.Rutina;
 import Modelo.Zona_Ejercicio;
 import java.awt.Label;
 import java.awt.Color;
@@ -27,7 +32,7 @@ import java.awt.SystemColor;
 import java.awt.TextField;
 
 
-public class CrearEjercicioProfesor extends JFrame {
+public class RutinaTabla extends JFrame {
 
 		private static final long serialVersionUID = 1L;
 		private JPanel contentPane;
@@ -42,7 +47,7 @@ public class CrearEjercicioProfesor extends JFrame {
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						CrearEjercicioProfesor frame = new CrearEjercicioProfesor(null);
+						RutinaTabla frame = new RutinaTabla(null);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -54,7 +59,7 @@ public class CrearEjercicioProfesor extends JFrame {
 		/**
 		 * Create the frame.
 		 */
-		public CrearEjercicioProfesor(Profesor profesor) {
+		public RutinaTabla(Profesor profesor) {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 602, 390);
 			contentPane = new JPanel();
@@ -62,12 +67,12 @@ public class CrearEjercicioProfesor extends JFrame {
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
 
-			// Inicializar controlador
-			EjercicioControlador controlador = new EjercicioControlador();
-			Ejercicio seleccionado = new Ejercicio();
+			// Inicializar controlador.
+			RutinaControlador controlador = new RutinaControlador();
+			Rutina seleccionado = new Rutina();
 
 			// Crear el modelo de la tabla
-			String[] columnNames = { "ID", "Nombre", "Series" , "Repeticiones" , "Zona"};
+			String[] columnNames = { "ID", "Nombre", "Profesor" , "Nivel"};
 			model = new DefaultTableModel(columnNames, 0);
 			table = new JTable(model);
 
@@ -105,8 +110,8 @@ public class CrearEjercicioProfesor extends JFrame {
 			JButton btnCrearZona = new JButton("Añadir");
 			btnCrearZona.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					AnadirEjercicio anadirejercicio = new AnadirEjercicio(profesor);
-					anadirejercicio.setVisible(true);
+					AnadirRutina anadirrutina = new AnadirRutina(seleccionado,profesor);
+					anadirrutina.setVisible(true);
 					dispose();
 				}
 			});
@@ -118,8 +123,8 @@ public class CrearEjercicioProfesor extends JFrame {
 			JButton btnEditar = new JButton("Editar");
 			btnEditar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (seleccionado.getID_Ejercicios()!=0) {				
-						EditarEjercicio editar = new EditarEjercicio(profesor,seleccionado);
+					if (seleccionado.getID_Rutinas()!=0) {				
+						EditarRutina editar = new EditarRutina(profesor,seleccionado);
 						editar.setVisible(true);
 						dispose();
 					}		
@@ -141,25 +146,29 @@ public class CrearEjercicioProfesor extends JFrame {
 				public void valueChanged(ListSelectionEvent e) {
 					if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
 						int selectedRow = table.getSelectedRow();
-						int id = (int) table.getValueAt(selectedRow, 0);
+						int idRutina = (int) table.getValueAt(selectedRow, 0);
 						String nombre = (String) table.getValueAt(selectedRow, 1);
-						int repeticiones = (int) table.getValueAt(selectedRow, 2);
-						int series = (int) table.getValueAt(selectedRow, 3);
-						int idzona =0 ;
-						ZonaControlador controladorZona = new ZonaControlador();
-						
-						for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
-							if (zona.getNombre().equals(table.getValueAt(selectedRow, 4))) {
-								idzona=zona.getID_Zona_Ejercicio();
+						String profesor = (String) table.getValueAt(selectedRow, 2);
+						int idnivel = (int) table.getValueAt(selectedRow, 3);
+									
+			             int idprofesor = 0;
+			             String profesorNombreyApellido = "";
+			             
+			             ProfesorControlador controladorprofesor = new ProfesorControlador();
+							
+						for (Profesor profesoreach : controladorprofesor.getAllProfesorConIDProfesor()) {
+							profesorNombreyApellido = profesoreach.getNombre() +" " + profesoreach.getApellido();
+							if (profesorNombreyApellido.equals(table.getValueAt(selectedRow, 2))) {
+								idprofesor=profesoreach.getID_Profesor();
 							}
 						}
-						
-						elemento.setText("Seleccionado: ID= " + id + ", Nombre= " + nombre + ", Repeticiones= " + repeticiones + ", Series= " + series + ", ID_Zona_Ejercicio= " + idzona);
-						seleccionado.setID_Ejercicios(id);
-						seleccionado.setNombre(nombre);
-						seleccionado.setRepeticion(repeticiones);
-						seleccionado.setSeries(series);
-						seleccionado.setID_Zona_Ejercicio(idzona); 	
+
+						elemento.setText("Seleccionado: ID_Rutina= " + idRutina + ", Nombre= " + nombre + ", Profesor= " + idprofesor + ", Nivel= " + idnivel );
+			            
+			             seleccionado.setID_Profesor(idprofesor);
+			             seleccionado.setNombre(nombre);
+			             seleccionado.setID_Rutinas(idRutina);;
+			             seleccionado.setNivel(idnivel);
 					}
 				}
 			});
@@ -170,13 +179,20 @@ public class CrearEjercicioProfesor extends JFrame {
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-		    		if (seleccionado.getID_Ejercicios()!=0) {
-						controlador.deleteEjercicio(seleccionado.getID_Ejercicios());;
-						System.out.println("Eliminaste el ejercicio");
-						lvlResultado.setText("Eliminaste el ejercicio correctamente");
+		    		if (seleccionado.getID_Rutinas()!=0) {
+		    			//borro intermedia
+		    			Rutina_EjerciciosControlador controladorintermedia = new Rutina_EjerciciosControlador();
+		    			controladorintermedia.deleteRutinaEjercicio(seleccionado.getID_Rutinas());
+		    			
+		    			//borro rutina
+						controlador.deleteRutina(seleccionado.getID_Rutinas());;
+						System.out.println("Eliminaste la rutina");
+						lvlResultado.setText("Eliminaste la rutina correctamente");
 						lvlResultado.setVisible(true);
 						actualizarTabla();
-						seleccionado.setID_Ejercicios(0);
+						seleccionado.setID_Rutinas(0);
+						
+						
 					}else {
 						lvlResultado.setText("");
 					}
@@ -190,7 +206,7 @@ public class CrearEjercicioProfesor extends JFrame {
 			JButton btnSalir = new JButton("Salir");
 			btnSalir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					MenuEjerciciosProfesor menuatras= new MenuEjerciciosProfesor(profesor);
+					MenuProfesor menuatras= new MenuProfesor(profesor);
 					menuatras.setVisible(true);
 					dispose();
 				}
@@ -225,56 +241,73 @@ public class CrearEjercicioProfesor extends JFrame {
 				
 
 		private void actualizarTabla() {
-			// Limpiar el modelo de la tabla
-			model.setRowCount(0);
-
-			// Obtener la lista actualizada de zonas de ejercicio
-			EjercicioControlador controlador = new EjercicioControlador();
-			ZonaControlador controladorZona = new ZonaControlador();
-			String nombreZona = "";
-
-			// Agregar los datos al modelo
-			for (Ejercicio ejercicio : controlador.getAllEjercicio()) {
-				for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
-					if (zona.getID_Zona_Ejercicio()==ejercicio.getID_Zona_Ejercicio()) {
-						nombreZona = zona.getNombre();
+		    // Limpiar el modelo de la tabla
+		    model.setRowCount(0);
+			    	    
+			RutinaControlador controlador = new RutinaControlador();
+			ProfesorControlador profesorcontrolador = new ProfesorControlador();
+			String nombreProfesor = "";
+	    	
+		    // Agregar los datos al modelo
+		    for (Rutina rutina : controlador.getAllRutina()) {
+		    	
+		    	for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
+					if (profesor.getID_Profesor()==rutina.getID_Profesor()) {
+						nombreProfesor = profesor.getNombre() +" " + profesor.getApellido();
 					}
-				}
-				
-				model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
-			}
+					model.addRow(
+							new Object[]
+									{
+											rutina.getID_Rutinas()
+											, rutina.getNombre()
+											, nombreProfesor
+											, rutina.getNivel()
+											
+									}
+							);
+				} 	
+		    }
+		    
 		}
 		
-		
+	
 		private void Filtrar(String criterio) {
 			// Limpiar el modelo de la tabla
 			if (!criterio.isEmpty()) {
 				
-				model.setRowCount(0);
-				
-				// Obtener la lista actualizada de zonas de ejercicio
-				EjercicioControlador controlador = new EjercicioControlador();
-				ZonaControlador controladorZona = new ZonaControlador();
-				String nombreZona = "";
+			    model.setRowCount(0);
+	    	    
+				RutinaControlador controlador = new RutinaControlador();
+				ProfesorControlador profesorcontrolador = new ProfesorControlador();
+				String nombreProfesor = "";
 				criterio = criterio.toLowerCase();
-				
-				
-				for (Ejercicio ejercicio : controlador.getAllEjercicio()) {
-					
-					for (Zona_Ejercicio zona : controladorZona.getAllZonas()) {
-						if (zona.getID_Zona_Ejercicio()==ejercicio.getID_Zona_Ejercicio()) {
-							nombreZona = zona.getNombre();
+		    	
+			    // Agregar los datos al modelo
+			    for (Rutina rutina : controlador.getAllRutina()) {
+			    	for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
+			    		
+						if (profesor.getID_Profesor()==rutina.getID_Profesor()) {
+							nombreProfesor = profesor.getNombre() +" " + profesor.getApellido();
+						}			
+						String nombreRutina = rutina.getNombre().toLowerCase();
+						if (nombreRutina.contains(criterio)){
+						model.addRow(
+								new Object[]
+										{
+												rutina.getID_Rutinas()
+												, rutina.getNombre()
+												, nombreProfesor
+												, rutina.getNivel()
+												
+										}
+									);
 						}
-					}
-					String nombreEjercicio = ejercicio.getNombre().toLowerCase();
-					String nombreZonaMinusculas = nombreZona.toLowerCase();
-					
-					
-					if (nombreEjercicio.contains(criterio) || nombreZonaMinusculas.contains(criterio)){
-						model.addRow(new Object[] { ejercicio.getID_Ejercicios() , ejercicio.getNombre() , ejercicio.getRepeticion() , ejercicio.getSeries() , nombreZona });
-					}		
-				}
-			}
-			
+					} 	
+			    }
+
+			}	
 		}
-	}
+		
+		
+		
+}

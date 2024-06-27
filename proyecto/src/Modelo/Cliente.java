@@ -251,35 +251,71 @@ public class Cliente extends Persona implements MenuIniciarSesion {
 	}
 		
 	public LinkedList<Clase> ClaseSegunNivel() {
-		
-		try {
-			ClaseControlador controlador = new ClaseControlador();
-			LinkedList<Clase> clasesACoincidir = new LinkedList<>();
-			
-			if (controlador.getAllClase().size()>0) {
-				for (int i = 0; i < controlador.getAllClase().size(); i++) {
-					
-					if (this.getNivel()==controlador.getAllClase().get(i).getNivel()) {		
-						clasesACoincidir.add(controlador.getAllClase().get(i));		
-					}
-				}	
-			}
-			
-			if (clasesACoincidir.isEmpty()) {
-				return null;
-			}
-			
-			return clasesACoincidir;
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-			
+	    try {
+	        ClaseControlador controlador = new ClaseControlador();
+	        Cliente_Rutina_ClaseControlador intermedia = new Cliente_Rutina_ClaseControlador();
+	        LinkedList<Clase> clasesACoincidir = new LinkedList<>();
 
-		
+	        for (Clase clase : controlador.getAllClase()) {    
+	            if (this.getNivel() == clase.getNivel()) {
+	                boolean coincide = false;
+	                for (Cliente_Rutina_Clase objetosIntermedia : intermedia.getAllClienteRutinaClase()) {
+	                    if (clase.getID_Clases() == objetosIntermedia.getID_Clase() && this.getID_Cliente() == objetosIntermedia.getID_Cliente()) {
+	                        coincide = true;
+	                        break;
+	                    }
+	                }
+	                if (!coincide) {
+	                    clasesACoincidir.add(clase);
+	                }
+	            }
+	        }
+
+	        return clasesACoincidir;
+	    
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 	
+
+
+	public LinkedList<Clase> ClaseSegunNivelABorrar() {
+	    try {
+	        ClaseControlador controlador = new ClaseControlador();
+	        Cliente_Rutina_ClaseControlador intermedia = new Cliente_Rutina_ClaseControlador();
+	        LinkedList<Clase> clasesACoincidir = new LinkedList<>();
+
+	        for (Clase clase : controlador.getAllClase()) {    
+	            if (this.getNivel() == clase.getNivel()) {
+	                boolean claseYaAgregada = false;
+	                for (Cliente_Rutina_Clase objetosIntermedia : intermedia.getAllClienteRutinaClase()) {
+	                    if (clase.getID_Clases() == objetosIntermedia.getID_Clase() && this.getID_Cliente() == objetosIntermedia.getID_Cliente()) {
+	                        if (!claseYaAgregada) {
+	                            clasesACoincidir.add(clase);
+	                            claseYaAgregada = true;
+	                        }
+	                        break; // Salir del bucle de objetosIntermedia y va a buscar otra clase de controlador.getAllClase()
+	                    }
+	                }
+	            }
+	        }
+
+	        return clasesACoincidir;
+	    
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	
+	public void AbandonarClase(Clase clase, Cliente cliente) {
+		Cliente_Rutina_ClaseControlador controlador = new Cliente_Rutina_ClaseControlador();
+		controlador.deleteClase(cliente.getID_Cliente(), clase.getID_Clases());
+	}
+
+
 	public boolean UnirseClase(Clase clase) {
 		try {
 			this.mis_clases.add(clase);

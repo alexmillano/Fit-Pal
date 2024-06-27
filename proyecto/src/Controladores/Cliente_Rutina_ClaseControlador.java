@@ -2,12 +2,15 @@ package Controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.Cliente_Rutina_ClaseRepository;
 import Modelo.Cliente_Rutina_Clase;
+import Modelo.Ejercicio;
 
 public class Cliente_Rutina_ClaseControlador implements Cliente_Rutina_ClaseRepository{
     private final Connection connection;
@@ -18,8 +21,20 @@ public class Cliente_Rutina_ClaseControlador implements Cliente_Rutina_ClaseRepo
 
 	@Override
 	public List<Cliente_Rutina_Clase> getAllClienteRutinaClase() {
-		// TODO Auto-generated method stub
-		return null;
+	     List<Cliente_Rutina_Clase> lista = new ArrayList<>();
+	        try {
+	            PreparedStatement statement = connection.prepareStatement("SELECT * FROM cliente_rutina_clase");
+	            ResultSet resultSet = statement.executeQuery();
+	       
+	            while (resultSet.next()) {
+	            	Cliente_Rutina_Clase intermedia = new Cliente_Rutina_Clase(resultSet.getInt("ID_Cliente") ,resultSet.getInt("ID_Rutinas"),resultSet.getInt("ID_Clases"));
+	            	lista.add(intermedia);
+	                
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return lista;
 	}
 
 	@Override
@@ -55,8 +70,21 @@ public class Cliente_Rutina_ClaseControlador implements Cliente_Rutina_ClaseRepo
 	}
 
 	@Override
-	public void deleteClase(int ID_Cliente, int ID_Rutina, int ID_Clase) {
-		// TODO Auto-generated method stub
+	public void deleteClase(int ID_Cliente,  int ID_Clase) {
+		 try {
+	            PreparedStatement statement = connection.prepareStatement("DELETE FROM cliente_rutina_clase WHERE ID_Cliente  = ?  AND ID_Clases = ?");
+	            statement.setInt(1, ID_Cliente);
+	            statement.setInt(2, ID_Clase);
+
+	            int rowsDeleted = statement.executeUpdate();
+	            if (rowsDeleted > 0) {
+	                System.out.println("Clase intermedia eliminado exitosamente");
+	            }
+	        } catch (SQLException e) {
+	        	System.out.println("Error en los datos ingresados o la clase intermedia no existe");
+	            e.printStackTrace();
+	        }
+		
 		
 	}
     

@@ -6,7 +6,9 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import Controladores.ClaseControlador;
 import Controladores.ClienteControlador;
+import Controladores.Cliente_Rutina_ClaseControlador;
 import Controladores.ProfesorControlador;
 import Controladores.RutinaControlador;
 import Controladores.EjercicioControlador;
@@ -293,6 +295,8 @@ public class Profesor extends Persona implements MenuIniciarSesion, Validaciones
 			return "Error al crear su ejercicio";
 		}
 	}
+	
+	
 	
 	
 }

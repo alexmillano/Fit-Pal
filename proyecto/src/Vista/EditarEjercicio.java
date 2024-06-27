@@ -19,6 +19,7 @@ import Controladores.ZonaControlador;
 import Modelo.Ejercicio;
 import Modelo.Profesor;
 import Modelo.Zona_Ejercicio;
+import java.awt.Font;
 
 public class EditarEjercicio extends JFrame {
 
@@ -53,8 +54,9 @@ public class EditarEjercicio extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Label label = new Label("Edite su ejercicio");
-		label.setBounds(139, 10, 214, 22);
+		Label label = new Label("Editar Ejercicio");
+		label.setFont(new Font("Calisto MT", Font.PLAIN, 16));
+		label.setBounds(137, 23, 214, 22);
 		contentPane.add(label);
 		
 		TextField txtNombre = new TextField();
@@ -63,10 +65,12 @@ public class EditarEjercicio extends JFrame {
 		txtNombre.setText(seleccionado.getNombre());
 		
 		Label label_1 = new Label("Nombre");
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1.setBounds(50, 60, 205, 22);
 		contentPane.add(label_1);
 		
 		Label lvlResultadoPositivo = new Label("");
+		lvlResultadoPositivo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoPositivo.setBackground(SystemColor.control);
 		lvlResultadoPositivo.setForeground(new Color(0, 255, 0));
 		lvlResultadoPositivo.setBounds(51, 340, 256, 22);
@@ -75,6 +79,7 @@ public class EditarEjercicio extends JFrame {
 
 		
 		Label lvlResultadoNegativo = new Label("");
+		lvlResultadoNegativo.setFont(new Font("Dialog", Font.PLAIN, 12));
 		lvlResultadoNegativo.setForeground(new Color(255, 0, 0));
 		lvlResultadoNegativo.setBounds(51, 340, 256, 22);
 		contentPane.add(lvlResultadoNegativo);
@@ -85,7 +90,8 @@ public class EditarEjercicio extends JFrame {
 		contentPane.add(comboBox);
 		
 		Label label_1_1_1_1 = new Label("Seleccione la zona de su ejercicio");
-		label_1_1_1_1.setBounds(53, 256, 205, 22);
+		label_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1_1_1_1.setBounds(50, 265, 205, 22);
 		contentPane.add(label_1_1_1_1);
 		
 		ZonaControlador controlador = new ZonaControlador();
@@ -95,6 +101,7 @@ public class EditarEjercicio extends JFrame {
 		
 		
 		Label label_1_1 = new Label("Repeticiones");
+		label_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
 		label_1_1.setBounds(50, 129, 205, 22);
 		contentPane.add(label_1_1);
 
@@ -105,7 +112,8 @@ public class EditarEjercicio extends JFrame {
 		contentPane.add(txtRepeticiones);
 		
 		Label label_1_1_1 = new Label("Series");
-		label_1_1_1.setBounds(50, 197, 205, 22);
+		label_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
+		label_1_1_1.setBounds(53, 197, 205, 22);
 		contentPane.add(label_1_1_1);
 		
 		TextField txtSeries = new TextField();
