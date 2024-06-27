@@ -55,7 +55,7 @@ public class MenuRecepcion extends JFrame {
 		cuotasbtn.setBounds(94, 110, 70, 22);
 		contentPane.add(cuotasbtn);
 		
-		Button clasesbtn = new Button("Clientes");
+		Button clasesbtn = new Button("Clases");
 		clasesbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AnadirClase anadirclase = new AnadirClase(recepcion);

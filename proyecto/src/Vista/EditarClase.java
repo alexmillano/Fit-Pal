@@ -1,30 +1,32 @@
 package Vista;
 
+import java.awt.Button;
+import java.awt.Choice;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Label;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controladores.ClaseControlador;
+import Controladores.ProfesorControlador;
 import Modelo.Recepcion;
 import Modelo.Profesor;
-import Controladores.ProfesorControlador;
-import Controladores.ClaseControlador;
-import java.awt.Label;
-import java.awt.Choice;
-import java.awt.Color;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.awt.Button;
+import Modelo.Clase;
 
-public class CrearClase extends JFrame {
+
+public class EditarClase extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -43,7 +45,7 @@ public class CrearClase extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CrearClase frame = new CrearClase(null);
+					EditarClase frame = new EditarClase(null,null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +57,7 @@ public class CrearClase extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CrearClase(Recepcion recepcion) {
+	public EditarClase(Recepcion recepcion, Clase seleccionado) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 449, 504);
 		contentPane = new JPanel();
@@ -63,7 +65,7 @@ public class CrearClase extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_3 = new JLabel("Complete los datos");
+		JLabel lblNewLabel_3 = new JLabel("Edite la clase");
         lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblNewLabel_3.setBounds(155, 11, 163, 14);
         contentPane.add(lblNewLabel_3);
@@ -94,7 +96,7 @@ public class CrearClase extends JFrame {
         contentPane.add(textFieldNombre);
         
         Label label_3 = new Label("Hora de inicio(formato HH:mm)");
-        label_3.setBounds(27, 260, 90, 22);
+        label_3.setBounds(27, 260, 163, 22);
         contentPane.add(label_3);
         
         textFieldHoraInicio = new TextField();
@@ -102,16 +104,16 @@ public class CrearClase extends JFrame {
         contentPane.add(textFieldHoraInicio);
         
         Label label_3_1 = new Label("Hora de fin(formato HH:mm)");
-        label_3_1.setBounds(27, 320, 90, 22);
+        label_3_1.setBounds(27, 320, 148, 22);
         contentPane.add(label_3_1);
         
         textFieldHoraFin = new TextField();
         textFieldHoraFin.setBounds(27, 344, 131, 22);
         contentPane.add(textFieldHoraFin);
         
-        Button button = new Button("Crear clase");
-        button.setBounds(107, 405, 90, 22);
-        contentPane.add(button);
+        Button buttonGuardar = new Button("Guardar");
+        buttonGuardar.setBounds(107, 405, 90, 22);
+        contentPane.add(buttonGuardar);
 
         Button buttonSalir = new Button("Salir");
         buttonSalir.setBounds(213, 405, 90, 22);
@@ -127,7 +129,7 @@ public class CrearClase extends JFrame {
         lblResultadoNegativo.setBounds(27, 375, 300, 22);
         contentPane.add(lblResultadoNegativo);
 
-        button.addActionListener(new ActionListener() {
+        buttonGuardar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = textFieldNombre.getText();
                 if (nombre.isEmpty()) {
@@ -175,13 +177,6 @@ public class CrearClase extends JFrame {
                     return;
                 }
 
-                if (!horaFin.isAfter(horaInicio)) {
-                    lblResultadoNegativo.setText("La hora de fin debe ser después de la hora de inicio");
-                    lblResultadoNegativo.setVisible(true);
-                    lblResultadoPositivo.setVisible(false);
-                    return;
-                }
-
                 int profesorIndex = choiceProfesor.getSelectedIndex();
                 if (profesorIndex == -1) {
                     lblResultadoNegativo.setText("Debe seleccionar un profesor");
@@ -195,10 +190,10 @@ public class CrearClase extends JFrame {
                 int profesorId = profesores.get(profesorIndex).getID_Profesor();
 
                 ClaseControlador claseControlador = new ClaseControlador();
-                boolean claseCreada = claseControlador.addClase(profesorId, nombre, horaInicio, horaFin, nivel);
+                boolean claseActualizada = claseControlador.updateClase(profesorId, nombre, horaInicio, horaFin, nivel,seleccionado.getID_Clases());
 
-                if (claseCreada) {
-                    lblResultadoPositivo.setText("Clase creada correctamente");
+                if (claseActualizada) {
+                    lblResultadoPositivo.setText("Clase actualizada correctamente");
                     lblResultadoPositivo.setVisible(true);
                     lblResultadoNegativo.setVisible(false);
                     dispose();
@@ -206,7 +201,7 @@ public class CrearClase extends JFrame {
                     AnadirClase menuatras = new AnadirClase(recepcion);
                     menuatras.setVisible(true);
                 } else {
-                    lblResultadoNegativo.setText("Error al crear la clase");
+                    lblResultadoNegativo.setText("Error al actualizar la clase");
                     lblResultadoNegativo.setVisible(true);
                     lblResultadoPositivo.setVisible(false);
                 }
@@ -218,8 +213,7 @@ public class CrearClase extends JFrame {
                 dispose();
             }
         });
-    }
-
+	}
     private void cargarProfesores() {
         ProfesorControlador profesorControlador = new ProfesorControlador();
         List<Profesor> profesores = profesorControlador.getAllProfesor();

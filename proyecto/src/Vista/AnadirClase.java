@@ -22,16 +22,11 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controladores.ClaseControlador;
-import Controladores.ProfesorControlador;
+
 import Modelo.Clase;
-import Modelo.Profesor;
+
 import Modelo.Recepcion;
 
-import javax.swing.JComboBox;
-import javax.swing.JTree;
-
-import javax.swing.JTextField;
-import java.awt.ScrollPane;
 
 public class AnadirClase extends JFrame {
 
@@ -116,9 +111,23 @@ public class AnadirClase extends JFrame {
 				dispose();
 			}
 		});
-		btnCrearClase.setBounds(58, 260, 120, 38);  // Ajustar tamaño para mejorar la visualización
+		btnCrearClase.setBounds(37, 260, 120, 38);  // Ajustar tamaño para mejorar la visualización
 		contentPane.add(btnCrearClase);
 		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (seleccionado.getID_Clases()!=0) {				
+					EditarClase editar = new EditarClase(recepcion,seleccionado);
+					editar.setVisible(true);
+					dispose();
+				}		
+			}
+		});
+		
+		
+		btnEditar.setBounds(167, 260, 120, 38);
+		contentPane.add(btnEditar);
 		
 
 		// Configurar el modelo de selección de la tabla
@@ -156,23 +165,23 @@ public class AnadirClase extends JFrame {
 		            public void actionPerformed(ActionEvent e) {
 		                if (seleccionado.getID_Clases() != 0) {
 		                    controlador.deleteClase(seleccionado.getID_Clases());
-		                    lvlResultado.setText("Eliminaste al cliente correctamente");
+		                    lvlResultado.setText("Eliminaste la clase correctamente");
 		                    lvlResultado.setVisible(true);
 		                    lvlError.setVisible(false);
 		                    actualizarTabla();
 		                    seleccionado.setID_Clases(0);
 		                } else {
-		                    lvlError.setText("Selecciona un cliente para eliminar");
+		                    lvlError.setText("Selecciona una clase para eliminar");
 		                    lvlError.setVisible(true);
 		                    lvlResultado.setVisible(false);
 		                }
 		            }
 		        });
 
-		        btnEliminar.setBounds(237, 260, 120, 38);
+		        btnEliminar.setBounds(297, 260, 120, 38);
 		        contentPane.add(btnEliminar);
 		
-		btnEliminar.setBounds(237, 260, 120, 38);
+		btnEliminar.setBounds(297, 260, 120, 38);
 		contentPane.add(btnEliminar);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -221,7 +230,15 @@ public class AnadirClase extends JFrame {
 
         // Agregar los datos al modelo
         for (Clase clase: controlador.getAllClase()) {
-            model.addRow(new Object[] { clase.getID_Clases(), clase.getID_Profesor(), clase.getNivel(), clase.getNombre(), clase.getInicio(),clase.getFin() });
+            System.out.println("Añadiendo clase: " + clase.getID_Clases()); // Añadir esta línea para depuración
+            model.addRow(new Object[] {
+                clase.getID_Clases(),
+                clase.getID_Profesor(),
+                clase.getNivel(),
+                clase.getNombre(),
+                clase.getInicio(),
+                clase.getFin()
+            });
         }
 	}
 	
@@ -239,7 +256,14 @@ public class AnadirClase extends JFrame {
 	                String nivelClase = String.valueOf(clase.getNivel());
 
 	                if (nombreClase.contains(criterio) || nivelClase.contains(criterio)) {
-	                    model.addRow(new Object[] { clase.getID_Clases(), clase.getNombre(), clase.getNivel() });
+	                	model.addRow(new Object[] {
+	                            clase.getID_Clases(),
+	                            clase.getID_Profesor(),
+	                            clase.getNivel(),
+	                            clase.getNombre(),
+	                            clase.getInicio(),
+	                            clase.getFin()
+	                        });
 	                }
 	            }
 	        }

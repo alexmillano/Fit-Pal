@@ -17,14 +17,13 @@ import Modelo.Cliente;
 import Modelo.Recepcion;
 
 import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.JTree;
+
 import javax.swing.ListSelectionModel;
-import javax.swing.JTextField;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.ScrollPane;
+
 import java.awt.SystemColor;
 import java.awt.TextField;
 import java.awt.Color;

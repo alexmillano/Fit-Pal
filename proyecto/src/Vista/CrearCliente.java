@@ -15,10 +15,9 @@ import java.time.LocalDate;
 
 import Controladores.ClienteControlador;
 import Controladores.CuotaControlador;
-import Modelo.Cliente;
+
 import Modelo.Cuota;
 import Modelo.Recepcion;
-import java.awt.TextField;
 import java.awt.Label;
 import java.awt.Button;
 

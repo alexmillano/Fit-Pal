@@ -1,10 +1,9 @@
 package Interfaces;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import Modelo.Clase;
-import Modelo.Profesor;
 
 public interface ClaseRepository {
 	
@@ -12,9 +11,9 @@ public interface ClaseRepository {
     
     Clase getClaseById(int id); //llama solo a uno, por su id
     
-    boolean addClase(Profesor profesor, String nombre, LocalDateTime inicio, LocalDateTime fin, int nivel); //añade clase a la bdd
+    boolean addClase(int profesorId, String nombre, LocalTime inicio, LocalTime fin, int nivel); //añade clase a la bdd
     
-    boolean updateClase(Clase clase); //actualiza las clase de la bdd
+    boolean updateClase(int profesorId, String nombre, LocalTime inicio, LocalTime fin, int nivel,int ID_Clases); //actualiza las clase de la bdd
     
     boolean deleteClase(int id); //eliminar clase de la bdd
 }

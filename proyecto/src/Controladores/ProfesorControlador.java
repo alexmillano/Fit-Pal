@@ -27,7 +27,7 @@ public class ProfesorControlador implements ProfesorRepository{
             ResultSet resultSet = statement.executeQuery();
        
             while (resultSet.next()) {
-            	Profesor user = new Profesor(resultSet.getString("Nombre"), resultSet.getString("Apellido"),
+            	Profesor user = new Profesor(resultSet.getInt("ID_Profesor"),resultSet.getString("Nombre"), resultSet.getString("Apellido"),
             			resultSet.getString("Contraseña"), resultSet.getInt("DNI"),resultSet.getString("Correo"));
                 users.add(user);
                 
