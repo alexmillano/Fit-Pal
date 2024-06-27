@@ -1,5 +1,4 @@
 package Test_Alex;
-import Modelo.Cuota;
 import Modelo.Profesor;
 import Controladores.ClaseControlador;
 import Controladores.ClienteControlador;
@@ -18,6 +17,7 @@ public class PruebaAlex {
 		public void CrearClienteV() {
 			boolean flag = true;
 			ClienteControlador controlador = new ClienteControlador();
+			int ID = 8;
 			String nombre = "Juan";
 	        String apellido = "Perez";
 	        int dni = 12345678;
@@ -25,19 +25,17 @@ public class PruebaAlex {
 	        String correo = "juan.perez@example.com";
 	        int nivel = 1;
 	        int telefono = 123456789;
-	        LocalDate vencimiento = LocalDate.now();
-			LocalDate vencimiento2 = vencimiento.plusMonths(1);
-			Cuota cuotanueva = new Cuota(2,vencimiento2);
-	        
-			List<Object> fieldsToCheck = Arrays.asList(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
 
-			for (Object field : fieldsToCheck) {
+	        
+			List<Object> chequeado = Arrays.asList(ID,nombre, apellido, dni, contraseña, correo, nivel, telefono, 1);
+
+			for (Object field : chequeado) {
 		        if (isInvalid(field)) {
 		        	System.out.println("Todos los campos deben estar completos");
 		        	flag = false;
 		        	break;
 		        } else {
-		        	controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
+		        	controlador.addCliente(ID,nombre, apellido, dni, contraseña, correo, nivel, telefono, 1);
 		        }
 		    }
 		    assertEquals(flag, true);
@@ -58,6 +56,7 @@ public class PruebaAlex {
 	    public void CrearClienteF() {
 			boolean flag = true;
 	        ClienteControlador controlador = new ClienteControlador();
+	        int ID = 9;
 	        String nombre = "";
 	        String apellido = "Hernandez";
 	        int dni = 64448724;
@@ -65,19 +64,17 @@ public class PruebaAlex {
 	        String correo = "miguel.hernandez@example.com";
 	        int nivel = 2;
 	        int telefono = 123456789;
-	        LocalDate vencimiento = LocalDate.now();
-			LocalDate vencimiento2 = vencimiento.plusMonths(1);
-			Cuota cuota = new Cuota(1,vencimiento2);
 
-			List<Object> fieldsToCheck = Arrays.asList(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuota);
 
-		    for (Object field : fieldsToCheck) {
+			List<Object> chequeado = Arrays.asList(ID,nombre, apellido, dni, contraseña, correo, nivel, telefono, 1);
+
+		    for (Object field : chequeado) {
 		        if (isInvalid2(field)) {
 		        	System.out.println("Todos los campos deben estar completos");
 		        	flag = false;
 		        	break;
 		        } else {
-		        	controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuota);
+		        	controlador.addCliente(ID,nombre, apellido, dni, contraseña, correo, nivel, telefono, 1);
 		        }
 		    }
 		    assertEquals(flag,false);
@@ -95,6 +92,7 @@ public class PruebaAlex {
 	    @Test
 	    public void EliminarClienteV() {
 	    	ClienteControlador controlador = new ClienteControlador();
+	    	int ID = 2;
 	        String nombre = "Juan";
 	        String apellido = "Perez";
 	        int dni = 12345678;
@@ -102,12 +100,9 @@ public class PruebaAlex {
 	        String correo = "juan.perez@example.com";
 	        int nivel = 1;
 	        int telefono = 123456789;
-	        LocalDate vencimiento = LocalDate.now();
-	        LocalDate vencimiento2 = vencimiento.plusMonths(1);
-	        Cuota cuotanueva = new Cuota(2, vencimiento2);
 
 
-	        controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
+	        controlador.addCliente(ID,nombre, apellido, dni, contraseña, correo, nivel, telefono, 1);
 	        
 	        int id = controlador.getClienteIdPorDni(dni);
 	        controlador.deleteCliente(id);

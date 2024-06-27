@@ -89,5 +89,11 @@ public class MenuCliente extends JFrame {
 		});
 		cerrarsesionbtn.setBounds(212, 133, 77, 31);
 		contentPane.add(cerrarsesionbtn);
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        dispose();
+		        System.exit(0);
+		    }
+		});
 	}
 }

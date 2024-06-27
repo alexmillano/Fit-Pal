@@ -65,7 +65,9 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 						
 						switch (opcionCuota) {
 						case 0://Asignar valor a cuotas
-							
+							double nuevovalor = Double.parseDouble(JOptionPane.showInputDialog("Coloque el nuevo valor de la cuota"));
+							Cuota nuevacuota = new Cuota (0,nuevovalor,0,null);
+							nuevacuota.setValor(nuevovalor);
 							
 							break;
 							
@@ -97,6 +99,7 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 						switch (opcionUsuario) {
 						case 0://Dar de alta
 							
+							int ID_Cliente=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del cliente"));
 							String nombre=JOptionPane.showInputDialog("Ingrese el nombre");
 							String apellido=JOptionPane.showInputDialog("Ingrese el apellido");
 							int dni=Integer.parseInt(JOptionPane.showInputDialog("Ingrese la contraseña"));
@@ -105,14 +108,32 @@ public class Recepcion extends Persona implements MenuIniciarSesion, Validacione
 							int nivel=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nivel"));
 							int telefono=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el telefono"));
 							
+							String [] opcionesPago={"Efectivo", "Credito", "Debito"};
+							int opcionPago= JOptionPane.showOptionDialog(null, "Seleccione forma de pago", "Menú de pago", 0, 0, null, opcionesRol, opcionesRol[0]);
+							int metodo = 0;
 							
-							int metodo=Integer.parseInt(JOptionPane.showInputDialog("Ingrese forma de pago"));
+							switch (opcionPago) {
+							case 0: // Tarjeta de credito
+								metodo = 1;
+								break;
+							case 1: // Tarjeta de debito
+								metodo = 2;
+								break;
+							case 2: //Efectivo
+								metodo = 3;
+								break;
+
+							default:
+								JOptionPane.showMessageDialog(null, "Opción de pago no válida");
+				                return;
+							}
+							
 							LocalDate vencimiento = LocalDate.now();
 							LocalDate vencimiento2 = vencimiento.plusMonths(1);
 							Cuota cuotanueva = new Cuota(metodo,vencimiento2);
 							
 							ClienteControlador controlador = new ClienteControlador();
-							controlador.addCliente(nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
+							controlador.addCliente(ID_Cliente,nombre, apellido, dni, contraseña, correo, nivel, telefono, cuotanueva);
 							
 							break;
 							

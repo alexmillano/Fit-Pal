@@ -1,6 +1,8 @@
 package Vista;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -58,11 +60,15 @@ public class MenuRecepcion extends JFrame {
 		cuotasbtn.setBounds(94, 110, 70, 22);
 		contentPane.add(cuotasbtn);
 		
-		Button usuariosbtn = new Button("Usuarios");
-		usuariosbtn.setBounds(170, 110, 70, 22);
-		contentPane.add(usuariosbtn);
-		
-		Button clasesbtn = new Button("Clases");
+		Button clasesbtn = new Button("Clientes");
+		clasesbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AnadirClase anadirclase = new AnadirClase(recepcion);
+				anadirclase.setVisible(true);
+				dispose();
+				
+			}
+		});
 		clasesbtn.setBounds(246, 110, 70, 22);
 		contentPane.add(clasesbtn);
 		
@@ -82,6 +88,25 @@ public class MenuRecepcion extends JFrame {
 		});
 		cerrarsesionbtn.setBounds(246, 138, 70, 22);
 		contentPane.add(cerrarsesionbtn);
+		cerrarsesionbtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        dispose();
+		        System.exit(0);
+		    }
+		});
+		
+		Button clientesbtn = new Button("Clientes");
+		clientesbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AnadirCliente anadircliente = new AnadirCliente(recepcion);
+				anadircliente.setVisible(true);
+				dispose();
+				
+			}
+		});
+		clientesbtn.setBounds(170, 110, 70, 22);
+		contentPane.add(clientesbtn);
+		
 	}
 
 }

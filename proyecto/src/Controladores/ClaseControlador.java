@@ -52,7 +52,7 @@ public class ClaseControlador implements ClaseRepository{
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-            	clase = new Clase(resultSet.getInt("ID_Profesor"), resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
+            	clase = new Clase(resultSet.getInt("ID_Profesor"), id, resultSet.getString("Nombre"), resultSet.getTimestamp("inicio").toLocalDateTime(), resultSet.getTimestamp("fin").toLocalDateTime(), resultSet.getInt("ID_Nivel"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
