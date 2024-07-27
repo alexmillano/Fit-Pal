@@ -111,8 +111,23 @@ public class AnadirCliente extends JFrame {
 				dispose();
 			}
 		});
-		btnCrearCliente.setBounds(58, 260, 120, 38);  // Ajustar tamaño para mejorar la visualización
+		btnCrearCliente.setBounds(37, 260, 120, 38);  // Ajustar tamaño para mejorar la visualización
 		contentPane.add(btnCrearCliente);
+		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (seleccionado.getID_Cliente()!=0) {				
+					EditarCliente editar = new EditarCliente(recepcion,seleccionado);
+					editar.setVisible(true);
+					dispose();
+				}		
+			}
+		});
+		
+		
+		btnEditar.setBounds(167, 260, 120, 38);
+		contentPane.add(btnEditar);
 		
 		
 
@@ -164,7 +179,7 @@ public class AnadirCliente extends JFrame {
 		        btnEliminar.setBounds(237, 260, 120, 38);
 		        contentPane.add(btnEliminar);
 		
-		btnEliminar.setBounds(237, 260, 120, 38);
+		btnEliminar.setBounds(297, 260, 120, 38);
 		contentPane.add(btnEliminar);
 		
 		JButton btnSalir = new JButton("Salir");

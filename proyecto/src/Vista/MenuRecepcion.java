@@ -57,7 +57,7 @@ public class MenuRecepcion extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		Button cuotasbtn = new Button("Cuotas");
-		cuotasbtn.setBounds(94, 110, 70, 22);
+		cuotasbtn.setBounds(69, 110, 81, 22);
 		contentPane.add(cuotasbtn);
 		
 		Button clasesbtn = new Button("Clases");
@@ -69,15 +69,19 @@ public class MenuRecepcion extends JFrame {
 				
 			}
 		});
-		clasesbtn.setBounds(246, 110, 70, 22);
+		clasesbtn.setBounds(250, 110, 81, 22);
 		contentPane.add(clasesbtn);
 		
 		Button cronogramabtn = new Button("Cronograma");
-		cronogramabtn.setBounds(94, 138, 70, 22);
+		cronogramabtn.setBounds(69, 138, 81, 22);
 		contentPane.add(cronogramabtn);
 		
 		Button perfilbtn = new Button("Perfil");
-		perfilbtn.setBounds(170, 138, 70, 22);
+		perfilbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		perfilbtn.setBounds(159, 138, 81, 22);
 		contentPane.add(perfilbtn);
 		
 		Button cerrarsesionbtn = new Button("Cerrar Sesión");
@@ -86,7 +90,7 @@ public class MenuRecepcion extends JFrame {
 				dispose();
 			}
 		});
-		cerrarsesionbtn.setBounds(246, 138, 70, 22);
+		cerrarsesionbtn.setBounds(250, 138, 81, 22);
 		contentPane.add(cerrarsesionbtn);
 		cerrarsesionbtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -104,7 +108,7 @@ public class MenuRecepcion extends JFrame {
 				
 			}
 		});
-		clientesbtn.setBounds(170, 110, 70, 22);
+		clientesbtn.setBounds(159, 110, 81, 22);
 		contentPane.add(clientesbtn);
 		
 	}

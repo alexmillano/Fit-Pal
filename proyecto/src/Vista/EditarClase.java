@@ -96,7 +96,7 @@ public class EditarClase extends JFrame {
         contentPane.add(textFieldNombre);
         
         Label label_3 = new Label("Hora de inicio(formato HH:mm)");
-        label_3.setBounds(27, 260, 163, 22);
+        label_3.setBounds(27, 260, 170, 22);
         contentPane.add(label_3);
         
         textFieldHoraInicio = new TextField();
@@ -104,7 +104,7 @@ public class EditarClase extends JFrame {
         contentPane.add(textFieldHoraInicio);
         
         Label label_3_1 = new Label("Hora de fin(formato HH:mm)");
-        label_3_1.setBounds(27, 320, 148, 22);
+        label_3_1.setBounds(27, 320, 170, 22);
         contentPane.add(label_3_1);
         
         textFieldHoraFin = new TextField();
@@ -210,6 +210,8 @@ public class EditarClase extends JFrame {
 
         buttonSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	AnadirClase menuatras= new AnadirClase(recepcion);
+				menuatras.setVisible(true);
                 dispose();
             }
         });

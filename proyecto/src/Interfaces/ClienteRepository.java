@@ -14,7 +14,7 @@ public interface ClienteRepository {
     
     void addCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono, Cuota cuota); //añade cliente a la bdd
     
-    boolean updateCliente(Cliente cliente); //actualiza los cliente de la bdd
+    boolean updateCliente(String nombre, String apellido, int dni, String contraseña, String correo, int nivel, int telefono,int idCliente); //actualiza los cliente de la bdd
     
     void deleteCliente(int id); //eliminar cliente de la bdd
 

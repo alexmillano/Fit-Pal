@@ -131,28 +131,33 @@ public class ClienteControlador implements ClienteRepository {
     }
 	
 	@Override
-    public boolean updateCliente(Cliente cliente) {
-		boolean actualizar = false;
-		try {
-			PreparedStatement statement = connection.prepareStatement("UPDATE users SET Nombre = ?, Correo = ? WHERE ID_Cliente = ?");
-	        statement.setString(1, cliente.getNombre());
-	        statement.setString(2, cliente.getCorreo());
-	        statement.setInt(3, cliente.getID_Cliente());
+	public boolean updateCliente(String nombre, String apellido, int dni, String contraseña, String correo, int idNivel, int telefono, int idCliente) {
+	    boolean actualizar = false;
+	    try {
+	        PreparedStatement statement = connection.prepareStatement("UPDATE cliente SET Contraseña = ?, Apellido = ?, DNI = ?, Correo = ?, Telefono = ?, Nombre = ?, ID_Nivel = ? WHERE ID_Cliente = ?");
+	        statement.setString(1, contraseña);
+	        statement.setString(2, apellido);
+	        statement.setInt(3, dni);
+	        statement.setString(4, correo);
+	        statement.setInt(5, telefono);
+	        statement.setString(6, nombre);
+	        statement.setInt(7, idNivel);
+	        statement.setInt(8, idCliente);
 
-	        
 	        int rowsUpdated = statement.executeUpdate();
 	        if (rowsUpdated > 0) {
 	            System.out.println("Cliente actualizado correctamente");
-	            
-	            
 	            actualizar = true;
+	        } else {
+	            System.out.println("No se encontró el cliente con el ID proporcionado");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        actualizar = false;
 	    }
-		return actualizar;
-    }
+	    return actualizar;
+	}
+
 
 	@Override
 	public void deleteCliente(int idCliente) {

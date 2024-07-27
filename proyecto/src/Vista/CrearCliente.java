@@ -109,7 +109,7 @@ public class CrearCliente extends JFrame {
         contentPane.add(label_2);
 
         Label label_3 = new Label("Contraseña");
-        label_3.setBounds(10, 101, 62, 22);
+        label_3.setBounds(10, 101, 78, 22);
         contentPane.add(label_3);
 
         Label label_4 = new Label("Correo");
