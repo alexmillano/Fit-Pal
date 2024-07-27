@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -162,13 +163,27 @@ public class ZonaEjercicioVista extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					
 		    		if (seleccionado.getID_Zona_Ejercicio()!=0) {
-						controlador.deleteZona(seleccionado.getID_Zona_Ejercicio());
-						System.out.println("Eliminaste la zona");
-						lvlResultado.setText("Eliminaste la zona correctamente");
-						lvlResultado.setVisible(true);
-						actualizarTabla();
-						seleccionado.setID_Zona_Ejercicio(0);
-					} 		    						
+		    			
+		    			String[] opcionesBorrar = { "Eliminar", "Volver" };
+	                    int opcionBorrar = JOptionPane.showOptionDialog(ZonaEjercicioVista.this, 
+	                            "¿Desea eliminar la Zona?", "Confirmación de eliminación", 
+	                            JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, 
+	                            null, opcionesBorrar, opcionesBorrar[0]);
+
+	                    switch (opcionBorrar) {
+	                        case 0:
+	                            controlador.deleteZona(seleccionado.getID_Zona_Ejercicio());
+	                            System.out.println("Eliminaste la zona");
+	                            lvlResultado.setText("Eliminaste la zona correctamente");
+	                            lvlResultado.setVisible(true);
+	                            actualizarTabla();
+	                            seleccionado.setID_Zona_Ejercicio(0);
+	                            break;
+	                        default:
+	                            break;
+	                    }
+					} 	
+		    		
 				}
 			});
 			

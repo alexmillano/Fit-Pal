@@ -27,6 +27,12 @@ public class Clase {
 		this.fin = fin;
 		this.nivel = nivel;
 		this.ID_Profesor=ID_Profesor;
+		this.ID_Clases=ID_Clases;
+
+	}
+	
+	public Clase() {
+		super();
 
 	}
 	

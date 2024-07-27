@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -171,12 +172,25 @@ public class CrearEjercicioProfesor extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					
 		    		if (seleccionado.getID_Ejercicios()!=0) {
-						controlador.deleteEjercicio(seleccionado.getID_Ejercicios());;
-						System.out.println("Eliminaste el ejercicio");
-						lvlResultado.setText("Eliminaste el ejercicio correctamente");
-						lvlResultado.setVisible(true);
-						actualizarTabla();
-						seleccionado.setID_Ejercicios(0);
+		    			
+		    			String[] opcionesBorrar = { "Eliminar", "Volver" };
+	                    int opcionBorrar = JOptionPane.showOptionDialog(CrearEjercicioProfesor.this, 
+	                            "¿Desea eliminar el Ejercicio?", "Confirmación de eliminación", 
+	                            JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, 
+	                            null, opcionesBorrar, opcionesBorrar[0]);
+
+	                    switch (opcionBorrar) {
+	                        case 0:
+	    						controlador.deleteEjercicio(seleccionado.getID_Ejercicios());;
+	    						System.out.println("Eliminaste el ejercicio");
+	    						lvlResultado.setText("Eliminaste el ejercicio correctamente");
+	    						lvlResultado.setVisible(true);
+	    						actualizarTabla();
+	    						seleccionado.setID_Ejercicios(0);
+	                            break;
+	                        default:
+	                            break;
+	                    }
 					}else {
 						lvlResultado.setText("");
 					}

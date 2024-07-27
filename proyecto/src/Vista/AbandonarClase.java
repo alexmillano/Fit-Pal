@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import Controladores.ClaseControlador;
 import Controladores.EjercicioControlador;
 import Controladores.ProfesorControlador;
+import Controladores.Rutina_EjerciciosControlador;
 import Controladores.ZonaControlador;
 import Modelo.Clase;
 import Modelo.Cliente;
@@ -132,11 +133,25 @@ public class AbandonarClase extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 	    		if (seleccionado.getID_Clases()!=0) {
-	    			 cliente.AbandonarClase(seleccionado, cliente); 			
-	    			 lvlResultadoPositivo.setText("Abandonaste la clase correctamente");
-	    			 lvlResultadoPositivo.setVisible(true);
-	    			 actualizarTabla(cliente);
-	    			 
+	    			
+	    			String[] opcionesBorrar = { "Abandonar", "Volver" };
+                    int opcionBorrar = JOptionPane.showOptionDialog(AbandonarClase.this, 
+                            "¿Desea abandonar la clase?", "Confirmación de eliminación", 
+                            JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, 
+                            null, opcionesBorrar, opcionesBorrar[0]);
+
+                    switch (opcionBorrar) {
+                        case 0:
+       	    			 cliente.AbandonarClase(seleccionado, cliente); 			
+    	    			 lvlResultadoPositivo.setText("Abandonaste la clase correctamente");
+    	    			 lvlResultadoPositivo.setVisible(true);
+    	    			 actualizarTabla(cliente);
+                            break;
+                        default:
+                            break;
+                    }
+                    seleccionado.setID_Clases(0);
+   			 
 				} else {
 					 System.out.println("Error al abandonar una clase");
 				}

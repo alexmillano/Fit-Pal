@@ -3,10 +3,13 @@ package Vista;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,6 +28,7 @@ import Modelo.Clase;
 import Modelo.Ejercicio;
 import Modelo.Profesor;
 import Modelo.Rutina;
+import Modelo.Rutinas_Ejercicios;
 import Modelo.Zona_Ejercicio;
 import java.awt.Label;
 import java.awt.Color;
@@ -72,7 +76,7 @@ public class RutinaTabla extends JFrame {
 			Rutina seleccionado = new Rutina();
 
 			// Crear el modelo de la tabla
-			String[] columnNames = { "ID", "Nombre", "Profesor" , "Nivel"};
+			String[] columnNames = { "ID", "Nombre", "Profesor" , "Nivel","Ejercicio 1" ,"Ejercicio 2"};
 			model = new DefaultTableModel(columnNames, 0);
 			table = new JTable(model);
 
@@ -179,19 +183,33 @@ public class RutinaTabla extends JFrame {
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
+					
+					
 		    		if (seleccionado.getID_Rutinas()!=0) {
-		    			//borro intermedia
-		    			Rutina_EjerciciosControlador controladorintermedia = new Rutina_EjerciciosControlador();
-		    			controladorintermedia.deleteRutinaEjercicio(seleccionado.getID_Rutinas());
 		    			
-		    			//borro rutina
-						controlador.deleteRutina(seleccionado.getID_Rutinas());;
-						System.out.println("Eliminaste la rutina");
-						lvlResultado.setText("Eliminaste la rutina correctamente");
-						lvlResultado.setVisible(true);
-						actualizarTabla();
-						seleccionado.setID_Rutinas(0);
-						
+		    			String[] opcionesBorrar = { "Eliminar", "Volver" };
+	                    int opcionBorrar = JOptionPane.showOptionDialog(RutinaTabla.this, 
+	                            "¿Desea eliminar la Rutina?", "Confirmación de eliminación", 
+	                            JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, 
+	                            null, opcionesBorrar, opcionesBorrar[0]);
+
+	                    switch (opcionBorrar) {
+	                        case 0:
+	    		    			//borro intermedia
+	    		    			Rutina_EjerciciosControlador controladorintermedia = new Rutina_EjerciciosControlador();
+	    		    			controladorintermedia.deleteRutinaEjercicio(seleccionado.getID_Rutinas());
+	    		    			
+	    		    			//borro rutina
+	    						controlador.deleteRutina(seleccionado.getID_Rutinas());;
+	    						System.out.println("Eliminaste la rutina");
+	    						lvlResultado.setText("Eliminaste la rutina correctamente");
+	    						lvlResultado.setVisible(true);
+	    						actualizarTabla();
+	    						seleccionado.setID_Rutinas(0);
+	                            break;
+	                        default:
+	                            break;
+	                    }
 						
 					}else {
 						lvlResultado.setText("");
@@ -246,15 +264,43 @@ public class RutinaTabla extends JFrame {
 			    	    
 			RutinaControlador controlador = new RutinaControlador();
 			ProfesorControlador profesorcontrolador = new ProfesorControlador();
-			String nombreProfesor = "";
+			Rutina_EjerciciosControlador intermediacontrolador = new Rutina_EjerciciosControlador();
+			EjercicioControlador ejerciciocontrolador = new EjercicioControlador();
 	    	
 		    // Agregar los datos al modelo
 		    for (Rutina rutina : controlador.getAllRutina()) {
+		    	String nombreProfesor = "";
+		    	String nombreEj1="";
+	    		String nombreEj2="";
+	    		boolean flag = false;
 		    	
 		    	for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
 					if (profesor.getID_Profesor()==rutina.getID_Profesor()) {
 						nombreProfesor = profesor.getNombre() +" " + profesor.getApellido();
+						break;
 					}
+		    	}
+		    	
+		    	for (Rutinas_Ejercicios rutina_ejercicios : intermediacontrolador.getAllRutinasEjercicios()) {
+	    		
+					if (rutina_ejercicios.getID_Rutinas()==rutina.getID_Rutinas()) {
+						
+						for (Ejercicio ejercicio : ejerciciocontrolador.getAllEjercicio()) {
+							
+							if (rutina_ejercicios.getID_Ejercicios()==ejercicio.getID_Ejercicios() && flag==false ) {
+								nombreEj1=ejercicio.getNombre();
+								flag=true;
+							} else if (rutina_ejercicios.getID_Ejercicios()==ejercicio.getID_Ejercicios()) {
+								nombreEj2=ejercicio.getNombre();
+							}
+						}
+						
+						
+					}
+				}
+		    	
+		    	
+		    	
 					model.addRow(
 							new Object[]
 									{
@@ -262,10 +308,12 @@ public class RutinaTabla extends JFrame {
 											, rutina.getNombre()
 											, nombreProfesor
 											, rutina.getNivel()
+											, nombreEj1
+											, nombreEj2
 											
 									}
 							);
-				} 	
+				 	
 		    }
 		    
 		}
@@ -275,22 +323,48 @@ public class RutinaTabla extends JFrame {
 			// Limpiar el modelo de la tabla
 			if (!criterio.isEmpty()) {
 				
+			    // Limpiar el modelo de la tabla
 			    model.setRowCount(0);
-	    	    
+				    	    
 				RutinaControlador controlador = new RutinaControlador();
 				ProfesorControlador profesorcontrolador = new ProfesorControlador();
-				String nombreProfesor = "";
-				criterio = criterio.toLowerCase();
+				Rutina_EjerciciosControlador intermediacontrolador = new Rutina_EjerciciosControlador();
+				EjercicioControlador ejerciciocontrolador = new EjercicioControlador();
 		    	
 			    // Agregar los datos al modelo
 			    for (Rutina rutina : controlador.getAllRutina()) {
+			    	String nombreProfesor = "";
+			    	String nombreEj1="";
+		    		String nombreEj2="";
+		    		boolean flag = false;
+			    	
 			    	for (Profesor profesor : profesorcontrolador.getAllProfesorConIDProfesor()) {
-			    		
 						if (profesor.getID_Profesor()==rutina.getID_Profesor()) {
 							nombreProfesor = profesor.getNombre() +" " + profesor.getApellido();
-						}			
-						String nombreRutina = rutina.getNombre().toLowerCase();
-						if (nombreRutina.contains(criterio)){
+							break;
+						}
+			    	}
+			    	
+			    	for (Rutinas_Ejercicios rutina_ejercicios : intermediacontrolador.getAllRutinasEjercicios()) {		    		
+						if (rutina_ejercicios.getID_Rutinas()==rutina.getID_Rutinas()) {						
+							for (Ejercicio ejercicio : ejerciciocontrolador.getAllEjercicio()) {								
+								if (rutina_ejercicios.getID_Ejercicios()==ejercicio.getID_Ejercicios() && flag==false ) {
+									nombreEj1=ejercicio.getNombre();
+									flag=true;
+								} else if (rutina_ejercicios.getID_Ejercicios()==ejercicio.getID_Ejercicios()) {
+									nombreEj2=ejercicio.getNombre();
+								}
+							}														
+						}
+					}
+			    	
+			    	
+			    	criterio=criterio.toLowerCase();
+			    	String nombreRutina=rutina.getNombre().toLowerCase();
+			    	String NombreEjercicio1=nombreEj1.toLowerCase();			    	
+			    	String NombreEjercicio2=nombreEj2.toLowerCase();			    	
+			    			    	
+			    	if (nombreRutina.contains(criterio) ||  NombreEjercicio1.contains(criterio) ||  NombreEjercicio2.contains(criterio)){
 						model.addRow(
 								new Object[]
 										{
@@ -298,14 +372,15 @@ public class RutinaTabla extends JFrame {
 												, rutina.getNombre()
 												, nombreProfesor
 												, rutina.getNivel()
-												
+												, nombreEj1
+												, nombreEj2						
 										}
-									);
-						}
-					} 	
+								);
+			    	}
 			    }
-
+			    
 			}	
+			
 		}
 		
 		
